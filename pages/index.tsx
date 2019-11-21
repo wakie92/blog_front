@@ -1,9 +1,8 @@
 import Header from '../components/Header';
-
-const Home = () => (
+const Home: React.FC = () => (
   <>
-  <Header />
-  <h1>Hello world</h1>
+    <Header />
+    <h1>Hello world</h1>
   </>
-  );
+);
 export default Home;
