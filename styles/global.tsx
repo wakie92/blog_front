@@ -1,7 +1,8 @@
 // styles/global.js
-import css from 'styled-jsx/css'
+import { createGlobalStyle } from 'styled-components';
 
-export default css.global`
+
+export const resetCss = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
@@ -36,4 +37,4 @@ export default css.global`
   }
   p {
     margin-bottom: 10px;
-  }`
+  }`;

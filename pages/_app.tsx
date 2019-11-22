@@ -1,7 +1,9 @@
-import global from '../styles/global';
-import App, { Container } from 'next/app';
+import App from 'next/app';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
 // import Header from '../components/Header';
-// import Layout from '../components/Layout';
+import Layout from '../components/Layout';
+import Header from '../components/Header';
+// styles/global.js
 
 class MyApp extends App {
   // Only uncomment this method if you have blocking data requirements for
@@ -18,18 +20,53 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps } = this.props;
-    return <Component {...pageProps} />;
+    return (
+      <ThemeProvider theme={{ fontFamily: 'Noto Sans KR' }}>
+        <Header />
+        <Component {...pageProps} />
+        <>
+          <GlobalStyle />
+        </>
+      </ThemeProvider>
+    );
   }
 }
 export default MyApp;
 
-// function MyApp({ Component, pageProps }) {
-//   return (
-//     <Layout>
-//       <Container>
-//         <Component {...pageProps} />
-//       </Container>
-//     </Layout>
-//   );
-// }
-// export default MyApp;
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 1.8;
+    color: #202020;
+    font-family: 'Noto Sans KR';
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+    vertical-align: top;
+  }
+  article, footer, header, aside, details, header, nav, section {
+    display: block;
+  }
+  ul, li, ol {
+    list-style: none;
+  }
+  img {
+    max-width: 100%;
+  }
+  a {
+    text-decoration: none;
+    color: #202020;
+  }
+  h1 {
+    font-weight: 700;
+  }
+  p {
+    margin-bottom: 10px;
+  }`;
