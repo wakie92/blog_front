@@ -1,8 +1,8 @@
 import App from 'next/app';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 // import Header from '../components/Header';
-import Layout from '../components/Layout';
-import Header from '../components/Header';
+import Layout from '../components/CommonUI/Layout';
+import Header from '../components/CommonUI/Header';
 // styles/global.js
 
 class MyApp extends App {
@@ -23,7 +23,9 @@ class MyApp extends App {
     return (
       <ThemeProvider theme={{ fontFamily: 'Noto Sans KR' }}>
         <Header />
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
         <>
           <GlobalStyle />
         </>
@@ -41,8 +43,9 @@ const GlobalStyle = createGlobalStyle`
     font-size: 18px;
     font-weight: normal;
     line-height: 1.8;
-    color: #202020;
+    color: #343a40;
     font-family: 'Noto Sans KR';
+    box-sizing: border-box;
   }
   * {
     margin: 0;
