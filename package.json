@@ -8,6 +8,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.22",
+    "@emotion/styled": "^10.0.23",
     "@types/next": "^9.0.0",
     "@types/styled-components": "^4.4.0",
     "@zeit/next-css": "^1.0.1",
