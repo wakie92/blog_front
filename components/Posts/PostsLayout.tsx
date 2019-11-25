@@ -23,7 +23,7 @@ const Layout = styled.section`
   ul {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 400px;
+    grid-auto-rows: 25rem;
     grid-gap: 1.5rem;
   }
 `;

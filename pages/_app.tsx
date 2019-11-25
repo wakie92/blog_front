@@ -65,7 +65,7 @@ const GlobalStyle = createGlobalStyle`
   }
   a {
     text-decoration: none;
-    color: #202020;
+    color: #343a40;
   }
   h1 {
     font-weight: 700;
