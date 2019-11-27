@@ -1,5 +1,5 @@
 import Header from '../components/CommonUI/Header';
-import Post from '../components/Post';
+import Post from '../components/Posts/Post/Post';
 import { PostsLayout } from '../components/Posts';
 const Home = () => (
   <>

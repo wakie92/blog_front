@@ -1,10 +1,13 @@
-import styled from '@emotion/styled';
-import Post from '../Post';
+import styled from 'styled-components';
+import Post from './Post/Post';
+import LoadingPost from './Post/LoadingPost';
+import { breakpoints } from '../../lib/styles/responsive';
 
 export default function PostsLayout() {
   return (
-    <Layout>
+    <Layout breakpoints={breakpoints}>
       <ul>
+        <LoadingPost />
         <Post />
         <Post />
         <Post />
@@ -16,14 +19,26 @@ export default function PostsLayout() {
       </ul>
     </Layout>
   );
-};
+}
 
-const Layout = styled.section`
+const Layout = styled.main<{breakpoints: object}>`
   width: 100%;
   ul {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 25rem;
+    grid-auto-rows: 40rem;
     grid-gap: 1.5rem;
+    @media screen and (max-width: ${breakpoints.xlarge}) {
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 40rem;
+    }
+    @media screen and (max-width: ${breakpoints.large}) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: 40rem;
+    }
+    @media screen and (max-width: ${breakpoints.medium}) {
+      grid-template-columns: repeat(1₩, 1fr);
+      grid-auto-rows: 40rem;
+    }
   }
 `;

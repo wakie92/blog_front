@@ -1,7 +1,7 @@
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
-import { colors } from '../styles/global';
+import { colors } from '../../../lib/styles/global';
 
 export type PostProps = {
   title: string;
@@ -31,7 +31,7 @@ export default function Post({
           <div className="date-comment">
             <span className="date">{date}</span>
             <div className="commetns">
-              <img src={COMMENT_SVG} alt="comments"/>
+              <img src={COMMENT_SVG} alt="comments" />
               {commentsCnt}
             </div>
           </div>
@@ -43,7 +43,7 @@ export default function Post({
 }
 
 Post.defaultProps = {
-  title: 'title',
+  title: '긴제목긴제목긴제목긴제목긴제목긴제목목',
   commentsCnt: 20,
   imgUrl:
     'https://cdn.evilmartians.com/front/posts/optimizing-react-virtual-dom-explained/cover-a1d5b40.png',
@@ -57,28 +57,28 @@ const WrpperProps = props => (
       border-radius: 4px;
       box-shadow: 0px 4px 8px 8px rgba(0, 0, 0, 0.05);
       .li-article {
-        padding: 0 15px;
-        margin: 1rem 0;
-        height: 13rem;
+        padding: 1rem 1.5rem;
+        height: 22rem;
         .post-info {
-          height: 7.5rem;
+          height: 14rem;
           border-bottom: 1px solid ${props.dateColor};
           .title {
-            font-size: 1.25rem;
+            /* font-size: 1.25rem; */
           }
-          .date-comment{
+          .date-comment {
             display: flex;
             justify-content: space-between;
             .commetns {
-              width: 3.5rem;
+              background-color: ${props.dataColor};
               img {
-                height: 20px;
-                margin-right: 5px;
+                height: 2rem;
+                margin-right: 0.5rem;
+                margin-top: 0.3rem;
               }
             }
             .date {
               color: ${props.dateColor};
-              font-size: 1rem;
+              font-size: 1.5rem;
               margin-bottom: 2rem;
             }
           }
@@ -86,19 +86,19 @@ const WrpperProps = props => (
         .pre-content {
           margin-top: 1.5rem;
           color: #868e96;
-          font-size: 1rem;
+          font-size: 1.5rem;
         }
       }
       .image-container {
         overflow: hidden;
         border-radius: 4px 4px 0 0;
-        height: 10rem;
+        height: 16rem;
         img {
           border-radius: 4px;
           background-image: url(${props.imgUrl});
           background-size: cover;
           background-repeat: no-repeat;
-          height: 10rem;
+          height: 100%;
           width: 100%;
           border-radius: 4px 4px 0 0;
           -webkit-transform: scale(1);
@@ -117,7 +117,6 @@ const WrpperProps = props => (
             -moz-transition: 0.3s;
             -ms-transition: 0.3s;
             -o-transition: 0.3s;
-
           }
         }
       }
