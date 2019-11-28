@@ -62,9 +62,6 @@ const WrpperProps = props => (
         .post-info {
           height: 14rem;
           border-bottom: 1px solid ${props.dateColor};
-          .title {
-            /* font-size: 1.25rem; */
-          }
           .date-comment {
             display: flex;
             justify-content: space-between;
