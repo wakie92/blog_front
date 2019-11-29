@@ -43,7 +43,7 @@ export default function Post({
 }
 
 Post.defaultProps = {
-  title: '긴제목긴제목긴제목긴제목긴제목긴제목목',
+  title: '긴제목긴제목긴제목긴제목긴제목긴제목',
   commentsCnt: 20,
   imgUrl:
     'https://cdn.evilmartians.com/front/posts/optimizing-react-virtual-dom-explained/cover-a1d5b40.png',
