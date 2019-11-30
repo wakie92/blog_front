@@ -21,7 +21,7 @@ export default function Post({
   commentsCnt,
 }: PostProps) {
   return (
-    <WrpperProps onClick={onClick} imgUrl={imgUrl} dateColor={colors.gray1}>
+    <WrpperProps onClick={onClick} imgUrl={imgUrl} dateColor={colors.gray4}>
       <div className="image-container">
         <img alt="" className="thumb-nail" />
       </div>
@@ -71,6 +71,7 @@ const WrpperProps = props => (
                 height: 2rem;
                 margin-right: 0.5rem;
                 margin-top: 0.3rem;
+                color: ${props.dataColor}
               }
             }
             .date {

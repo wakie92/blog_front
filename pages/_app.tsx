@@ -1,8 +1,8 @@
 import App from 'next/app';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
-// import Header from '../components/Header';
 import Layout from '../components/CommonUI/Layout';
 import Header from '../components/CommonUI/Header';
+import { colors } from '../lib/styles/global';
 // styles/global.js
 
 class MyApp extends App {
@@ -27,7 +27,7 @@ class MyApp extends App {
           <Component {...pageProps} />
         </Layout>
         <>
-          <GlobalStyle />
+          <GlobalStyle gray1={colors.gray1}/>
         </>
       </ThemeProvider>
     );
@@ -36,9 +36,10 @@ class MyApp extends App {
 export default MyApp;
 
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle<{gray1: string}>`
   html {
     font-size:62.5%;
+    background-color: ${props =>  props.gray1}
   }
   body {
     margin: 0;
@@ -74,5 +75,5 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 700;
   }
   p {
-    margin-bottom: 10px;
+    margin: 0;
   }`;
