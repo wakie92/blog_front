@@ -7,7 +7,7 @@ export type LoadingPostProps = {};
 const COMMENT_SVG = '/svg/iconmonstr-speech-bubble-comment-thin.svg';
 export default function LoadingPost({}: LoadingPostProps) {
   return (
-    <WrpperProps gray1={colors.gray1}>
+    <WrpperProps gray1={colors.gray2}>
       <div className="image-container">
         <div className="thumb-nail" />
       </div>
