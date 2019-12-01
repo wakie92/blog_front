@@ -5,7 +5,7 @@ export default function Layout(props) {
   return (
     <div
       css={css`
-      width: 90%;
+      width: calc(100% - 10rem);
       padding: 0 3%;
       padding-bottom: 100px;
       margin: 0 auto;
