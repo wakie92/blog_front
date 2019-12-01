@@ -37,7 +37,7 @@ const Layout = styled.main<{breakpoints: object}>`
       grid-auto-rows: 40rem;
     }
     @media screen and (max-width: ${breakpoints.medium}) {
-      grid-template-columns: repeat(1₩, 1fr);
+      grid-template-columns: repeat(1, 1fr);
       grid-auto-rows: 40rem;
     }
   }
