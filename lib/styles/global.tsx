@@ -10,4 +10,5 @@ export const colors = {
   gray7: '#495057',
   gray8: '#343A40',
   gray9: '#212529',
+  violet9: '#5f3dc4',
 };
