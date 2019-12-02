@@ -1,25 +1,21 @@
 import styled from 'styled-components';
 import { string } from 'prop-types';
+import { colors } from '../../lib/styles/global';
 
 interface EditorProps {
   inputValue: string;
   handleChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 export default function Editor({ inputValue, handleChange }: EditorProps) {
-  return (
-    <Wrapper>
-      <textarea className="editor" onChange={handleChange} />
-    </Wrapper>
-  );
+  return <TextArea onChange={handleChange} />;
 }
 
-const Wrapper = styled.div`
-  width: calc(49% - 0.8rem);
-
-  .editor {
-    width: 100%;
-    height: 100%;
-    font-size: 1.6rem;
-    padding: 0.8rem;
-  }
+const TextArea = styled.textarea`
+  width: calc(50% - 1.6rem);
+  height: calc(100% - 1.6rem);
+  font-size: 1.6rem;
+  padding: 0.8rem;
+  margin-right: 1px;
+  background-color: ${colors.gray9};
+  color: #fff;
 `;

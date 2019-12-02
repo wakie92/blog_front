@@ -10,8 +10,7 @@ export default function write() {
 }
 
 const Wrapper = styled.main`
-  width: 90%;
+  width: 100%;
   height: 100rem;
   margin: auto;
-  margin-top: 5rem;
 `;

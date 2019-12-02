@@ -12,11 +12,12 @@ export default function Preview({ inputValue }: PreviewProps) {
 
 const Wrapper = styled.div`
   padding: 0.8rem;
-  width: calc(49% - 0.8rem);
+  width: calc(50% - 1.6rem);
   background-color: white;
   overflow-y: scroll;
   word-break: break-all;
   white-space: normal;
+  margin-left: 1px;
   line-height: 1.4;
   h1,
   h2,
