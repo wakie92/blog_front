@@ -22,7 +22,7 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
     return (
       <ThemeProvider theme={{ fontFamily: 'Noto Sans KR' }}>
-        <Header />
+        {/* <Header /> */}
         <Layout>
           <Component {...pageProps} />
         </Layout>
