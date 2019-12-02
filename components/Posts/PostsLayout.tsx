@@ -6,6 +6,7 @@ import { breakpoints } from '../../lib/styles/responsive';
 export default function PostsLayout() {
   return (
     <Layout breakpoints={breakpoints}>
+      <h1>Development(전체글)</h1>
       <ul>
         <LoadingPost />
         <Post />
@@ -21,8 +22,9 @@ export default function PostsLayout() {
   );
 }
 
-const Layout = styled.main<{breakpoints: object}>`
-  width: 100%;
+const Layout = styled.main<{ breakpoints: object }>`
+  width: 90%;
+  margin: auto;
   ul {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
