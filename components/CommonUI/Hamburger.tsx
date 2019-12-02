@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { breakpoints } from '../../lib/styles/responsive';
 import { colors } from '../../lib/styles/global';
 
@@ -44,12 +44,22 @@ const BurgerIcon = styled.button<{
   }
   transition: all 500ms;
   transform: ${props =>
-    props.toggle ? 'translateX(-35rem)' : 'translateX(0rem)'};
+    props.toggle ? 'translateX(-35rem) rotate(180deg)' : 'translateX(0rem)'};
   background-color: ${props => props.toggle && colors.violet9};
   .burger-line {
-    width: 3rem;
-    height: 0.4rem;
-    margin: 0.2rem 0;
+    ${props => !props.toggle
+      ? css`
+      width: 3rem;
+      height: 0.4rem;
+      margin: 0.2rem 0;
+      `
+      : css`
+      width: 3rem;
+      height: 0.15rem;
+      margin: 0;
+      `
+    };
+    transition: ease-in 500ms;
     background-color: white;
   }
   @media screen and (max-width: ${breakpoints.small}) {
