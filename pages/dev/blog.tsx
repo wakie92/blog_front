@@ -1,11 +1,10 @@
 import { PostsLayout } from '../../components/Posts';
+import Header from '../../components/CommonUI/Header';
 
 export default function blog() {
   return (
     <>
-    <h1>
-      Development(전체글)
-    </h1>
+    <Header />
     <PostsLayout />
     </>
   )
