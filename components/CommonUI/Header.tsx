@@ -6,7 +6,7 @@ import { colors } from '../../lib/styles/global';
 import Hamburger from './Hamburger';
 import { breakpoints } from '../../lib/styles/responsive';
 
-export default function Home() {
+export default function Header() {
   const [toggle, setToggle] = useState(false);
   return (
     <Wrapper aColor={colors.violet9} breakpoints={breakpoints}>
@@ -80,11 +80,22 @@ const Wrapper = styled.header<{ aColor: string; breakpoints: object }>`
   border-bottom: 1px solid #ced4da;
   display: flex;
   align-items: center;
+  @media screen and (max-width: ${breakpoints.medium}) {
+    width: 100%;
+  }
+  @media screen and (max-width: ${breakpoints.small}) {
+    padding-top: 2rem;
+  }
   .nav-box {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media screen and (max-width: ${breakpoints.medium}) {
+      width: 100%;
+      padding: 0 2rem;
+
+    }
     .blog-name {
       font-size: 2rem;
       font-weight: 900;
