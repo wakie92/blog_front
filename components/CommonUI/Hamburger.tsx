@@ -64,5 +64,6 @@ const BurgerIcon = styled.button<{
   }
   @media screen and (max-width: ${breakpoints.small}) {
     transform: unset;
+    right: 2rem;
   }
 `;
