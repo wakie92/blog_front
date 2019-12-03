@@ -2,6 +2,8 @@
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import { colors } from '../../../lib/styles/global';
+import Link from 'next/link';
+import { ROUTES } from '../../../lib/Routes/Routes';
 
 export type PostProps = {
   title: string;
@@ -10,6 +12,7 @@ export type PostProps = {
   commentsCnt: number;
   onClick?: () => void;
   imgUrl: string;
+  id: number;
 };
 const COMMENT_SVG = '/svg/iconmonstr-speech-bubble-comment-thin.svg';
 export default function Post({
@@ -19,15 +22,20 @@ export default function Post({
   onClick,
   imgUrl,
   commentsCnt,
+  id,
 }: PostProps) {
   return (
     <WrpperProps onClick={onClick} imgUrl={imgUrl} dateColor={colors.gray4}>
-      <div className="image-container">
-        <img alt="" className="thumb-nail" />
-      </div>
+      <Link href={`${ROUTES.devBlog}/[id]`} as={`${ROUTES.devBlog}/${id}`}>
+        <div className="image-container">
+          <img alt="" className="thumb-nail" />
+        </div>
+      </Link>
       <div className="li-article">
         <div className="post-info">
-          <h3 className="title">{title}</h3>
+          <Link href={`${ROUTES.devBlog}/[id]`} as={`${ROUTES.devBlog}/${id}`}>
+            <h3 className="title">{title}</h3>
+          </Link>
           <div className="date-comment">
             <span className="date">{date}</span>
             <div className="commetns">
@@ -49,6 +57,7 @@ Post.defaultProps = {
     'https://cdn.evilmartians.com/front/posts/optimizing-react-virtual-dom-explained/cover-a1d5b40.png',
   date: '2019년 11월 25일',
   preContent: '내용미리보기내용미리보기내용미리보기내용미리보기',
+  id: 2,
 };
 
 const WrpperProps = props => (
@@ -62,6 +71,9 @@ const WrpperProps = props => (
         .post-info {
           height: 14rem;
           border-bottom: 1px solid ${props.dateColor};
+          .title {
+            cursor: pointer;
+          }
           .date-comment {
             display: flex;
             justify-content: space-between;
@@ -71,7 +83,7 @@ const WrpperProps = props => (
                 height: 2rem;
                 margin-right: 0.5rem;
                 margin-top: 0.3rem;
-                color: ${props.dataColor}
+                color: ${props.dataColor};
               }
             }
             .date {
@@ -91,6 +103,7 @@ const WrpperProps = props => (
         overflow: hidden;
         border-radius: 4px 4px 0 0;
         height: 16rem;
+        cursor: pointer;
         img {
           border-radius: 4px;
           background-image: url(${props.imgUrl});
