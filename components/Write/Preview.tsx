@@ -3,10 +3,12 @@ import showdown from 'showdown';
 
 interface PreviewProps {
   inputValue: string;
+  handleConv: (html) => void;
 }
-export default function Preview({ inputValue }: PreviewProps) {
+export default function Preview({ inputValue, handleConv }: PreviewProps) {
   const converter = new showdown.Converter();
   const html = converter.makeHtml(inputValue);
+  handleConv(html);
   return <Wrapper dangerouslySetInnerHTML={{ __html: html }}></Wrapper>;
 }
 
