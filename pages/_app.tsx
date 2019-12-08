@@ -1,8 +1,13 @@
 import App from 'next/app';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
 import Layout from '../components/CommonUI/Layout';
 import Header from '../components/CommonUI/Header';
 import { colors } from '../lib/styles/global';
+import rootReducer from '../store/modules';
 // styles/global.js
 
 class MyApp extends App {
@@ -19,15 +24,18 @@ class MyApp extends App {
   // }
 
   render() {
+    const store = createStore(rootReducer, composeWithDevTools());
     const { Component, pageProps } = this.props;
     return (
       <ThemeProvider theme={{ fontFamily: 'Noto Sans KR' }}>
         {/* <Header /> */}
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <Provider store={store} >
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </Provider>
         <>
-          <GlobalStyle gray1={colors.gray1}/>
+          <GlobalStyle gray1={colors.gray1} />
         </>
       </ThemeProvider>
     );
@@ -35,11 +43,10 @@ class MyApp extends App {
 }
 export default MyApp;
 
-
-const GlobalStyle = createGlobalStyle<{gray1: string}>`
+const GlobalStyle = createGlobalStyle<{ gray1: string }>`
   html {
     font-size:62.5%;
-    background-color: ${props =>  props.gray1}
+    background-color: ${props => props.gray1}
   }
   body {
     margin: 0;
