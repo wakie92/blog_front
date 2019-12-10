@@ -8,7 +8,7 @@ import { ROUTES } from '../../../lib/Routes/Routes';
 export type PostProps = {
   title: string;
   preContent: string;
-  date: string;
+  date: Date;
   commentsCnt: number;
   onClick?: () => void;
   imgUrl: string;
