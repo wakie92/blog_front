@@ -35,7 +35,7 @@ class MyApp extends App {
           </Layout>
         </Provider>
         <>
-          <GlobalStyle gray1={colors.gray1} />
+          <GlobalStyle />
         </>
       </ThemeProvider>
     );
@@ -43,10 +43,10 @@ class MyApp extends App {
 }
 export default MyApp;
 
-const GlobalStyle = createGlobalStyle<{ gray1: string }>`
+const GlobalStyle = createGlobalStyle`
   html {
     font-size:62.5%;
-    background-color: ${props => props.gray1}
+    background-color: #fff;
   }
   body {
     margin: 0;
