@@ -1,20 +1,23 @@
 import styled from 'styled-components';
 import { colors } from '../../lib/styles/global';
 import { FiArrowLeft, FiUpload } from 'react-icons/fi';
-interface HeadProps {
-  title: string,
+
+type HeadProps = {
+  title: string;
+  onUpload: () => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function Head({ title }: HeadProps) {
+export default function Head({ title, onUpload, onChange }: HeadProps) {
   const backLink = () => {
     history.back();
   }
   return (
     <Title>
       <FiArrowLeft onClick={backLink} className="svg-icon" />
-      <input placeholder={title} value={title} />
+      <input placeholder={title} onChange={onChange} value={title} />
       <FiUpload className="svg-icon" />
-      <button type="button">작성하기</button>
+      <button type="button" onClick={onUpload}>작성하기</button>
     </Title>
   );
 }
