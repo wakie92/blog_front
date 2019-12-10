@@ -1,14 +1,32 @@
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import Post from './Post/Post';
 import LoadingPost from './Post/LoadingPost';
 import { breakpoints } from '../../lib/styles/responsive';
+import { RootState } from '../../store/modules';
 
 export default function PostsLayout() {
+  const { postsList } = useSelector(
+    (state: RootState) => ({
+      postsList: state.Post.postsList,
+    })
+  );
+  console.log(postsList);
   return (
     <Layout breakpoints={breakpoints}>
       <h1>Development(전체글)</h1>
       <ul>
         <LoadingPost />
+        {
+          postsList.map(item => (
+            <Post
+              title={item.title}
+              preContent={item.content}
+              date={item.date}
+              id={item.id}
+            />
+          ))
+        }
         <Post />
         <Post />
         <Post />
