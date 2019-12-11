@@ -29,7 +29,7 @@ export default function WriteContainer() {
   }
 
   const onUpload = () => {
-    const uploadDate = new Date();
+    const uploadDate = new Date().getFullYear();
     dispatch(inputMd({
       title,
       date: uploadDate,

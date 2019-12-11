@@ -1,10 +1,10 @@
 import {
-  action,
+  deprecated,
   createAction,
   ActionType,
   createReducer,
 } from 'typesafe-actions';
-
+const { createStandardAction } = deprecated;
 let nextId = 1;
 const GET_POSTS_LIST = 'post/GET_POSTS_LIST';
 const INPUT_MD = 'post/INPUT_MD';
@@ -14,16 +14,18 @@ export const getPostsList = createAction(
   (payload): Post[] => payload,
 )();
 
-export const inputMd = createAction(
-  INPUT_MD,
-  ({ title, date, content }: Post) => ({
-    id: nextId++,
-    title,
-    date,
-    content,
-  }),
-)();
+// export const inputMd = createAction(
+//   INPUT_MD,
+//   (payload: Post) => ({
+//     id: nextId++,
+//     ...payload
+//   })
+//   )();
+export const inputMd = createStandardAction(INPUT_MD)<Post>();
 
+const add = createAction('ADD', action => {
+  return (amount: number) => action(amount);
+});
 const actions = {
   getPostsList,
   inputMd,
@@ -34,7 +36,7 @@ type PostActions = ActionType<typeof actions>;
 export type Post = {
   id?: number;
   title: string;
-  date: Date;
+  date: number;
   content: string;
   reply?: [];
 };
@@ -45,7 +47,14 @@ export type PostState = {
 };
 
 const initialState: PostState = {
-  postsList: [],
+  postsList: [
+    {
+      id: 1,
+      title: 'wdsf',
+      content: 'sdfsdfsfsdf',
+      date: new Date().getFullYear(),
+    }
+  ],
   mdValue: '',
 };
 
@@ -54,10 +63,9 @@ const post = createReducer<PostState, PostActions>(initialState, {
     return {
       ...state,
       postsList: payload,
-    }
+    };
   },
   [INPUT_MD]: (state, { payload }) => {
-    console.log(payload);
     return {
       ...state,
       postsList: state.postsList.concat(payload),
