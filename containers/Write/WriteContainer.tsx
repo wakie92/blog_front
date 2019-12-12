@@ -6,6 +6,7 @@ import { Editor, Head, Preview } from '../../components/Write';
 import { RootState } from '../../store/modules';
 import { inputMd } from '../../store/modules/post';
 import { ROUTES } from '../../lib/Routes/Routes';
+import { getInputV } from '../../store/modules/write';
 
 export default function WriteContainer() {
   const dispatch = useDispatch();
@@ -13,6 +14,9 @@ export default function WriteContainer() {
   const [title, setTitle] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [convValue, setConvValue] = useState();
+  const { write } = useSelector(({ write }) => ({
+    write: write.write,
+  }));
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;
@@ -21,7 +25,7 @@ export default function WriteContainer() {
 
   const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setTitle(value);
+    dispatch(getInputV(value));
   }
 
   const handleConv = (html) => {
@@ -37,9 +41,10 @@ export default function WriteContainer() {
     }));
     router.push(ROUTES.devBlog);
   };
+  console.log(write);
   return (
     <>
-      <Head onUpload={onUpload} title={title} onChange={handleTitle} />
+      <Head onUpload={onUpload} title={write} onChange={handleTitle} />
       <EditBox>
         <Editor inputValue={inputValue} handleChange={handleChange} />
         <Preview inputValue={inputValue} handleConv={handleConv} />

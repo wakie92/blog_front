@@ -5,6 +5,7 @@ import LoadingPost from './Post/LoadingPost';
 import { breakpoints } from '../../lib/styles/responsive';
 import { RootState } from '../../store/modules';
 
+
 export default function PostsLayout() {
   const { postsList } = useSelector(
     (state: RootState) => ({

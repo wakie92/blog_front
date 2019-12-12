@@ -1,31 +1,20 @@
+import produce from 'immer';
 import {
-  deprecated,
   createAction,
   ActionType,
   createReducer,
 } from 'typesafe-actions';
-const { createStandardAction } = deprecated;
 let nextId = 1;
 const GET_POSTS_LIST = 'post/GET_POSTS_LIST';
 const INPUT_MD = 'post/INPUT_MD';
 
 export const getPostsList = createAction(
   GET_POSTS_LIST,
-  (payload): Post[] => payload,
-)();
+  (payload: Post[]) => payload,
+)<Post[]>();
 
-// export const inputMd = createAction(
-//   INPUT_MD,
-//   (payload: Post) => ({
-//     id: nextId++,
-//     ...payload
-//   })
-//   )();
-export const inputMd = createStandardAction(INPUT_MD)<Post>();
+export const inputMd = createAction(INPUT_MD, (post: Post) => post)<Post>();
 
-const add = createAction('ADD', action => {
-  return (amount: number) => action(amount);
-});
 const actions = {
   getPostsList,
   inputMd,
@@ -43,7 +32,7 @@ export type Post = {
 
 export type PostState = {
   postsList: Post[];
-  mdValue: string;
+  // mdValue: string;
 };
 
 const initialState: PostState = {
@@ -53,24 +42,26 @@ const initialState: PostState = {
       title: 'wdsf',
       content: 'sdfsdfsfsdf',
       date: new Date().getFullYear(),
-    }
+    },
   ],
-  mdValue: '',
+  // mdValue: '',
 };
 
 const post = createReducer<PostState, PostActions>(initialState, {
   [GET_POSTS_LIST]: (state, { payload }) => {
     return {
-      ...state,
+      // ...state,
       postsList: payload,
+      mdValue: 'dsf',
     };
   },
-  [INPUT_MD]: (state, { payload }) => {
-    return {
-      ...state,
-      postsList: state.postsList.concat(payload),
-    }
-  }
+  [INPUT_MD]: (state, { payload: post }) =>
+    produce(state, draft => {
+      draft.postsList.push({
+        ...post,
+        // id: nextId++,
+      })
+    }),
 });
 
 export default post;

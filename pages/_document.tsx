@@ -1,15 +1,18 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
+import { createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import rootReducer from '../store/modules';
+import { Provider } from 'react-redux';
 
 class MyDocument extends Document {
-
   static async getInitialProps(ctx) {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          enhanceApp: App => props => sheet.collectStyles(<App {...props} />)
+          enhanceApp: App => props => sheet.collectStyles(<App {...props} />),
         });
 
       const initialProps = await Document.getInitialProps(ctx);
@@ -20,23 +23,27 @@ class MyDocument extends Document {
             {initialProps.styles}
             {sheet.getStyleElement()}
           </>
-        )
+        ),
       };
     } finally {
       sheet.seal();
     }
   }
 
-   render() {
+  render() {
+    const store = createStore(rootReducer, composeWithDevTools());
+
     return (
       <Html>
         <Head />
         <body>
           <Main />
-          <NextScript />
+          <Provider store={store}>
+            <NextScript />
+          </Provider>
         </body>
       </Html>
-    )
+    );
   }
 }
 export default MyDocument;
