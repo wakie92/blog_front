@@ -1,9 +1,10 @@
-import produce from 'immer';
 import {
+  deprecated,
   createAction,
   ActionType,
   createReducer,
 } from 'typesafe-actions';
+const { createStandardAction } = deprecated;
 let nextId = 1;
 const GET_POSTS_LIST = 'post/GET_POSTS_LIST';
 const INPUT_MD = 'post/INPUT_MD';
@@ -32,7 +33,7 @@ export type Post = {
 
 export type PostState = {
   postsList: Post[];
-  // mdValue: string;
+  mdValue: string;
 };
 
 const initialState: PostState = {
@@ -44,24 +45,25 @@ const initialState: PostState = {
       date: new Date().getFullYear(),
     },
   ],
-  // mdValue: '',
+  mdValue: '',
 };
 
 const post = createReducer<PostState, PostActions>(initialState, {
   [GET_POSTS_LIST]: (state, { payload }) => {
     return {
-      // ...state,
+      ...state,
       postsList: payload,
-      mdValue: 'dsf',
     };
   },
-  [INPUT_MD]: (state, { payload: post }) =>
-    produce(state, draft => {
-      draft.postsList.push({
-        ...post,
-        // id: nextId++,
-      })
-    }),
+
+  [INPUT_MD]: (state, { payload: post }) => {
+    console.log(state.postsList);
+    console.log(post);
+    return (
+    {
+      ...state,
+      postsList: state.postsList.concat(post),
+  })}
 });
 
 export default post;

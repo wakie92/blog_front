@@ -20,16 +20,16 @@ export type Blog = {
 
 export type WriteState = {
   write: string;
-  // blog: Blog[];
+  blog: Blog[];
 };
 
 const initialState: WriteState = {
   write: '',
-  // blog: [],
+  blog: [],
 };
 
 const write = createReducer<WriteState, WriteActions>(initialState, {
-  [INPUT_V]: (state, action) => ({ write: action.payload }),
+  // [INPUT_V]: (state, action) => (write: action.payload),
 });
 
 export default write;
