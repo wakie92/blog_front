@@ -1,21 +1,29 @@
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Post from './Post/Post';
 import LoadingPost from './Post/LoadingPost';
 import { breakpoints } from '../../lib/styles/responsive';
 import { RootState } from '../../store/modules';
+import { getPostsList } from '../../store/modules/post';
 
 
 export default function PostsLayout() {
-  const { postsList } = useSelector(
+  const { postsList, mdValue } = useSelector(
     (state: RootState) => ({
-      postsList: state.Post.postsList,
+      postsList: state.post.postsList,
+      mdValue: state.post.mdValue,
     })
   );
-  console.log(postsList);
+  const dispatch = useDispatch();
+  console.log(mdValue);
+  useEffect(() => {
+    dispatch(getPostsList(postsList));
+  }, [dispatch, postsList]);
   return (
     <Layout breakpoints={breakpoints}>
       <h1>Development(전체글)</h1>
+      <span>{mdValue}</span>
       <ul>
         <LoadingPost />
         {

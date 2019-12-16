@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { string } from 'prop-types';
 import { colors } from '../../lib/styles/global';
@@ -6,9 +7,9 @@ interface EditorProps {
   inputValue: string;
   handleChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
-export default function Editor({ inputValue, handleChange }: EditorProps) {
-  return <TextArea onChange={handleChange} />;
-}
+export default React.memo(function Editor({ inputValue, handleChange }: EditorProps) {
+  return <TextArea onChange={handleChange} value={inputValue} />;
+})
 
 const TextArea = styled.textarea`
   width: calc(50% - 1.6rem);

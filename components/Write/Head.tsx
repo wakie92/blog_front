@@ -1,6 +1,9 @@
+import React from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
 import { colors } from '../../lib/styles/global';
 import { FiArrowLeft, FiUpload } from 'react-icons/fi';
+import { ROUTES } from '../../lib/Routes/Routes';
 
 type HeadProps = {
   title: string;
@@ -8,23 +11,22 @@ type HeadProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function Head({ title, onUpload, onChange }: HeadProps) {
+export default React.memo(function Head({ title, onUpload, onChange }: HeadProps) {
   const backLink = () => {
     history.back();
   }
+  console.log(title);
   return (
     <Title>
       <FiArrowLeft onClick={backLink} className="svg-icon" />
       <input placeholder={title} onChange={onChange} value={title} />
       <FiUpload className="svg-icon" />
+    <Link href={ROUTES.devBlog} >
       <button type="button" onClick={onUpload}>작성하기</button>
+    </Link>
     </Title>
   );
-}
-
-Head.defaultProps = {
-  title: '제목',
-};
+},(preProps, nextProps) => preProps.title === nextProps.title);
 
 const Title = styled.div`
   width: calc(100% - 0.5rem);

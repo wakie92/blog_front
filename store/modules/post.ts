@@ -1,13 +1,12 @@
 import {
-  deprecated,
   createAction,
   ActionType,
   createReducer,
 } from 'typesafe-actions';
-const { createStandardAction } = deprecated;
-let nextId = 1;
+
 const GET_POSTS_LIST = 'post/GET_POSTS_LIST';
 const INPUT_MD = 'post/INPUT_MD';
+const INPUT_VALUE = 'post/INPUT_VALUE';
 
 export const getPostsList = createAction(
   GET_POSTS_LIST,
@@ -15,10 +14,12 @@ export const getPostsList = createAction(
 )<Post[]>();
 
 export const inputMd = createAction(INPUT_MD, (post: Post) => post)<Post>();
+export const getValue = createAction(INPUT_VALUE, (payload: string) => payload)<string>();
 
 const actions = {
   getPostsList,
   inputMd,
+  getValue,
 };
 
 type PostActions = ActionType<typeof actions>;
@@ -45,7 +46,7 @@ const initialState: PostState = {
       date: new Date().getFullYear(),
     },
   ],
-  mdValue: '',
+  mdValue: 'kkkk',
 };
 
 const post = createReducer<PostState, PostActions>(initialState, {
@@ -63,7 +64,14 @@ const post = createReducer<PostState, PostActions>(initialState, {
     {
       ...state,
       postsList: state.postsList.concat(post),
-  })}
+  })},
+
+  [INPUT_VALUE]: (state, { payload: value }) => {
+    return {
+      ...state,
+      mdValue: value,
+    }
+  }
 });
 
 export default post;
