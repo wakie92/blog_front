@@ -3,6 +3,7 @@ import {
   ActionType,
   createReducer,
 } from 'typesafe-actions';
+import formatDate from '../../lib/Utils/utils';
 
 const GET_POSTS_LIST = 'post/GET_POSTS_LIST';
 const INPUT_MD = 'post/INPUT_MD';
@@ -27,8 +28,10 @@ type PostActions = ActionType<typeof actions>;
 export type Post = {
   id?: number;
   title: string;
-  date: number;
+  date: string;
   content: string;
+  imgUrl?: undefined | string;
+  contentMd: string;
   reply?: [];
 };
 
@@ -42,8 +45,10 @@ const initialState: PostState = {
     {
       id: 1,
       title: 'wdsf',
-      content: 'sdfsdfsfsdf',
-      date: new Date().getFullYear(),
+      imgUrl: 'https://cdn.evilmartians.com/front/posts/optimizing-react-virtual-dom-explained/cover-a1d5b40.png',
+      contentMd:'<p>내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기<p>',
+      content: '내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기',
+      date: formatDate(new Date().toLocaleString()),
     },
   ],
   mdValue: 'kkkk',

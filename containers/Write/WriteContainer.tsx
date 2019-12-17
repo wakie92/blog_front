@@ -13,7 +13,7 @@ export default function WriteContainer() {
   const router = useRouter();
   const [title, setTitle] = useState('');
   const [inputValue, setInputValue] = useState('');
-  const [convValue, setConvValue] = useState();
+  const [convValue, setConvValue] = useState('');
 
   const { postsList } = useSelector(({ post }: RootState) => ({
     postsList: post.postsList,
@@ -36,15 +36,15 @@ export default function WriteContainer() {
   };
 
   const onUpload = () => {
-    const uploadDate = new Date().getFullYear();
+    const uploadDate = new Date().toLocaleString();
     dispatch(inputMd({
       title,
       date: uploadDate,
-      content: convValue
+      content: inputValue,
+      contentMd: convValue,
     }));
   };
-  console.log(postsList);
-
+  console.log(convValue);
   return (
     <>
       <Head onUpload={onUpload} title={title} onChange={handleTitle} />

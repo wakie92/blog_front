@@ -22,6 +22,7 @@ const Layout = styled.div`
   min-height: 70rem;
   /* background-color: ${colors.violet9}; */
   padding: 2rem;
+  margin-top: 20rem;
   hr {
     width: 100%;
     border: 1px solid ${colors.gray5};

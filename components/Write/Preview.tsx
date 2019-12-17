@@ -9,7 +9,11 @@ export default function Preview({ inputValue, handleConv }: PreviewProps) {
   const converter = new showdown.Converter();
   const html = converter.makeHtml(inputValue);
   handleConv(html);
-  return <Wrapper dangerouslySetInnerHTML={{ __html: html }}></Wrapper>;
+  return <Wrapper>
+    <div dangerouslySetInnerHTML={{ __html: html }}>
+
+    </div>
+  </Wrapper>;
 }
 
 const Wrapper = styled.div`
@@ -45,7 +49,22 @@ const Wrapper = styled.div`
     margin-bottom: 1.5em;
     padding: 0.125rem 0.3125rem 0.0625rem;
   }
-
+  code {
+    background-color: #f8f8f8;
+    border-color: #dfdfdf;
+    border-style: solid;
+    border-width: 1px;
+    color: #333;
+    font-family: Consolas,"Liberation Mono",Courier,monospace;
+    font-weight: normal;
+    padding: 0.125rem 0.3125rem 0.0625rem;
+  }
+  ul {
+    margin-left: 2.1rem;
+  }
+  ul, li {
+    list-style: unset;
+  }
   pre code {
     background-color: transparent;
     border: 0;

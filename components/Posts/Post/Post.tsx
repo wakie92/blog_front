@@ -1,6 +1,7 @@
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
+import showdown from 'showdown';
 import { colors } from '../../../lib/styles/global';
 import Link from 'next/link';
 import { ROUTES } from '../../../lib/Routes/Routes';
@@ -8,10 +9,10 @@ import { ROUTES } from '../../../lib/Routes/Routes';
 export type PostProps = {
   title: string;
   preContent: string;
-  date: number;
+  date: string;
   commentsCnt: number;
   onClick?: () => void;
-  imgUrl: string;
+  imgUrl?: string;
   id: number;
 };
 const COMMENT_SVG = '/svg/iconmonstr-speech-bubble-comment-thin.svg';
@@ -24,7 +25,9 @@ export default function Post({
   commentsCnt,
   id,
 }: PostProps) {
-  return (
+  console.log(preContent.length);
+  const pre = !imgUrl ? `${preContent.substring(0, 150)}...` : `${preContent.substring(0, 45)}....`
+;  return (
     <WrpperProps onClick={onClick} imgUrl={imgUrl} dateColor={colors.gray4}>
       <Link href={`${ROUTES.devBlog}/[id]`} as={`${ROUTES.devBlog}/${id}`}>
         <div className="image-container">
@@ -44,19 +47,19 @@ export default function Post({
             </div>
           </div>
         </div>
-        <div className="pre-content">{preContent}</div>
+        <div className="pre-content">{pre}</div>
       </div>
     </WrpperProps>
   );
 }
 
 Post.defaultProps = {
-  title: '긴제목긴제목긴제목긴제목긴제목긴제목',
+  title: '백엔드가 이정도는 해줘야 함 - 커리큘럼 털어놓기',
   commentsCnt: 20,
-  imgUrl:
-    'https://cdn.evilmartians.com/front/posts/optimizing-react-virtual-dom-explained/cover-a1d5b40.png',
+  // imgUrl:
+  //   'https://cdn.evilmartians.com/front/posts/optimizing-react-virtual-dom-explained/cover-a1d5b40.png',
   date: '2019년 11월 25일',
-  preContent: '내용미리보기내용미리보기내용미리보기내용미리보기',
+  preContent: '내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기',
   id: 2,
 };
 
@@ -67,12 +70,14 @@ const WrpperProps = props => (
       box-shadow: 0px 4px 8px 8px rgba(0, 0, 0, 0.05);
       .li-article {
         padding: 1rem 1.5rem;
-        height: 22rem;
+        height: 21rem;
+        padding-top: 2rem;
         .post-info {
           height: 14rem;
           border-bottom: 1px solid ${props.dateColor};
           .title {
             cursor: pointer;
+            margin-bottom: 2rem;
           }
           .date-comment {
             display: flex;
@@ -104,6 +109,7 @@ const WrpperProps = props => (
         border-radius: 4px 4px 0 0;
         height: 16rem;
         cursor: pointer;
+        display: ${!props.imgUrl && 'none'};
         img {
           border-radius: 4px;
           background-image: url(${props.imgUrl});
