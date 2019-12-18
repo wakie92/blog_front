@@ -38,9 +38,9 @@ const WrpperProps = props => (
       .li-article {
         padding: 1rem 1.5rem;
         margin: 1rem 0;
-        height: 22rem;
+        height: 18rem;
         .post-info {
-          height: 14rem;
+          height: 12rem;
           border-bottom: 1px solid ${props.gray1};
           margin-bottom: 1rem;
           .title {
@@ -74,7 +74,7 @@ const WrpperProps = props => (
       .image-container {
         overflow: hidden;
         border-radius: 4px 4px 0 0;
-        height: 16rem;
+        height: 18rem;
         display: flex;
         justify-content: center;
         align-items: center;

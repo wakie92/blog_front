@@ -25,8 +25,7 @@ export default function Post({
   commentsCnt,
   id,
 }: PostProps) {
-  console.log(preContent.length);
-  const pre = !imgUrl ? `${preContent.substring(0, 150)}...` : `${preContent.substring(0, 45)}....`
+  const pre = `${preContent.substring(0, 150)}...`
 ;  return (
     <WrpperProps onClick={onClick} imgUrl={imgUrl} dateColor={colors.gray4}>
       <Link href={`${ROUTES.devBlog}/[id]`} as={`${ROUTES.devBlog}/${id}`}>
@@ -70,10 +69,10 @@ const WrpperProps = props => (
       box-shadow: 0px 4px 8px 8px rgba(0, 0, 0, 0.05);
       .li-article {
         padding: 1rem 1.5rem;
-        height: 21rem;
+        height: ${props.imgUrl ? '19rem' : '37rem'};
         padding-top: 2rem;
         .post-info {
-          height: 14rem;
+          height: ${props.imgUrl ? '12rem' : '13rem'};
           border-bottom: 1px solid ${props.dateColor};
           .title {
             cursor: pointer;
@@ -82,6 +81,7 @@ const WrpperProps = props => (
           .date-comment {
             display: flex;
             justify-content: space-between;
+            margin-bottom: 1rem;
             .commetns {
               background-color: ${props.dataColor};
               img {
@@ -102,12 +102,15 @@ const WrpperProps = props => (
           margin-top: 1.5rem;
           color: #868e96;
           font-size: 1.5rem;
+          overflow: hidden;
+          height: ${props.imgUrl ? '5rem' : '20rem'};
+          line-height: 1.9;
         }
       }
       .image-container {
         overflow: hidden;
         border-radius: 4px 4px 0 0;
-        height: 16rem;
+        height: 18rem;
         cursor: pointer;
         display: ${!props.imgUrl && 'none'};
         img {
