@@ -16,7 +16,6 @@ export default function PostsLayout() {
     })
   );
   const dispatch = useDispatch();
-  console.log(mdValue);
   useEffect(() => {
     dispatch(getPostsList(postsList));
   }, [dispatch, postsList]);

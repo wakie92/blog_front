@@ -27,7 +27,6 @@ export default function WriteContainer() {
 
   const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    console.log(value);
     setTitle(value);
   };
 
@@ -44,7 +43,6 @@ export default function WriteContainer() {
       contentMd: convValue,
     }));
   };
-  console.log(convValue);
   return (
     <>
       <Head onUpload={onUpload} title={title} onChange={handleTitle} />

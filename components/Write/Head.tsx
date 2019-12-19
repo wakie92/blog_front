@@ -15,7 +15,6 @@ export default React.memo(function Head({ title, onUpload, onChange }: HeadProps
   const backLink = () => {
     history.back();
   }
-  console.log(title);
   return (
     <Title>
       <FiArrowLeft onClick={backLink} className="svg-icon" />
