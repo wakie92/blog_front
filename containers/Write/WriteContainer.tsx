@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { Editor, Head, Preview } from '../../components/Write';
 import { RootState } from '../../store/modules';
-import { inputMd, getValue } from '../../store/modules/post';
+import { inputMd, getValue } from '../../store/modules/postUI';
 import { ROUTES } from '../../lib/Routes/Routes';
 import { getInputV } from '../../store/modules/write';
 
@@ -42,6 +42,7 @@ export default function WriteContainer() {
       content: inputValue,
       contentMd: convValue,
     }));
+    router.push(ROUTES.devBlog, ROUTES.devBlog, { shallow: true });
   };
   return (
     <>

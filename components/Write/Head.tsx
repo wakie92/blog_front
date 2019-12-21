@@ -9,23 +9,26 @@ type HeadProps = {
   title: string;
   onUpload: () => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
+};
 
-export default React.memo(function Head({ title, onUpload, onChange }: HeadProps) {
-  const backLink = () => {
-    history.back();
-  }
-  return (
-    <Title>
-      <FiArrowLeft onClick={backLink} className="svg-icon" />
-      <input placeholder={title} onChange={onChange} value={title} />
-      <FiUpload className="svg-icon" />
-    <Link href={ROUTES.devBlog} >
-      <button type="button" onClick={onUpload}>작성하기</button>
-    </Link>
-    </Title>
-  );
-},(preProps, nextProps) => preProps.title === nextProps.title);
+export default React.memo(
+  function Head({ title, onUpload, onChange }: HeadProps) {
+    const backLink = () => {
+      history.back();
+    };
+    return (
+      <Title>
+        <FiArrowLeft onClick={backLink} className="svg-icon" />
+        <input placeholder={title} onChange={onChange} value={title} />
+        <FiUpload className="svg-icon" />
+        <button type="button" onClick={onUpload}>
+          작성하기
+        </button>
+      </Title>
+    );
+  },
+  (preProps, nextProps) => preProps.title === nextProps.title,
+);
 
 const Title = styled.div`
   width: calc(100% - 0.5rem);

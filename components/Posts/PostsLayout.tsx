@@ -5,7 +5,7 @@ import Post from './Post/Post';
 import LoadingPost from './Post/LoadingPost';
 import { breakpoints } from '../../lib/styles/responsive';
 import { RootState } from '../../store/modules';
-import { getPostsList } from '../../store/modules/post';
+import { getPostsList } from '../../store/modules/postUI';
 
 
 export default function PostsLayout() {

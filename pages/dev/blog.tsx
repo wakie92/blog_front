@@ -1,12 +1,24 @@
 import { PostsLayout } from '../../components/Posts';
 import Header from '../../components/CommonUI/Header';
+import { NextPage, NextPageContext } from 'next';
 
-
-export default function blog() {
+type blogType = {
+  isServer: string;
+};
+const Blog: NextPage = ({ isServer }: blogType) => {
   return (
     <>
-    <Header />
-    <PostsLayout />
+      <Header />
+      <PostsLayout />
     </>
-  )
+  );
 };
+
+Blog.getInitialProps = async (
+  ctx: NextPageContext
+) => {
+  const isServer: string = ctx.req ? 'server' : 'client';
+  return { isServer }
+};
+
+export default Blog;

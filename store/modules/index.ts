@@ -1,4 +1,4 @@
-import post  from './post';
+import post  from './postUI';
 import { combineReducers } from 'redux';
 import write from './write';
 

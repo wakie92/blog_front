@@ -1,7 +1,9 @@
+import { reducerUtils } from './../../lib/Utils/asyncUtils';
 import {
   createAction,
   ActionType,
   createReducer,
+  deprecated
 } from 'typesafe-actions';
 import formatDate from '../../lib/Utils/utils';
 
@@ -23,7 +25,7 @@ const actions = {
   getValue,
 };
 
-type PostActions = ActionType<typeof actions>;
+export type PostActions = ActionType<typeof actions>;
 
 export type Post = {
   id?: number;
@@ -38,6 +40,7 @@ export type Post = {
 export type PostState = {
   postsList: Post[];
   mdValue: string;
+  post: Post;
 };
 
 const initialState: PostState = {
