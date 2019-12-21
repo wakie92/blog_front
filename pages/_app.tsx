@@ -1,35 +1,40 @@
 import App from 'next/app';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, Store } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-
+import withRedux from 'next-redux-wrapper';
 import Layout from '../components/CommonUI/Layout';
 import Header from '../components/CommonUI/Header';
 import { colors } from '../lib/styles/global';
 import rootReducer from '../store/modules';
 // styles/global.js
 
-class MyApp extends App {
+interface IProps {
+  store: Store;
+}
+const makeStore = () => {
+  return createStore(rootReducer, composeWithDevTools());
+};
+class MyApp extends App<IProps> {
   // Only uncomment this method if you have blocking data requirements for
   // every single page in your application. This disables the ability to
   // perform automatic static optimization, causing every page in your app to
   // be server-side rendered.
   //
-  // static async getInitialProps(app`₩Context) {
-  //   // calls page's `getInitialProps` and fills `appProps.pageProps`
-  //   const appProps = await App.getInitialProps(appContext);
-  //
-  //   return { ...appProps }
-  // }
+  static async getInitialProps({ Component, ctx }) {
+    const pageProps = Component.getInitialProps
+      ? await Component.getInitialProps(ctx)
+      : {};
+    return { pageProps };
+  }
 
   render() {
-    const store = createStore(rootReducer, composeWithDevTools());
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, store } = this.props;
     return (
       <ThemeProvider theme={{ fontFamily: 'Noto Sans KR' }}>
         {/* <Header /> */}
-        <Provider store={store} >
+        <Provider store={store}>
           <Layout>
             <Component {...pageProps} />
           </Layout>
@@ -41,7 +46,7 @@ class MyApp extends App {
     );
   }
 }
-export default MyApp;
+export default withRedux(makeStore)(MyApp);
 
 const GlobalStyle = createGlobalStyle`
   html {
