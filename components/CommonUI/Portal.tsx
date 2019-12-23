@@ -1,12 +1,13 @@
-import ReactDOM from 'react-dom';
+import { createPortal } from 'react-dom';
 import { ReactNode } from 'react';
 
 type Portal = {
-  children: ReactNode,
-}
+  children: ReactNode;
+};
 const Portal = ({ children }: Portal) => {
+  const test = document.getElementById('d');
   const element: HTMLElement = document.getElementById('other');
-  return ReactDOM.createPortal(children, element);
+  return createPortal(children, element);
 };
 
 export default Portal;

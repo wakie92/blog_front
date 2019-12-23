@@ -1,77 +1,86 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { ROUTES } from '../../lib/Routes/Routes';
 import { colors } from '../../lib/styles/global';
 import Hamburger from './Hamburger';
 import { breakpoints } from '../../lib/styles/responsive';
+import { getLoginModal } from '../../store/modules/loginUI';
+import LoginContainer from '../../containers/Login/LoginContainer';
 
-export default function Header() {
+const Header = () => {
+  const dispatch = useDispatch();
   const [toggle, setToggle] = useState(false);
+
+  const onLoginModal = () => {
+    dispatch(getLoginModal());
+  };
   return (
-    <Wrapper aColor={colors.violet9} breakpoints={breakpoints}>
-      <div className="nav-box">
-        <Link href={ROUTES.home}>
-          <a>
-            <span className="blog-name">건망증 개발자 기록지</span>
-          </a>
-        </Link>
-        <SmallNav toggle={toggle}>
-          <Link href={ROUTES.about}>
+    <>
+      <LoginContainer />
+      <Wrapper aColor={colors.violet9} breakpoints={breakpoints}>
+        <div className="nav-box">
+          <Link href={ROUTES.home}>
             <a>
-              <span>About</span>
+              <span className="blog-name">건망증 개발자 기록지</span>
             </a>
           </Link>
-          <Link href={ROUTES.devBlog}>
-            <a>
-              <span>Development</span>
-              <ul className="bolg-category">
-                <li>Web</li>
-                <li>Javascript</li>
-                <li>React</li>
-                <li>Node</li>
-                <li>Html/css</li>
-              </ul>
-            </a>
-          </Link>
-          <Link href={ROUTES.write}>
-            <a>
-              <span>GitHub</span>
-            </a>
-          </Link>
-          <Link href={ROUTES.about}>
-            <a>
+          <SmallNav toggle={toggle}>
+            <Link href={ROUTES.about}>
+              <a>
+                <span>About</span>
+              </a>
+            </Link>
+            <Link href={ROUTES.devBlog}>
+              <a>
+                <span>Development</span>
+                <ul className="bolg-category">
+                  <li>Web</li>
+                  <li>Javascript</li>
+                  <li>React</li>
+                  <li>Node</li>
+                  <li>Html/css</li>
+                </ul>
+              </a>
+            </Link>
+            <Link href={ROUTES.write}>
+              <a>
+                <span>GitHub</span>
+              </a>
+            </Link>
+            <Link href={ROUTES.about}>
+              <a>
+                <span>Facebook</span>
+              </a>
+            </Link>
+          </SmallNav>
+          <Hamburger toggle={toggle} onToggle={() => setToggle(!toggle)} />
+          <nav className="nav">
+            <Link href={ROUTES.about}>
+              <a>
+                <span>About</span>
+              </a>
+            </Link>
+            <Link href={ROUTES.devBlog}>
+              <a>
+                <span>Development</span>
+              </a>
+            </Link>
+            <Link href={ROUTES.write}>
+              <a>
+                <span>GitHub</span>
+              </a>
+            </Link>
+            <a onClick={onLoginModal}>
               <span>Facebook</span>
             </a>
-          </Link>
-        </SmallNav>
-        <Hamburger toggle={toggle} onToggle={() => setToggle(!toggle)} />
-        <nav className="nav">
-          <Link href={ROUTES.about}>
-            <a>
-              <span>About</span>
-            </a>
-          </Link>
-          <Link href={ROUTES.devBlog}>
-            <a>
-              <span>Development</span>
-            </a>
-          </Link>
-          <Link href={ROUTES.write}>
-            <a>
-              <span>GitHub</span>
-            </a>
-          </Link>
-          <Link href={ROUTES.about}>
-            <a>
-              <span>Facebook</span>
-            </a>
-          </Link>
-        </nav>
-      </div>
-    </Wrapper>
+          </nav>
+        </div>
+      </Wrapper>
+    </>
   );
-}
+};
 const Wrapper = styled.header<{ aColor: string; breakpoints: object }>`
   width: calc(100% - 10rem);
   height: 6rem;
@@ -94,7 +103,6 @@ const Wrapper = styled.header<{ aColor: string; breakpoints: object }>`
     @media screen and (max-width: ${breakpoints.medium}) {
       width: 100%;
       padding: 0 2rem;
-
     }
     .blog-name {
       font-size: 2rem;
@@ -148,3 +156,5 @@ const SmallNav = styled.aside<{ toggle: boolean }>`
     width: calc(100% - 5rem);
   }
 `;
+
+export default Header;

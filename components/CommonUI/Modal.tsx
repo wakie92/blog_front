@@ -7,6 +7,7 @@ type ModalProps = {
   visible: boolean;
 };
 const Modal = ({ children, visible }: ModalProps) => {
+  console.log(visible);
   return (
     <Portal>
       <Wrapper visible={visible}>{children}</Wrapper>
