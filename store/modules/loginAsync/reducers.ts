@@ -2,7 +2,6 @@ import {
   GET_LOGIN,
   GET_LOGIN_SUCCESS,
   GET_LOGIN_ERROR,
-  GET_AUTH,
 } from './actions';
 import { LoginState, LoginActions, updateKey } from './types';
 import { reducerUtils } from '../../../lib/Utils/asyncUtils';
@@ -15,13 +14,6 @@ const initialState: LoginState = {
 };
 
 const login = createReducer<LoginState, LoginActions>(initialState, {
-  [GET_AUTH]: (state, { payload }) => {
-    const { name, value } = payload;
-    return {
-      ...state,
-      [name]: value,
-    };
-  },
   [GET_LOGIN]: state => ({
     ...state,
     userProfile: {

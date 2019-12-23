@@ -40,7 +40,6 @@ export type Post = {
 export type PostState = {
   postsList: Post[];
   mdValue: string;
-  post: Post;
 };
 
 const initialState: PostState = {
