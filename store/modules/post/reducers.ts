@@ -1,15 +1,15 @@
+import {
+  asyncState,
+  transformToArray,
+  handleAsyncActions,
+} from './../../../lib/Utils/asyncUtils';
 import { PostState, PostActions, Post } from './types';
 import formatDate from '../../../lib/Utils/utils';
 import { createReducer } from 'typesafe-actions';
-import {
-  GET_POSTS_LIST,
-  GET_POSTS_LIST_SUCCESS,
-  GET_POSTS_LIST_ERROR,
-} from './actions';
-import { AxiosError } from 'axios';
+import { getPostsListAsync } from './actions';
 
 const initialState: PostState = {
-  postsList: [
+  postsList: asyncState.initial([
     {
       id: 1,
       title: 'wdsf',
@@ -21,27 +21,11 @@ const initialState: PostState = {
         '내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기',
       date: formatDate(new Date().toLocaleString()),
     },
-  ],
+  ]),
 };
 
-const post = createReducer<PostState, PostActions>(initialState, {
-  [GET_POSTS_LIST]: (state, payload: undefined) => {
-    return {
-      ...state,
-      postsList: payload,
-    };
-  },
-  [GET_POSTS_LIST_SUCCESS]: (state, { payload }) => {
-    return {
-      ...state,
-      postsList: payload,
-    };
-  },
-  [GET_POSTS_LIST_ERROR]: (state, payload) => {
-    return {
-      ...state,
-      postsList: payload,
-    };
-  },
-});
+const post = createReducer<PostState, PostActions>(initialState).handleAction(
+  transformToArray(getPostsListAsync),
+  handleAsyncActions(getPostsListAsync, 'postsList'),
+);
 export default post;

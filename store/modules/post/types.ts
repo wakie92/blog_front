@@ -1,3 +1,5 @@
+import { AsyncState } from './../../../lib/Utils/asyncUtils';
+import { AxiosError } from 'axios';
 import { ActionType } from 'typesafe-actions';
 import * as actions from './actions';
 
@@ -14,5 +16,5 @@ export type Post = {
 };
 
 export type PostState = {
-  postsList: Post[];
+  postsList: AsyncState<Post[], AxiosError>
 };

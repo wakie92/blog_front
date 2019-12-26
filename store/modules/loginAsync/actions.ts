@@ -1,5 +1,5 @@
-import { createAsyncAction, createAction } from 'typesafe-actions';
-import { LoginAuth, updateKey } from './types';
+import { createAsyncAction } from 'typesafe-actions';
+import { LoginAuth } from './types';
 import { AxiosError } from 'axios';
 
 export const GET_LOGIN = 'login/GET_LOGIN';

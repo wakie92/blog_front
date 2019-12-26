@@ -1,4 +1,13 @@
-import Axios, { AxiosResponse } from 'axios';
+import { Get } from './axios';
+import Axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
+
+const SERVER = 'http://13.125.208.46/v1/';
+
+export const getLoginTest = async (config: AxiosRequestConfig) => {
+  const endpoint = `${SERVER}/users`;
+  const res: string = await Get<string>(endpoint, config);
+  return res;
+}
 
 export async function getLogin({
   email,
@@ -19,3 +28,4 @@ export async function getLogin({
 export type LoginType = {
   message: string;
 };
+

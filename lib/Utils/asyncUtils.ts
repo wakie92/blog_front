@@ -1,59 +1,63 @@
-// export const createPromiseThunk = (type, promiseCreator) => {
-//   const [SUCESS, ERROR] = [`${type}_SUCCESS, ${type}_ERROR`];
-//   return param => async dispatch => {
-//     // api 요청 시작
-//     dispatch({ type, param });
-//     try {
-//       const payload = await promiseCreator(param);
-//       dispatch({ type: SUCESS, payload });
-//     } catch (e) {
-//       dispatch({ type: ERROR, payload: e, error: true });
-//     }
-//   };
-// };
-export const reducerUtils = {
-  initial: (initialData = null) => ({
+import { AnyAction } from 'redux';
+import { getType, AsyncActionCreatorBuilder } from 'typesafe-actions';
+export type AsyncState<T, E = any> = {
+  data: T | null;
+  loading: boolean;
+  error: E | null;
+};
+export const asyncState = {
+  initial: <T, E = any>(initialData?: T): AsyncState<T, E> => ({
     loading: false,
-    data: initialData,
-    error: null
+    data: initialData || null,
+    error: null,
   }),
-  loading: (prevState = null) => ({
-    loading: true,
-    data: prevState,
-    error: null
-  }),
-  // 성공 상태
-  success: payload => ({
+  loading: <T, E = any>(initialData?: T): AsyncState<T, E> => ({
     loading: false,
-    data: payload,
-    error: null
+    data: initialData || null,
+    error: null,
   }),
-  // 실패 상태
-  error: error => ({
+  success: <T, E = any>(initialData?: T): AsyncState<T, E> => ({
     loading: false,
-    data: null,
-    error: error
-  })
+    data: initialData || null,
+    error: null,
+  }),
+  error: <T, E = any>(initialData?: T): AsyncState<T, E> => ({
+    loading: false,
+    data: initialData || null,
+    error: null,
+  }),
 };
 
-export const handleAsyncActions = (type, key) => {
-  const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
-  return (state, action) => {
+type AnyAsyncActionCreator = AsyncActionCreatorBuilder<any, any, any>;
+export function transformToArray<AC extends AnyAsyncActionCreator>(
+  asyncActionCreator: AC,
+) {
+  const { request, success, failure } = asyncActionCreator;
+  return [request, success, failure];
+}
+
+export const handleAsyncActions = <S, AC extends AnyAsyncActionCreator, K extends keyof S>(
+  type: AC,
+  key: K
+  ) => {
+  return (state: S, action: AnyAction) => {
+    const [request, success, failure] = transformToArray(type).map(getType);
+
     switch (action.type) {
-      case type:
+      case request:
         return {
           ...state,
-          [key]: reducerUtils.loading()
+          [key]: asyncState.loading(),
         };
-      case SUCCESS:
+      case success:
         return {
           ...state,
-          [key]: reducerUtils.success(action.payload)
+          [key]: asyncState.success(action.payload),
         };
-      case ERROR:
+      case failure:
         return {
           ...state,
-          [key]: reducerUtils.error(action.payload)
+          [key]: asyncState.error(action.payload),
         };
       default:
         return state;
