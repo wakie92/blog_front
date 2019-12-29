@@ -4,13 +4,13 @@ import {
   GET_LOGIN_ERROR,
 } from './actions';
 import { LoginState, LoginActions, updateKey } from './types';
-import { reducerUtils } from '../../../lib/Utils/asyncUtils';
 import { createReducer } from 'typesafe-actions';
+import { asyncState } from '../../../lib/Utils/asyncUtils';
 
 const initialState: LoginState = {
   email: '',
   password: '',
-  msg: reducerUtils.initial(),
+  msg: asyncState.initial(),
 };
 
 const login = createReducer<LoginState, LoginActions>(initialState, {

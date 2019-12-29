@@ -1,9 +1,7 @@
-import { reducerUtils } from './../../lib/Utils/asyncUtils';
 import {
   createAction,
   ActionType,
   createReducer,
-  deprecated
 } from 'typesafe-actions';
 import formatDate from '../../lib/Utils/utils';
 
