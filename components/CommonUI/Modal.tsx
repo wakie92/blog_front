@@ -9,7 +9,7 @@ type ModalProps = {
 const Modal = ({ children, visible }: ModalProps) => {
   console.log(visible);
   return (
-    <Portal>
+    <Portal visible={visible}>
       <Wrapper visible={visible}>{children}</Wrapper>
     </Portal>
   );
