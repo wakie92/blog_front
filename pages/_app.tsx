@@ -1,21 +1,31 @@
 import App from 'next/app';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { Provider } from 'react-redux';
-import { createStore, Store } from 'redux';
+import { createStore, Store, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import withRedux from 'next-redux-wrapper';
 import Layout from '../components/CommonUI/Layout';
 import Header from '../components/CommonUI/Header';
 import { colors } from '../lib/styles/global';
-import rootReducer from '../store/modules';
+import rootReducer, { rootSaga } from '../store/modules';
+import createSagaMiddleware from 'redux-saga';
+
 // styles/global.js
 
 interface IProps {
   store: Store;
 }
+
+
+
+
+// composeWithDevTools()
+const sagaMiddleware = createSagaMiddleware();
 const makeStore = () => {
-  return createStore(rootReducer, composeWithDevTools());
+  return createStore(rootReducer, applyMiddleware(sagaMiddleware, ) );
 };
+sagaMiddleware.run(rootSaga);
+
 class MyApp extends App<IProps> {
   // Only uncomment this method if you have blocking data requirements for
   // every single page in your application. This disables the ability to
@@ -24,11 +34,10 @@ class MyApp extends App<IProps> {
   //
   static async getInitialProps({ Component, ctx }) {
     const pageProps = Component.getInitialProps
-      ? await Component.getInitialProps(ctx)
-      : {};
+    ? await Component.getInitialProps(ctx)
+    : {};
     return { pageProps };
   }
-
   render() {
     const { Component, pageProps, store } = this.props;
     return (

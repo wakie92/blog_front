@@ -5,4 +5,6 @@ export type LoginUIActions = ActionType<typeof actions>;
 
 export type LoginUIState = {
   isLoginModal: boolean,
+  email: string,
+  password: string,
 };

@@ -30,6 +30,12 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head />
+        <meta name="description" content="리액트를 주로 개발하는 주니어 프론트엔드 개발자입니다. 항해사가 항해일지를 기록하듯 개발과 지식의 로그를 기록하기 위한 블로그입니다." />
+        <meta name="keyword" content="frot-end" />
+        <meta name="keyword" content="리액트" />
+        <meta name="keyword" content="react" />
+        <meta name="keyword" content="javascript" />
+        <title>Oscar's devlog</title>
         <body>
           <Main />
           <div id="modal" />
