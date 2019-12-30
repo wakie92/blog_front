@@ -25,7 +25,8 @@ const Wrapper = styled.div<{ visible: boolean }>`
   align-items: center;
   justify-content: center;
   background-color: #202020;
-  opacity: 0.3;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.5);
   visibility: ${props => (props.visible ? 'visible' : 'hidden')};
 `;
 
