@@ -1,9 +1,6 @@
-import {
-  createAction,
-  ActionType,
-  createReducer,
-} from 'typesafe-actions';
-import formatDate from '../../lib/Utils/utils';
+import { updateKey } from './loginAsync/types';
+import { formatDate } from './../../lib/Utils/utils';
+import { createAction, ActionType, createReducer } from 'typesafe-actions';
 
 const GET_POSTS_LIST = 'post/GET_POSTS_LIST';
 const INPUT_MD = 'post/INPUT_MD';
@@ -15,7 +12,13 @@ export const getPostsList = createAction(
 )<Post[]>();
 
 export const inputMd = createAction(INPUT_MD, (post: Post) => post)<Post>();
-export const getValue = createAction(INPUT_VALUE, (payload: string) => payload)<string>();
+export const getValue = createAction(
+  INPUT_VALUE,
+  ({ name, value }: updateKey) => ({
+    name,
+    value,
+  }),
+)<updateKey>();
 
 const actions = {
   getPostsList,
@@ -35,9 +38,15 @@ export type Post = {
   reply?: [];
 };
 
+export type PostWrite = {
+  title: string;
+  inputValue: string;
+  mdValue: string;
+};
+
 export type PostState = {
   postsList: Post[];
-  mdValue: string;
+  postWrite: PostWrite;
 };
 
 const initialState: PostState = {
@@ -45,13 +54,20 @@ const initialState: PostState = {
     {
       id: 1,
       title: 'wdsf',
-      imgUrl: 'https://cdn.evilmartians.com/front/posts/optimizing-react-virtual-dom-explained/cover-a1d5b40.png',
-      contentMd:'<p>내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기<p>',
-      content: '내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기',
+      imgUrl:
+        'https://cdn.evilmartians.com/front/posts/optimizing-react-virtual-dom-explained/cover-a1d5b40.png',
+      contentMd:
+        '<p>내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기<p>',
+      content:
+        '내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기',
       date: formatDate(new Date().toLocaleString()),
     },
   ],
-  mdValue: 'kkkk',
+  postWrite: {
+    title: '',
+    inputValue: '',
+    mdValue: '',
+  },
 };
 
 const post = createReducer<PostState, PostActions>(initialState, {
@@ -65,18 +81,21 @@ const post = createReducer<PostState, PostActions>(initialState, {
   [INPUT_MD]: (state, { payload: post }) => {
     console.log(state.postsList);
     console.log(post);
-    return (
-    {
-      ...state,
-      postsList: state.postsList.concat(post),
-  })},
-
-  [INPUT_VALUE]: (state, { payload: value }) => {
     return {
       ...state,
-      mdValue: value,
-    }
-  }
+      postsList: state.postsList.concat(post),
+    };
+  },
+
+  [INPUT_VALUE]: (state, { name, value } : updateKey) => {
+    return {
+      ...state,
+      postWrite: {
+        ...state.postWrite,
+        [name]: value,
+      }
+    };
+  },
 });
 
 export default post;

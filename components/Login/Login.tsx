@@ -11,26 +11,35 @@ type LoginProps = {
   visible: boolean;
   email: string;
   password: string;
+  onClose: () => void;
 };
-const Login = ({ visible, onClick, email, password, onChange }: LoginProps) => {
+const Login = ({
+  visible,
+  onClick,
+  email,
+  password,
+  onChange,
+  onClose,
+}: LoginProps) => {
   return (
     <Modal visible={visible}>
       <Wrapper>
         <div className="modal-header">
-          <Button type="button">
+          <Button type="button" onClick={onClose} bgColor="unset">
             <TiTimes />
           </Button>
         </div>
         <div className="input-box">
-          <input type="text" value={email} name="email" onChange={onChange} />
+          <input type="text" placeholder="email" value={email} name="email" onChange={onChange} />
           <input
             type="password"
             value={password}
             name="password"
             onChange={onChange}
+            placeholder="password"
           />
         </div>
-        <Button type="submit" onClick={onClick}>
+        <Button type="button" size="large" onClick={onClick}>
           로그인
         </Button>
       </Wrapper>
@@ -41,24 +50,32 @@ const Login = ({ visible, onClick, email, password, onChange }: LoginProps) => {
 const Wrapper = styled.form`
   display: flex;
   width: 30rem;
-  height: 50rem;
+  height: 30rem;
   border-radius: 0.5rem;
   background-color: ${colors.gray3};
   flex-direction: column;
   .modal-header {
     width: 100%;
-    height: 5rem;
+    height: 4rem;
+    display: flex;
+    justify-content: flex-end;
+    background-color: unset;
+    svg {
+      width: 3rem;
+      height: 3rem;
+    };
   }
   .input-box {
     width: 100%;
-    height: 40rem;
-    padding-top: 20rem;
+    height: 30rem;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     input {
       height: 4rem;
       font-size: 2rem;
       margin-bottom: 1rem;
+      padding-left: 1rem;
     }
   }
 `;

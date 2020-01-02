@@ -16,15 +16,14 @@ interface IProps {
   store: Store;
 }
 
-
-
-
 // composeWithDevTools()
-const sagaMiddleware = createSagaMiddleware();
 const makeStore = () => {
-  return createStore(rootReducer, applyMiddleware(sagaMiddleware, ) );
+  const sagaMiddleware = createSagaMiddleware();
+  const middleware = [composeWithDevTools(), sagaMiddleware]
+  const store = createStore(rootReducer, applyMiddleware(sagaMiddleware) );
+  sagaMiddleware.run(rootSaga);
+  return store;
 };
-sagaMiddleware.run(rootSaga);
 
 class MyApp extends App<IProps> {
   // Only uncomment this method if you have blocking data requirements for
@@ -94,6 +93,9 @@ const GlobalStyle = createGlobalStyle`
   }
   h1 {
     font-weight: 700;
+  }
+  button {
+    cursor: pointer;
   }
   p {
     margin: 0;

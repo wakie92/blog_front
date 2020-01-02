@@ -32,21 +32,21 @@ const Button = ({
 
 const Wrapper = styled.button<ButtonType>`
   background-color: ${props => props.bgColor};
-  width: ${props => props.width}
+  width: ${props => props.width};
     ${props =>
       props.size === 'small' &&
       css`
         height: 1.75rem;
         font-size: 0.75rem;
         padding: 0 0.875rem;
-      `}
+      `};
     ${props =>
       props.size === 'medium' &&
       css`
         height: 2.5rem;
         font-size: 1rem;
         padding: 0 1rem;
-      `}
+      `};
     ${props =>
       props.size === 'large' &&
       css`
