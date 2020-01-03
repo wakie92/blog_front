@@ -8,46 +8,39 @@ import { inputMd, getValue } from '../../store/modules/postUI';
 import { ROUTES } from '../../lib/Routes/Routes';
 
 export default function WriteContainer() {
-  const dispatch = useDispatch();
-  const { mdValue, inputValue } = useSelector((state: RootState) => ({
-    mdValue: state.post.mdValue,
-    inputValue: state.post.inputValue,
-  }))
-  const router = useRouter();
-  const [title, setTitle] = useState('');
 
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const { value } = e.target;
-    dispatch(getValue(value));
+  const dispatch = useDispatch();
+  const { postWrite } = useSelector((state: RootState) => ({
+    postWrite: state.post.postWrite,
+  }))
+  const { title, inputValue, mdValue } = postWrite;
+  const router = useRouter();
+
+  const handleChange = useCallback((e: React.ChangeEvent<any>) => {
+    const { value, name } = e.target;
+    dispatch(getValue({ name, value }));
   }, [dispatch]);
 
-  const handleTitle = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setTitle(value);
-  }, [setTitle]);
-
   const handleConv = useCallback((html: string) => {
-    dis
-    setConvValue(html);
-  }, [setConvValue]);
+    dispatch(getValue({ name: 'mdValue', value: html}));
+  }, [dispatch]);
 
   const onUpload = useCallback(() => {
     const uploadDate = new Date().toLocaleString();
-    console.log(mdValue);
     dispatch(
       inputMd({
-        title,
+        title: postWrite.title,
+        content: postWrite.inputValue,
+        contentMd: postWrite.mdValue,
         date: uploadDate,
-        content: mdValue,
-        contentMd: convValue,
       }),
     );
     router.push(ROUTES.devBlog, ROUTES.devBlog, { shallow: true });
-  }, [dispatch, inputValue, convValue, title]);
-  console.log(inputValue);
+  }, [dispatch, postWrite]);
+  console.log(postWrite);
   return (
     <>
-      <Head onUpload={onUpload} title={title} onChange={handleTitle} />
+      <Head onUpload={onUpload} title={title} onChange={handleChange} />
       <EditBox>
         <Editor inputValue={inputValue} handleChange={handleChange} />
         <Preview inputValue={inputValue} handleConv={handleConv} />

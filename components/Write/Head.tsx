@@ -19,7 +19,7 @@ export default React.memo(
     return (
       <Title>
         <FiArrowLeft onClick={backLink} className="svg-icon" />
-        <input placeholder={title} onChange={onChange} value={title} />
+        <input placeholder={title} name="title" onChange={onChange} value={title} />
         <FiUpload className="svg-icon" />
         <button type="button" onClick={onUpload}>
           작성하기

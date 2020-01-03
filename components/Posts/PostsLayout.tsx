@@ -9,10 +9,9 @@ import { getPostsList } from '../../store/modules/postUI';
 
 
 export default function PostsLayout() {
-  const { postsList, mdValue } = useSelector(
+  const { postsList } = useSelector(
     (state: RootState) => ({
       postsList: state.post.postsList,
-      mdValue: state.post.mdValue,
     })
   );
   const dispatch = useDispatch();
@@ -22,7 +21,6 @@ export default function PostsLayout() {
   return (
     <Layout breakpoints={breakpoints}>
       <h1>Development(전체글)</h1>
-      <span>{mdValue}</span>
       <ul>
         <LoadingPost />
         {
@@ -33,7 +31,7 @@ export default function PostsLayout() {
               date={item.date}
               id={item.id}
               imgUrl={item.imgUrl}
-              key={`card-${item.id}`}
+              key={`card-${String(item.date)}-${item.title}`}
             />
           ))
         }

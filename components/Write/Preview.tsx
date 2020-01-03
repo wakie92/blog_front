@@ -1,14 +1,17 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import showdown from 'showdown';
 
 interface PreviewProps {
   inputValue: string;
-  handleConv: (html) => void;
+  handleConv: (html: string) => void;
 }
 export default function Preview({ inputValue, handleConv }: PreviewProps) {
   const converter = new showdown.Converter();
   const html = converter.makeHtml(inputValue);
-  handleConv(html);
+  useEffect(() => {
+    handleConv(html);
+  }, [html])
   return <Wrapper>
     <div dangerouslySetInnerHTML={{ __html: html }}>
 

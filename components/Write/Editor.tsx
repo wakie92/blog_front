@@ -8,7 +8,7 @@ interface EditorProps {
   handleChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 export default React.memo(function Editor({ inputValue, handleChange }: EditorProps) {
-  return <TextArea onChange={handleChange} value={inputValue} />;
+  return <TextArea onChange={handleChange} value={inputValue} name="inputValue" />;
 })
 
 const TextArea = styled.textarea`

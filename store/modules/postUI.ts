@@ -87,13 +87,13 @@ const post = createReducer<PostState, PostActions>(initialState, {
     };
   },
 
-  [INPUT_VALUE]: (state, { name, value } : updateKey) => {
+  [INPUT_VALUE]: (state, { payload: { name, value }}) => {
     return {
       ...state,
       postWrite: {
         ...state.postWrite,
         [name]: value,
-      }
+      },
     };
   },
 });
