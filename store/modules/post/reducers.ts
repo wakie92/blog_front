@@ -5,8 +5,8 @@ import {
 } from './../../../lib/Utils/asyncUtils';
 import { PostState, PostActions, Post } from './types';
 import { formatDate } from '../../../lib/Utils/utils';
-import { createReducer, action } from 'typesafe-actions';
-import { getPostsListAsync, UPDATE_POST, UPDATE_POST_SUCCESS, UPDATE_POST_ERROR } from './actions';
+import { createReducer } from 'typesafe-actions';
+import { getPostsListAsync, postAsync } from './actions';
 
 const initialState: PostState = {
   postsList: asyncState.initial([
@@ -25,30 +25,13 @@ const initialState: PostState = {
   reqPost: asyncState.initial(),
 };
 
-const post = createReducer<PostState, PostActions>(initialState, {
-  [UPDATE_POST]: (state) => ({
-    ...state,
-    reqPost: {
-      loading: true,
-      error: null,
-      data: null,
-    }
-  }),
-  [UPDATE_POST_SUCCESS]: (state, action) => ({
-    ...state,
-    reqPost: {
-      loading: false,
-      error: null,
-      data: action.payload,
-    }
-  }),
-  [UPDATE_POST_ERROR]: (state, action) => ({
-    ...state,
-    reqPost: {
-      loading: false,
-      error: action.payload,
-      data: null,
-    }
-  })
-});
+const post = createReducer<PostState, PostActions>(initialState).handleAction(
+  transformToArray(getPostsListAsync),
+  handleAsyncActions(getPostsListAsync, 'postsList'),
+)
+// handleActions 체이닝 방법 찾기 20200114
+// .handleAction(
+//   transformToArray(postAsyc),
+//   handleAsyncActions(postAsync, 'reqPost'),
+// );
 export default post;

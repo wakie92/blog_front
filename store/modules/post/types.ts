@@ -19,7 +19,7 @@ export type PostState = {
   postsList: AsyncState<Post[], AxiosError>
   reqPost: {
     loading: boolean,
-    data: null | string,
+    data: null | Post,
     error: null | AxiosError,
   }
 };

@@ -17,7 +17,7 @@ export type updateKey = {
 export type LoginState = {
   email: string,
   password: string,
-  msg: {
+  reqLogin: {
     loading: boolean,
     data: null | string,
     error: null | AxiosError,

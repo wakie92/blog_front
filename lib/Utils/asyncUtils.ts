@@ -12,7 +12,7 @@ export const asyncState = {
     error: null,
   }),
   loading: <T, E = any>(initialData?: T): AsyncState<T, E> => ({
-    loading: false,
+    loading: true,
     data: initialData || null,
     error: null,
   }),
