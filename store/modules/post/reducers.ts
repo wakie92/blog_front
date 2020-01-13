@@ -4,9 +4,9 @@ import {
   handleAsyncActions,
 } from './../../../lib/Utils/asyncUtils';
 import { PostState, PostActions, Post } from './types';
-import formatDate from '../../../lib/Utils/utils';
-import { createReducer } from 'typesafe-actions';
-import { getPostsListAsync } from './actions';
+import { formatDate } from '../../../lib/Utils/utils';
+import { createReducer, action } from 'typesafe-actions';
+import { getPostsListAsync, UPDATE_POST, UPDATE_POST_SUCCESS, UPDATE_POST_ERROR } from './actions';
 
 const initialState: PostState = {
   postsList: asyncState.initial([
@@ -22,10 +22,33 @@ const initialState: PostState = {
       date: formatDate(new Date().toLocaleString()),
     },
   ]),
+  reqPost: asyncState.initial(),
 };
 
-const post = createReducer<PostState, PostActions>(initialState).handleAction(
-  transformToArray(getPostsListAsync),
-  handleAsyncActions(getPostsListAsync, 'postsList'),
-);
+const post = createReducer<PostState, PostActions>(initialState, {
+  [UPDATE_POST]: (state) => ({
+    ...state,
+    reqPost: {
+      loading: true,
+      error: null,
+      data: null,
+    }
+  }),
+  [UPDATE_POST_SUCCESS]: (state, action) => ({
+    ...state,
+    reqPost: {
+      loading: false,
+      error: null,
+      data: action.payload,
+    }
+  }),
+  [UPDATE_POST_ERROR]: (state, action) => ({
+    ...state,
+    reqPost: {
+      loading: false,
+      error: action.payload,
+      data: null,
+    }
+  })
+});
 export default post;
