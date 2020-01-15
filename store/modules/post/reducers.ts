@@ -12,7 +12,7 @@ const initialState: PostState = {
   postsList: asyncState.initial([
     {
       id: 1,
-      title: 'wdsf',
+      title: 'wdsfssss',
       imgUrl:
         'https://cdn.evilmartians.com/front/posts/optimizing-react-virtual-dom-explained/cover-a1d5b40.png',
       contentMd:
