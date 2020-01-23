@@ -11,11 +11,6 @@ type homeType = {
 const Home: NextPage = ({ isServer }: homeType) => (
   <>
     <Header />
-    <Link href={ROUTES.about}>
-      <a>
-        <h1>자기소개 컴포넌트</h1>
-      </a>
-    </Link>
     <PostsLayout />
   </>
 );
