@@ -1,17 +1,17 @@
 import { getLoginReqAsync, GET_LOGIN } from './actions';
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { getLogin } from '../../../lib/api/apis';
+// import { getLogin } from '../../../lib/api/apis';
 
-function* getLoginSaga(action: ReturnType<typeof getLoginReqAsync.request>) {
-  try {
-    const login: string = yield call(getLogin, action.payload);
-    console.log(login);
-    yield put(getLoginReqAsync.success(login));
-  } catch (e) {
-    yield put(getLoginReqAsync.failure(e));
-  }
-};
+// function* getLoginSaga(action: ReturnType<typeof getLoginReqAsync.request>) {
+//   try {
+//     const login: string = yield call(getLogin, action.payload);
+//     console.log(login);
+//     yield put(getLoginReqAsync.success(login));
+//   } catch (e) {
+//     yield put(getLoginReqAsync.failure(e));
+//   }
+// };
 
-export function* loginSaga() {
-  yield takeLatest(GET_LOGIN, getLoginSaga);
-}
+// export function* loginSaga() {
+//   yield takeLatest(GET_LOGIN, getLoginSaga);
+// }

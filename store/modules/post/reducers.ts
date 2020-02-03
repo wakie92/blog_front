@@ -9,19 +9,7 @@ import { createReducer } from 'typesafe-actions';
 import { getPostsListAsync, postAsync } from './actions';
 
 const initialState: PostState = {
-  postsList: asyncState.initial([
-    {
-      id: 1,
-      title: 'wdsfssss',
-      imgUrl:
-        'https://cdn.evilmartians.com/front/posts/optimizing-react-virtual-dom-explained/cover-a1d5b40.png',
-      contentMd:
-        '<p>내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기<p>',
-      content:
-        '내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기',
-      date: formatDate(new Date().toLocaleString()),
-    },
-  ]),
+  postsList: asyncState.initial([]),
   reqPost: asyncState.initial(),
 };
 

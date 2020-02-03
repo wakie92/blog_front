@@ -42,7 +42,7 @@ export const handleAsyncActions = <S, AC extends AnyAsyncActionCreator, K extend
   ) => {
   return (state: S, action: AnyAction) => {
     const [request, success, failure] = transformToArray(type).map(getType);
-
+    
     switch (action.type) {
       case request:
         return {

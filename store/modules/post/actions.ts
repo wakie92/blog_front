@@ -13,11 +13,11 @@ export const UPDATE_POST_ERROR = 'post/UPDATE_POST_ERROR';
 export const getPostsListAsync = createAsyncAction(
   GET_POSTS_LIST,
   GET_POSTS_LIST_SUCCESS,
-  GET_POSTS_LIST_ERROR
+  GET_POSTS_LIST_ERROR,
 )<undefined, Post[], AxiosError>();
 
 export const postAsync = createAsyncAction(
   UPDATE_POST,
   UPDATE_POST_SUCCESS,
-  UPDATE_POST_ERROR
+  UPDATE_POST_ERROR,
 )<Post, string, AxiosError>();

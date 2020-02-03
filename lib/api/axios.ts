@@ -16,7 +16,7 @@ const processRes = <T>(res: AxiosResponse<T>) => {
   }
 }
 
-export const Get = async <T>(url:string , config: AxiosRequestConfig) => {
+export const Get = async <T>(url:string , config?: AxiosRequestConfig) => {
   try {
     const res: AxiosResponse<T> = await axios.get(url, config);
     return processRes(res);
