@@ -18,6 +18,14 @@ export const GetPostsList = async () => {
   return response.data;
 };
 
+export const PostUpdate = async (data: Post) => {
+  const endpoint = `${SERVER}/posts`;
+  const response = await axios.post<Post>(
+    endpoint,
+    data
+  )
+  return response.data;
+}
 // export async function getLogin({
 //   email,
 //   password,

@@ -12,7 +12,6 @@ export type Post = {
   content: string;
   imgUrl?: undefined | string;
   contentMd: string;
-  reply?: [];
 };
 
 export type PostState = {

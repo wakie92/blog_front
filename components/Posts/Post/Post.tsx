@@ -5,12 +5,12 @@ import showdown from 'showdown';
 import { colors } from '../../../lib/styles/global';
 import Link from 'next/link';
 import { ROUTES } from '../../../lib/Routes/Routes';
+import { formatDate } from '../../../lib/Utils/utils';
 
 export type PostProps = {
   title: string;
   preContent: string;
   date: string;
-  commentsCnt: number;
   onClick?: () => void;
   imgUrl?: string;
   id: number;
@@ -22,7 +22,6 @@ export default function Post({
   date,
   onClick,
   imgUrl,
-  commentsCnt,
   id,
 }: PostProps) {
   const pre = `${preContent.substring(0, 150)}...`
@@ -39,10 +38,9 @@ export default function Post({
             <h3 className="title">{title}</h3>
           </Link>
           <div className="date-comment">
-            <span className="date">{date}</span>
+            <span className="date">{formatDate(date)}</span>
             <div className="commetns">
               <img src={COMMENT_SVG} alt="comments" />
-              {commentsCnt}
             </div>
           </div>
         </div>
@@ -51,16 +49,6 @@ export default function Post({
     </WrpperProps>
   );
 }
-
-Post.defaultProps = {
-  title: '백엔드가 이정도는 해줘야 함 - 커리큘럼 털어놓기',
-  commentsCnt: 20,
-  // imgUrl:
-  //   'https://cdn.evilmartians.com/front/posts/optimizing-react-virtual-dom-explained/cover-a1d5b40.png',
-  date: '2019년 11월 25일',
-  preContent: '내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기내용미리보기',
-  id: 2,
-};
 
 const WrpperProps = props => (
   <li

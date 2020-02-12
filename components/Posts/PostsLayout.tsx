@@ -1,22 +1,17 @@
-import styled from 'styled-components';
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import PostComponent from './Post/Post';
-import LoadingPost from './Post/LoadingPost';
-import { breakpoints } from '../../lib/styles/responsive';
-import { RootState } from '../../store/modules';
-import { getPostsList } from '../../store/modules/postUI';
-import { postSaga } from '../../store/modules/post/saga';
-import { getPostsListAsync, Post } from '../../store/modules/post';
-import { AxiosError } from 'axios';
-import { NextPageContext } from 'next';
-
+import styled from "styled-components";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import PostComponent from "./Post/Post";
+import LoadingPost from "./Post/LoadingPost";
+import { breakpoints } from "../../lib/styles/responsive";
+import { RootState } from "../../store/modules";
+import { postSaga } from "../../store/modules/post/saga";
+import { getPostsListAsync, Post } from "../../store/modules/post";
+import { AxiosError } from "axios";
+import { NextPageContext, NextPage } from "next";
+import { AsyncState } from "../../lib/Utils/asyncUtils";
 type PostListsProps = {
-  postsList: {
-    data: Post[];
-    loading: Boolean;
-    error: AxiosError<any>;
-  };
+  postsList: AsyncState<Post[], AxiosError>
 };
 const PostList = ({ postsList }: PostListsProps) => {
   const { data, loading, error } = postsList;
@@ -34,14 +29,14 @@ const PostList = ({ postsList }: PostListsProps) => {
   return <>{list}</>;
 };
 
-export default function PostsLayout() {
+const PostsLayout: NextPage = () => {
   const { postsList } = useSelector((state: RootState) => ({
     postsList: state.post.postsList,
   }));
   const dispatch = useDispatch();
   const reqGetPostsList = () => {
     try {
-      console.log('ddddfdf');
+      console.log("ddddfdf");
       dispatch(getPostsListAsync.request(undefined, null));
     } catch (e) {
       throw e;
@@ -64,18 +59,19 @@ export default function PostsLayout() {
 
 PostsLayout.getInitialProps = async (ctx: NextPageContext) => {
   const dispatch = useDispatch();
-  console.log('getInit');
+  console.log(ctx);
   const reqGetPostsList = () => {
     try {
-      console.log('ddddfdf');
+      console.log("ddddfdf");
       dispatch(getPostsListAsync.request(undefined, null));
     } catch (e) {
       throw e;
     }
   };
-  reqGetPostsList();
-  return { data: 'dfdf' };
+  await reqGetPostsList();
+  return { data: "dfdf" };
 };
+export default PostsLayout;
 
 const Layout = styled.main<{ breakpoints: object }>`
   width: 90%;

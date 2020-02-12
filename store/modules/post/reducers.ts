@@ -9,17 +9,16 @@ import { createReducer } from 'typesafe-actions';
 import { getPostsListAsync, postAsync } from './actions';
 
 const initialState: PostState = {
-  postsList: asyncState.initial([]),
+  postsList: asyncState.initial(),
   reqPost: asyncState.initial(),
 };
 
-const post = createReducer<PostState, PostActions>(initialState).handleAction(
+const post = createReducer<PostState, PostActions>(initialState)
+.handleAction(
   transformToArray(getPostsListAsync),
   handleAsyncActions(getPostsListAsync, 'postsList'),
-)
-// handleActions 체이닝 방법 찾기 20200114
-// .handleAction(
-//   transformToArray(postAsyc),
-//   handleAsyncActions(postAsync, 'reqPost'),
-// );
+).handleAction(
+  transformToArray(postAsync),
+  handleAsyncActions(postAsync, 'reqPost'),
+);
 export default post;

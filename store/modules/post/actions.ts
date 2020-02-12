@@ -15,7 +15,6 @@ export const getPostsListAsync = createAsyncAction(
   GET_POSTS_LIST_SUCCESS,
   GET_POSTS_LIST_ERROR,
 )<undefined, Post[], AxiosError>();
-
 export const postAsync = createAsyncAction(
   UPDATE_POST,
   UPDATE_POST_SUCCESS,

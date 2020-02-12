@@ -4,14 +4,15 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { Editor, Head, Preview } from '../../components/Write';
 import { RootState } from '../../store/modules';
-import { inputMd, getValue } from '../../store/modules/postUI';
+import { getValue } from '../../store/modules/postUI';
 import { ROUTES } from '../../lib/Routes/Routes';
 
 export default function WriteContainer() {
 
   const dispatch = useDispatch();
   const { postWrite } = useSelector((state: RootState) => ({
-    postWrite: state.post.postWrite,
+    postWrite: state.postUI.postWrite,
+    // postList: state.post.postsList,
   }))
   const { title, inputValue, mdValue } = postWrite;
   const router = useRouter();
@@ -27,14 +28,7 @@ export default function WriteContainer() {
 
   const onUpload = useCallback(() => {
     const uploadDate = new Date().toLocaleString();
-    dispatch(
-      inputMd({
-        title: postWrite.title,
-        content: postWrite.inputValue,
-        contentMd: postWrite.mdValue,
-        date: uploadDate,
-      }),
-    );
+    // 
     router.push(ROUTES.devBlog, ROUTES.devBlog, { shallow: true });
   }, [dispatch, postWrite]);
   console.log(postWrite);

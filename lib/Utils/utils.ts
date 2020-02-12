@@ -1,11 +1,13 @@
-export const formatDate = (date: string) => {
-  const formatted = date.split('.');
-  console.log(formatted)
-  const month = Number(formatted[1]) < 10 ? `0${formatted[1]}` : formatted[1];
-  const day = Number(formatted[2]) < 10 ? `0${formatted[2]}` : formatted[2];
+export const formatDate = (dateData: string) => {
+  const formatted: Date = new Date(dateData);
+  const year: number = formatted.getFullYear();
+  let month: number | string = formatted.getMonth() + 1;
+  let day: number | string = formatted.getDate();
+  month = Number(month) < 10 ? `0${month}` : month;
+  day = Number(day) < 10 ? `0${day}` : day;
 
-  return  `${formatted[0]}년 ${month}월 ${day}일`;
-}
+  return `${year}년 ${month}월 ${day}일`;
+};  
 
 export const setItem = (key: string, obj: object) => {
   return sessionStorage.setItem(key, JSON.stringify(obj));
@@ -13,4 +15,4 @@ export const setItem = (key: string, obj: object) => {
 
 export const getItem = (key: string) => {
   return sessionStorage.getItem(JSON.parse(key));
-}
+};
