@@ -30,14 +30,14 @@ const PostList = ({ postsList }: PostListsProps) => {
 };
 
 const PostsLayout: NextPage = () => {
-  const { postsList } = useSelector((state: RootState) => ({
-    postsList: state.post.postsList,
+  const { postsList } = useSelector(({ post }: RootState) => ({
+    postsList: post.getPost.postsList,
   }));
   const dispatch = useDispatch();
   const reqGetPostsList = () => {
     try {
       console.log("ddddfdf");
-      dispatch(getPostsListAsync.request(undefined, null));
+      dispatch(getPostsListAsync.request(30));
     } catch (e) {
       throw e;
     }
@@ -63,7 +63,7 @@ PostsLayout.getInitialProps = async (ctx: NextPageContext) => {
   const reqGetPostsList = () => {
     try {
       console.log("ddddfdf");
-      dispatch(getPostsListAsync.request(undefined, null));
+      dispatch(getPostsListAsync.request(30));
     } catch (e) {
       throw e;
     }
