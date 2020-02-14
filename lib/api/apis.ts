@@ -10,11 +10,12 @@ export const getLoginTest = async (config: AxiosRequestConfig) => {
   return res;
 }
 
-export const GetPostsList = async () => {
+export const GetPostsList = async (cnt: number) => {
   const endpoint = `${SERVER}/posts`;
   const response = await axios.get<Post[]>(
     endpoint
   );
+  console.log(response);
   return response.data;
 };
 

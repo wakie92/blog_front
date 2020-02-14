@@ -4,17 +4,8 @@ import { GetPostsList, PostUpdate } from '../../../lib/api/apis';
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import createAsyncSaga from '../../../lib/Utils/createAsyncSaga';
 
-// function* getPostsListSaga(
-//   action: ReturnType<typeof getPostsListAsync.request>,
-// ) {
-//   try {
-//     const postList: Post[] = yield call(GetPostsList, undefined);
-//     yield put(getPostsListAsync.success(postList));
-//   } catch (e) {
-//     yield put(getPostsListAsync.failure(e));
-//   }
-// }
 const getPostsListSaga = createAsyncSaga(getPostsListAsync, GetPostsList);
+
 function* postUpdateSaga(
   action: ReturnType<typeof postAsync.request>,
 ) {

@@ -15,7 +15,8 @@ type PostListsProps = {
 };
 const PostList = ({ postsList }: PostListsProps) => {
   const { data, loading, error } = postsList;
-  if (loading) return null;
+  console.log(postsList);
+  if (!data) return null;
   const list = data.map(item => (
     <PostComponent
       title={item.title}
@@ -31,7 +32,7 @@ const PostList = ({ postsList }: PostListsProps) => {
 
 const PostsLayout: NextPage = () => {
   const { postsList } = useSelector(({ post }: RootState) => ({
-    postsList: post.getPost.postsList,
+    postsList: post.postsList,
   }));
   const dispatch = useDispatch();
   const reqGetPostsList = () => {
