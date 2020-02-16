@@ -15,13 +15,12 @@ export const GetPostsList = async (cnt: number) => {
   const response = await axios.get<Post[]>(
     endpoint
   );
-  console.log(response);
   return response.data;
 };
 
 export const PostUpdate = async (data: Post) => {
   const endpoint = `${SERVER}/posts`;
-  const response = await axios.post<Post>(
+  const response = await axios.post<string>(
     endpoint,
     data
   )

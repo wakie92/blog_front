@@ -16,3 +16,12 @@ export const setItem = (key: string, obj: object) => {
 export const getItem = (key: string) => {
   return sessionStorage.getItem(JSON.parse(key));
 };
+
+export const removeExp = (str: string) => {
+  const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi
+  console.log(str);
+  if(regExp.test(str)) {
+    const result = str.replace(regExp, '');
+    return result;
+  } return str;
+} 

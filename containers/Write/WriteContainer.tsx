@@ -6,13 +6,19 @@ import { Editor, Head, Preview } from '../../components/Write';
 import { RootState } from '../../store/modules';
 import { getValue } from '../../store/modules/postUI';
 import { ROUTES } from '../../lib/Routes/Routes';
+import { removeExp } from '../../lib/Utils/utils';
+import { AxiosError } from 'axios';
+import { Post, postAsync } from '../../store/modules/post';
+import { AsyncState } from '../../lib/Utils/asyncUtils';
 
-export default function WriteContainer() {
+type WriteContainerProps = {
+  getInitList: AsyncState<Post[], AxiosError>;
+};
 
+export default function WriteContainer({ getInitList }: WriteContainerProps) {
   const dispatch = useDispatch();
   const { postWrite } = useSelector((state: RootState) => ({
     postWrite: state.postUI.postWrite,
-    // postList: state.post.postsList,
   }))
   const { title, inputValue, mdValue } = postWrite;
   const router = useRouter();
@@ -26,10 +32,23 @@ export default function WriteContainer() {
     dispatch(getValue({ name: 'mdValue', value: html}));
   }, [dispatch]);
 
-  const onUpload = useCallback(() => {
+  const onUpload = useCallback(async () => {
     const uploadDate = new Date().toLocaleString();
+    const withoutExp = removeExp(inputValue);
+    const dataForUpload:Post = {
+      title,
+      content: withoutExp,
+      contentMd: mdValue,
+      date: uploadDate,
+      id: getInitList.data.length + 1
+    }
+    //img upload작업 필요
+    console.log(withoutExp);
+    console.log(dataForUpload);
+    // const res = dispatch(postAsync.request(dataForUpload));
+    // console.log(res);
     // 
-    router.push(ROUTES.devBlog, ROUTES.devBlog, { shallow: true });
+    // router.push(ROUTES.devBlog, ROUTES.devBlog, { shallow: true });
   }, [dispatch, postWrite]);
   console.log(postWrite);
   return (

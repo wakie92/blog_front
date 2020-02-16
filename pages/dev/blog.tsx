@@ -18,6 +18,7 @@ Blog.getInitialProps = async (
   ctx: NextPageContext
 ) => {
   const isServer: string = ctx.req ? 'server' : 'client';
+  console.log('BLog');
   return { isServer }
 };
 

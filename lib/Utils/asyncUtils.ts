@@ -11,21 +11,21 @@ export const asyncState = {
     data: initialData || null,
     error: null,
   }),
-  loading: <T, E = any>(initialData?: T): AsyncState<T, E> => ({
+  loading: <T, E = any>(data?: T): AsyncState<T, E> => ({
     loading: true,
-    data: initialData || null,
-    error: null,
+    data: data || null,
+    error: null
   }),
-  success: <T, E = any>(initialData?: T): AsyncState<T, E> => ({
+  success: <T, E = any>(data: T): AsyncState<T, E> => ({
     loading: false,
-    data: initialData || null,
-    error: null,
+    data,
+    error: null
   }),
-  error: <T, E = any>(initialData?: T): AsyncState<T, E> => ({
+  error: <T, E>(error: E): AsyncState<T, E> => ({
     loading: false,
-    data: initialData || null,
-    error: null,
-  }),
+    data: null,
+    error: error
+  })
 };
 
 type AnyAsyncActionCreator = AsyncActionCreatorBuilder<any, any, any>;
@@ -42,8 +42,6 @@ export const handleAsyncActions = <S, AC extends AnyAsyncActionCreator, K extend
   ) => {
   return (state: S, action: AnyAction) => {
     const [request, success, failure] = transformToArray(type).map(getType);
-    console.log(action.type, key);
-
     switch (action.type) {
       case request:
         return {
