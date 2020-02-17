@@ -4,13 +4,13 @@ import showdown from 'showdown';
 
 interface PreviewProps {
   inputValue: string;
-  handleConv: (html: string) => void;
+  onChange: (html: string) => void;
 }
-export default function Preview({ inputValue, handleConv }: PreviewProps) {
+export default function Preview({ inputValue, onChange }: PreviewProps) {
   const converter = new showdown.Converter();
   const html = converter.makeHtml(inputValue);
   useEffect(() => {
-    handleConv(html);
+    onChange(html);
   }, [html])
   return <Wrapper>
     <div dangerouslySetInnerHTML={{ __html: html }}>

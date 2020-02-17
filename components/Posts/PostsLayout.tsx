@@ -18,7 +18,7 @@ type PostLayoutProps = {
 const PostList = ({ postsList }: PostListsProps) => {
   const { data, loading, error } = postsList;
   if (!data) return null;
-  const list = data.map(item => (
+  const list = data.sort((a, b) => b.id - a.id).map(item => (
     <PostComponent
       title={item.title}
       preContent={item.content}

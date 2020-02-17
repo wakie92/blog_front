@@ -15,12 +15,11 @@ type WriteContainerProps = {
   getInitList: AsyncState<Post[], AxiosError>;
 };
 
-export default function WriteContainer({ getInitList }: WriteContainerProps) {
+const WriteContainer = ({ getInitList }: WriteContainerProps) => {
   const dispatch = useDispatch();
   const { postWrite } = useSelector((state: RootState) => ({
     postWrite: state.postUI.postWrite,
   }))
-  const { title, inputValue, mdValue } = postWrite;
   const router = useRouter();
 
   const handleChange = useCallback((e: React.ChangeEvent<any>) => {
@@ -32,36 +31,36 @@ export default function WriteContainer({ getInitList }: WriteContainerProps) {
     dispatch(getValue({ name: 'mdValue', value: html}));
   }, [dispatch]);
 
-  const onUpload = useCallback(async () => {
-    const uploadDate = new Date().toLocaleString();
-    const withoutExp = removeExp(inputValue);
+  const onUpload = useCallback((postData) => {
+    const uploadDate = new Date().toISOString();
+    const withoutExp = removeExp(postData.inputValue);
     const dataForUpload:Post = {
-      title,
+      title: postData.title,
       content: withoutExp,
-      contentMd: mdValue,
+      contentMd: postData.mdValue,
       date: uploadDate,
       id: getInitList.data.length + 1
     }
-    //img upload작업 필요
-    console.log(withoutExp);
-    console.log(dataForUpload);
-    // const res = dispatch(postAsync.request(dataForUpload));
-    // console.log(res);
-    // 
-    // router.push(ROUTES.devBlog, ROUTES.devBlog, { shallow: true });
+    //img upload작업  eslint-plugin-react-hook
+    const res = dispatch(postAsync.request(dataForUpload));
+    console.log(res);
+    router.push(ROUTES.devBlog, ROUTES.devBlog, { shallow: true });
   }, [dispatch, postWrite]);
+  
+
   console.log(postWrite);
   return (
     <>
-      <Head onUpload={onUpload} title={title} onChange={handleChange} />
+      <Head onUpload={onUpload} postWrite={postWrite} onChange={handleChange} />
       <EditBox>
-        <Editor inputValue={inputValue} handleChange={handleChange} />
-        <Preview inputValue={inputValue} handleConv={handleConv} />
+        <Editor inputValue={postWrite.inputValue} onChange={handleChange} />
+        <Preview inputValue={postWrite.inputValue} onChange={handleConv} />
       </EditBox>
     </>
   );
 }
 
+export default WriteContainer;
 const EditBox = styled.div`
   display: flex;
   height: 94rem;

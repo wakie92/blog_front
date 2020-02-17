@@ -1,5 +1,6 @@
 export const formatDate = (dateData: string) => {
   const formatted: Date = new Date(dateData);
+  console.log(dateData);
   const year: number = formatted.getFullYear();
   let month: number | string = formatted.getMonth() + 1;
   let day: number | string = formatted.getDate();
