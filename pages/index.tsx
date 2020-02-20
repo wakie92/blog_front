@@ -9,7 +9,11 @@ import { getPostsListAsync, Post } from '../store/modules/post';
 import { GetPostsList } from '../lib/api/apis';
 import { asyncState, AsyncState } from '../lib/Utils/asyncUtils';
 import { AxiosError } from 'axios';
+import { Store } from 'redux';
 
+interface CustomerNextContextProps extends NextPageContext {
+  store?: Store
+  }
 type homeType = {
   getInitList: AsyncState<Post[], AxiosError>;
 };
@@ -20,17 +24,17 @@ const Home: NextPage = ({ getInitList }: homeType) => (
   </>
 );
 
-Home.getInitialProps = async (ctx: NextPageContext) => {
+Home.getInitialProps = async (ctx: CustomerNextContextProps) => {
   let getInitList:AsyncState<Post[], AxiosError> = asyncState.initial();
+  // 리팩토링 필요. 
+  // const { dispatch, getState }  = ctx.store;
+  const itemLimit = 30;
   try {
-    const res = await GetPostsList(30);
+    const res = await GetPostsList(itemLimit);
     getInitList = asyncState.success(res);
   } catch (error) {
     getInitList = asyncState.error(error);
   }
-  const res = await GetPostsList(30);
-  getInitList
-  console.log(res);
   return { getInitList };
 };
 export default Home;

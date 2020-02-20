@@ -16,7 +16,6 @@ const loginUI = createReducer<LoginUIState, LoginUIActions>(initialState, {
   })},
   [GET_AUTH]: (state, action) => {
     const { name, value } = action.payload;
-    console.log(name, value);
     return ({
       ...state,
       [name]: value,

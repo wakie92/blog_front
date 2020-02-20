@@ -43,12 +43,12 @@ const WriteContainer = ({ getInitList }: WriteContainerProps) => {
     }
     //img upload작업  eslint-plugin-react-hook
     const res = dispatch(postAsync.request(dataForUpload));
-    console.log(res);
+    (res);
     router.push(ROUTES.devBlog, ROUTES.devBlog, { shallow: true });
   }, [dispatch, postWrite]);
   
 
-  console.log(postWrite);
+  (postWrite);
   return (
     <>
       <Head onUpload={onUpload} postWrite={postWrite} onChange={handleChange} />

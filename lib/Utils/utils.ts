@@ -1,6 +1,5 @@
 export const formatDate = (dateData: string) => {
   const formatted: Date = new Date(dateData);
-  console.log(dateData);
   const year: number = formatted.getFullYear();
   let month: number | string = formatted.getMonth() + 1;
   let day: number | string = formatted.getDate();
@@ -20,7 +19,6 @@ export const getItem = (key: string) => {
 
 export const removeExp = (str: string) => {
   const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi
-  console.log(str);
   if(regExp.test(str)) {
     const result = str.replace(regExp, '');
     return result;

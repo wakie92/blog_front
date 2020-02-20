@@ -6,28 +6,35 @@ import { colors } from '../../../lib/styles/global';
 export type LoadingPostProps = {};
 const COMMENT_SVG = '/svg/iconmonstr-speech-bubble-comment-thin.svg';
 export default function LoadingPost({}: LoadingPostProps) {
-  return (
-    <WrpperProps gray1={colors.gray2}>
-      <div className="image-container">
-        <div className="thumb-nail" />
-      </div>
-      <div className="li-article">
-        <div className="post-info">
-          <h3 className="title" style={{ width: '100%'}} />
-          <h3 className="title" style={{ width: '30%'}}/>
-          <div className="date-comment">
-            <span className="date"></span>
-            <div className="commetns"></div>
+  const arr = new Array(30);
+  const LoadingPosts: JSX.Element[] = arr.map(item => {
+    return (
+      <WrpperProps gray1={colors.gray2}>
+        <div className="image-container">
+          <div className="thumb-nail" />
+        </div>
+        <div className="li-article">
+          <div className="post-info">
+            <h3 className="title" style={{ width: '100%'}} />
+            <h3 className="title" style={{ width: '30%'}}/>
+            <div className="date-comment">
+              <span className="date"></span>
+              <div className="commetns"></div>
+            </div>
+          </div>
+          <div className="pre-content">
+            <div style={{ width: '100%' }} />
+            <div style={{ width: '100%' }} />
+            <div style={{ width: '80%' }} />
           </div>
         </div>
-        <div className="pre-content">
-          <div style={{ width: '100%' }} />
-          <div style={{ width: '100%' }} />
-          <div style={{ width: '80%' }} />
-        </div>
-      </div>
-    </WrpperProps>
-  );
+      </WrpperProps>
+    )
+  });
+  console.log(LoadingPosts);
+  return <>
+    {LoadingPosts}
+  </>
 }
 
 const WrpperProps = props => (

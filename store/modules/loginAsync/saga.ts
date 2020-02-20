@@ -5,7 +5,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 // function* getLoginSaga(action: ReturnType<typeof getLoginReqAsync.request>) {
 //   try {
 //     const login: string = yield call(getLogin, action.payload);
-//     console.log(login);
+//     (login);
 //     yield put(getLoginReqAsync.success(login));
 //   } catch (e) {
 //     yield put(getLoginReqAsync.failure(e));

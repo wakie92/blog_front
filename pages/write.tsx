@@ -30,9 +30,6 @@ Write.getInitialProps = async (ctx: NextPageContext) => {
   } catch (error) {
     getInitList = asyncState.error(error);
   }
-  const res = await GetPostsList(30);
-  getInitList
-  console.log(res);
   return { getInitList };
 };
 

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import PostComponent from "./Post/Post";
 import LoadingPost from "./Post/LoadingPost";
@@ -8,48 +8,36 @@ import { RootState } from "../../store/modules";
 import { getPostsListAsync, Post } from "../../store/modules/post";
 import { AxiosError } from "axios";
 import { AsyncState } from "../../lib/Utils/asyncUtils";
+import PostList from "./PostList/PostList";
+import Maybe from "../Maybe/Maybe";
 
-type PostListsProps = {
-  postsList: AsyncState<Post[], AxiosError>
-};
 type PostLayoutProps = {
   getInitList?: AsyncState<Post[], AxiosError>
 }
-const PostList = ({ postsList }: PostListsProps) => {
-  const { data, loading, error } = postsList;
-  if (!data) return null;
-  const list = data.sort((a, b) => b.id - a.id).map(item => (
-    <PostComponent
-      title={item.title}
-      preContent={item.content}
-      date={item.date}
-      id={item.id}
-      imgUrl={item.imgUrl}
-      key={`card-${String(item.date)}-${item.title}`}
-    />
-  ));
-  return <>{list}</>;
-};
 
 const PostsLayout = ({ getInitList }: PostLayoutProps) => {
   const { postsList } = useSelector(({ post }: RootState) => ({
     postsList: post.postsList,
   }));
   const dispatch = useDispatch();
-  const reqGetPostsList = () => {
+
+  const reqGetPostsList = useCallback(() => {
     try {
-      dispatch(getPostsListAsync.request(30));
+      dispatch(getPostsListAsync.success(getInitList.data));
     } catch (e) {
       throw e;
     }
-  };
+  }, [dispatch]);
+
   useEffect(() => {
-    !getInitList && reqGetPostsList();  
+    reqGetPostsList();  
   }, []);
   return (
     <Layout breakpoints={breakpoints}>
       <h1>Development(전체글)</h1>
       <ul>
+        {/* <Maybe isVisible={getInitList}>
+        </Maybe> */}
         <LoadingPost />
         <PostList postsList={getInitList ? getInitList : postsList} />
       </ul>
