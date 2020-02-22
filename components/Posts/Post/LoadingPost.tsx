@@ -4,12 +4,10 @@ import styled from '@emotion/styled';
 import { colors } from '../../../lib/styles/global';
 
 export type LoadingPostProps = {};
-const COMMENT_SVG = '/svg/iconmonstr-speech-bubble-comment-thin.svg';
 export default function LoadingPost({}: LoadingPostProps) {
-  const arr = new Array(30);
-  const LoadingPosts: JSX.Element[] = arr.map(item => {
-    return (
-      <WrpperProps gray1={colors.gray2}>
+  const loadingPostArr = new Array(30);
+  const ele: JSX.Element = (
+    <WrpperProps gray1={colors.gray2}>
         <div className="image-container">
           <div className="thumb-nail" />
         </div>
@@ -29,11 +27,12 @@ export default function LoadingPost({}: LoadingPostProps) {
           </div>
         </div>
       </WrpperProps>
-    )
-  });
-  console.log(LoadingPosts);
+  );
+  for(let i = 0; i < 30; i+=1 ) {
+    loadingPostArr.push(ele);
+  }
   return <>
-    {LoadingPosts}
+    {loadingPostArr}
   </>
 }
 
