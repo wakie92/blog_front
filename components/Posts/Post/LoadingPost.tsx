@@ -5,7 +5,7 @@ import { colors } from '../../../lib/styles/global';
 
 export type LoadingPostProps = {};
 export default function LoadingPost({}: LoadingPostProps) {
-  const loadingPostArr = new Array(30);
+  const loadingPostArr:JSX.Element[] = new Array(30);
   const ele: JSX.Element = (
     <WrpperProps gray1={colors.gray2}>
         <div className="image-container">

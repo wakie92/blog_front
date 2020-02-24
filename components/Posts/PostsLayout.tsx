@@ -36,9 +36,9 @@ const PostsLayout = ({ getInitList }: PostLayoutProps) => {
     <Layout breakpoints={breakpoints}>
       <h1>Development(전체글)</h1>
       <ul>
-        {/* <Maybe isVisible={getInitList}>
-        </Maybe> */}
-        <LoadingPost />
+        <Maybe isVisible={getInitList.loading}>
+          <LoadingPost />
+        </Maybe>
         <PostList postsList={getInitList ? getInitList : postsList} />
       </ul>
     </Layout>
