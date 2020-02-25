@@ -17,4 +17,5 @@ export type Post = {
 export type PostState = {
   postsList: AsyncState<Post[], AxiosError>
   reqPost: AsyncState<string, AxiosError>
+  post: AsyncState<Post, AxiosError>
 };

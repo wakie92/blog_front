@@ -9,12 +9,16 @@ import {
 	GET_POSTS_LIST_ERROR,
 	UPDATE_POST,
 	UPDATE_POST_SUCCESS,
-	UPDATE_POST_ERROR
+	UPDATE_POST_ERROR,
+	GET_POST,
+	GET_POST_SUCCESS,
+	GET_POST_ERROR
 } from './actions';
 
 const initialState: PostState = {
 	postsList: asyncState.initial(),
-	reqPost: asyncState.initial()
+	reqPost: asyncState.initial(),
+	post: asyncState.initial(),
 };
 const post = createReducer<PostState, PostActions>(initialState, {
 	[GET_POSTS_LIST]: (state) => ({
@@ -40,6 +44,18 @@ const post = createReducer<PostState, PostActions>(initialState, {
 	[UPDATE_POST_ERROR]: (state, action) => ({
 		...state,
 		reqPost: asyncState.error(action.payload)
+	}),
+	[GET_POST]: (state) => ({
+		...state,
+		post: asyncState.loading(),
+	}),
+	[GET_POST_SUCCESS]: (state, action) => ({
+		...state,
+		post: asyncState.success(action.payload)
+	}),
+	[GET_POST_ERROR]: (state, action) => ({
+		...state,
+		post: asyncState.error(action.payload)
 	})
 });
 
