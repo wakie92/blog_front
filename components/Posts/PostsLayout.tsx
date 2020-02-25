@@ -5,11 +5,13 @@ import PostComponent from "./Post/Post";
 import LoadingPost from "./Post/LoadingPost";
 import { breakpoints } from "../../lib/styles/responsive";
 import { RootState } from "../../store/modules";
-import { getPostsListAsync, Post } from "../../store/modules/post";
+import { getPostsListAsync, Post, getPostAsync } from "../../store/modules/post";
 import { AxiosError } from "axios";
 import { AsyncState } from "../../lib/Utils/asyncUtils";
 import PostList from "./PostList/PostList";
 import Maybe from "../Maybe/Maybe";
+import { useRouter } from "next/router";
+import { ROUTES } from "../../lib/Routes/Routes";
 
 type PostLayoutProps = {
   getInitList?: AsyncState<Post[], AxiosError>
@@ -20,6 +22,7 @@ const PostsLayout = ({ getInitList }: PostLayoutProps) => {
     postsList: post.postsList,
   }));
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const reqGetPostsList = useCallback(() => {
     try {
@@ -28,6 +31,16 @@ const PostsLayout = ({ getInitList }: PostLayoutProps) => {
       throw e;
     }
   }, [dispatch]);
+
+  const reqGetPost = useCallback((id: number) => {
+    try {
+      console.log(id);
+      dispatch(getPostAsync.request(id))
+      router.push(`${ROUTES.devBlog}/${id}`, `${ROUTES.devBlog}/${id}`);
+    } catch (e) {
+      throw e;
+    }
+  }, [dispatch])
 
   useEffect(() => {
     reqGetPostsList();  
@@ -39,7 +52,7 @@ const PostsLayout = ({ getInitList }: PostLayoutProps) => {
         <Maybe isVisible={getInitList.loading}>
           <LoadingPost />
         </Maybe>
-        <PostList postsList={getInitList ? getInitList : postsList} />
+        <PostList onGetPost = {reqGetPost} postsList={getInitList ? getInitList : postsList} />
       </ul>
     </Layout>
   );
