@@ -5,8 +5,9 @@ import PostComponent from '../Post/Post';
 
 type PostListsProps = {
   postsList: AsyncState<Post[], AxiosError>
+  onGetPost: (id: number) => void,
 };
-const PostList = ({ postsList }: PostListsProps) => {
+const PostList = ({ postsList, onGetPost }: PostListsProps) => {
   const { data, loading, error } = postsList;
   if (!data) return null;
   const list = data.sort((a, b) => b.id - a.id).map(item => (
@@ -16,6 +17,7 @@ const PostList = ({ postsList }: PostListsProps) => {
       date={item.date}
       id={item.id}
       imgUrl={item.imgUrl}
+      onClick={() => onGetPost(item.id)}
       key={`card-${String(item.date)}-${item.title}`}
     />
   ));
