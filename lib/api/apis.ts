@@ -26,6 +26,15 @@ export const PostUpdate = async (data: Post) => {
   )
   return response.data;
 }
+
+export const GetPost = async (id: number) => {
+  const endpoint = `${SERVER}/posts/${id}`;
+  const response = await axios.get<Post>(
+    endpoint,
+  )
+  console.log(response);
+  return response.data;
+}
 // export async function getLogin({
 //   email,
 //   password,
