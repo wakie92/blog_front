@@ -1,8 +1,16 @@
 import styled from 'styled-components';
 import { colors } from '../../../lib/styles/global';
 import { breakpoints } from '../../../lib/styles/responsive';
+import { Post } from '../../../store/modules/post';
+import { AsyncState } from '../../../lib/Utils/asyncUtils';
+import { AxiosError } from 'axios';
 
-export default function PostView({ test }) {
+type PostViewProps = {
+  postData: AsyncState<Post, AxiosError>,
+  test: string,
+}
+
+export default function PostView({ postData, test }: PostViewProps) {
   return (
     <Layout>
       <div className="wrapper">
