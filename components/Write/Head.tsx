@@ -29,7 +29,7 @@ export default React.memo(function Head({ postWrite, onUpload, onChange }: HeadP
 		<Title>
 			<FiArrowLeft onClick={backLink} className="svg-icon" />
 			<input placeholder="제목" name="title" onChange={onChange} value={postWrite.title} />
-			<FiUpload className="svg-icon" />
+			<FiUpload className="svg-icon"  />
 			<button type="button" onClick={() => onUpload(postWrite)}>
 				작성하기
 			</button>

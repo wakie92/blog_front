@@ -32,7 +32,6 @@ export const GetPost = async (id: number) => {
   const response = await axios.get<Post>(
     endpoint,
   )
-  console.log(response);
   return response.data;
 }
 // export async function getLogin({
