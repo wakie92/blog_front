@@ -62,11 +62,6 @@ const Header = () => {
                 <span>About</span>
               </a>
             </Link>
-            <Link href={ROUTES.devBlog}>
-              <a>
-                <span>Development</span>
-              </a>
-            </Link>
             <Link href={ROUTES.write}>
               <a>
                 <span>GitHub</span>
