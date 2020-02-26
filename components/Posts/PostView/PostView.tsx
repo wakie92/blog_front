@@ -4,6 +4,8 @@ import { breakpoints } from '../../../lib/styles/responsive';
 import { Post } from '../../../store/modules/post';
 import { AsyncState } from '../../../lib/Utils/asyncUtils';
 import { AxiosError } from 'axios';
+import { formatDate } from '../../../lib/Utils/utils';
+import '../../../lib/styles/github-markdown.css';
 
 type PostViewProps = {
   postData: AsyncState<Post, AxiosError>,
@@ -11,13 +13,16 @@ type PostViewProps = {
 }
 
 export default function PostView({ postData, test }: PostViewProps) {
+  const { data, loading, error } = postData;
+  console.log(postData);
+  if (loading) return null;
   return (
     <Layout>
       <div className="wrapper">
-        <span className="reg-date">2019년 12월 30일</span>
-        <h1>제목입니다.제목밉니다.제목이에유</h1>
+        <span className="reg-date">{formatDate(data.date)}</span>
+        <h1>{data.title}</h1>
         <hr />
-        <div className="content" dangerouslySetInnerHTML={{ __html: test }}>
+        <div className="markdown-body" dangerouslySetInnerHTML={{ __html: data.contentMd }}>
         </div>
       </div>
     </Layout>
