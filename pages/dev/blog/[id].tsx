@@ -3,14 +3,17 @@ import { useCallback, useEffect } from 'react';
 import Header from '../../../components/CommonUI/Header';
 import PostView from '../../../components/Posts/PostView/PostView';
 import { NextPage, NextPageContext } from 'next';
-import { getPostAsync } from '../../../store/modules/post';
+import { getPostAsync, Post } from '../../../store/modules/post';
 import { useRouter } from 'next/router';
 import { RootState } from '../../../store/modules';
+import { asyncState, AsyncState } from '../../../lib/Utils/asyncUtils';
+import { AxiosError } from 'axios';
+import { GetPost } from '../../../lib/api/apis';
 
 type blogType = {
-  isServer: string;
+  postData: AsyncState<Post, AxiosError>;
 };
-const Post: NextPage = ({ isServer }: blogType) => {
+const PostComponent: NextPage = ({ postData }: blogType) => {
   const { post } = useSelector(({ post }: RootState) => ({
     post: post.post,
   }));
@@ -27,21 +30,32 @@ const Post: NextPage = ({ isServer }: blogType) => {
       throw e;
     }
   }, [dispatch])
+
+  
   useEffect(() => {
     const { id } = router.query; 
     reqGetPost(Number(id));
   }, [reqGetPost]);
+  console.log(postData);
   return (
     <>
       <Header />
-      <PostView postData={post} test={test} />
+      <PostView postData={postData} test={test} />
     </>
   );
 };
 
-Post.getInitialProps = async (ctx: NextPageContext) => {
+PostComponent.getInitialProps = async (ctx: NextPageContext) => {
   const isServer: string = ctx.req ? 'server' : 'client';
-  return isServer;
+  let postData: AsyncState<Post, AxiosError> = asyncState.initial();
+  const { id } = ctx.query;
+  try {
+    const res:Post = await GetPost(Number(id));
+    postData = asyncState.success(res);
+  } catch (error) {
+    postData = asyncState.error(error);
+  }
+  return { postData };
 };
 
-export default Post;
+export default PostComponent;
