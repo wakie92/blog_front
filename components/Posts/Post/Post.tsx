@@ -82,6 +82,7 @@ const WrpperProps = (props) => (
 					overflow: hidden;
 					height: ${props.imgUrl ? '5rem' : '20rem'};
 					line-height: 1.9;
+					word-break: break-word;
 				}
 			}
 			.image-container {
