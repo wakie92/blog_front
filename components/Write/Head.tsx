@@ -29,7 +29,10 @@ export default React.memo(function Head({ postWrite, onUpload, onChange }: HeadP
 		<Title>
 			<FiArrowLeft onClick={backLink} className="svg-icon" />
 			<input placeholder="제목" name="title" onChange={onChange} value={postWrite.title} />
-			<FiUpload className="svg-icon"  />
+			<input type="file" className="file-upload" id="file-upload"/>
+			<label htmlFor="file-upload">
+				<FiUpload className="svg-icon" />
+			</label>
 			<button type="button" onClick={() => onUpload(postWrite)}>
 				작성하기
 			</button>
@@ -51,6 +54,9 @@ const Title = styled.div`
 		font-size: 1.6rem;
 		border-radius: 4px;
 		border: 2px solid ${colors.gray1};
+	}
+	.file-upload {
+		display: none;
 	}
 	.svg-icon {
 		color: #fff;

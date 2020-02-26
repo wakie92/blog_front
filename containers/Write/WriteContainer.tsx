@@ -10,6 +10,7 @@ import { removeExp } from '../../lib/Utils/utils';
 import { AxiosError } from 'axios';
 import { Post, postAsync } from '../../store/modules/post';
 import { AsyncState } from '../../lib/Utils/asyncUtils';
+import { handleUpload } from '../../lib/Utils/S3';
 
 type WriteContainerProps = {
   getInitList: AsyncState<Post[], AxiosError>;
@@ -47,8 +48,8 @@ const WriteContainer = ({ getInitList }: WriteContainerProps) => {
     router.push(ROUTES.home, ROUTES.home, { shallow: true });
   }, [dispatch, postWrite]);
   
-  const reqImgUpload = useCallback((e) => {
-
+  const reqImgUpload = useCallback(async (e) => {
+    const url = await handleUpload(e);
   }, []);
   
   return (
