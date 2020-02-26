@@ -81,9 +81,7 @@ const GlobalStyle = createGlobalStyle`
   article, footer, header, aside, details, header, nav, section {
     display: block;
   }
-  ul, li, ol {
-    list-style: none;
-  }
+
   img {
     max-width: 100%;
   }
