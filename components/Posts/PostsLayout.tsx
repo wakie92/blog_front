@@ -61,6 +61,9 @@ export default PostsLayout;
 const Layout = styled.main<{ breakpoints: object }>`
   width: 90%;
   margin: auto;
+  ul, li, ol {
+    list-style: none;
+  }
   ul {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
