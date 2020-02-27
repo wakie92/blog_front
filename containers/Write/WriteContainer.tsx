@@ -50,6 +50,7 @@ const WriteContainer = ({ getInitList }: WriteContainerProps) => {
   
   const reqImgUpload = useCallback(async (e) => {
     const url = await handleUpload(e);
+    console.log(url);
   }, []);
   
   return (
