@@ -10,7 +10,7 @@ import { removeExp } from '../../lib/Utils/utils';
 import { AxiosError } from 'axios';
 import { Post, postAsync } from '../../store/modules/post';
 import { AsyncState } from '../../lib/Utils/asyncUtils';
-import { handleUpload } from '../../lib/Utils/S3';
+import { handleUpload, addPhoto } from '../../lib/Utils/S3';
 
 type WriteContainerProps = {
   getInitList: AsyncState<Post[], AxiosError>;
@@ -48,14 +48,14 @@ const WriteContainer = ({ getInitList }: WriteContainerProps) => {
     router.push(ROUTES.home, ROUTES.home, { shallow: true });
   }, [dispatch, postWrite]);
   
-  const reqImgUpload = useCallback(async (e) => {
-    const url = await handleUpload(e);
+  const reqImgUpload = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const url = await addPhoto(e);
     console.log(url);
   }, []);
   
   return (
     <>
-      <Head onUpload={onUpload} postWrite={postWrite} onChange={handleChange} />
+      <Head onUpload={onUpload} postWrite={postWrite} onChange={handleChange} reqImgUpload={reqImgUpload} />
       <EditBox>
         <Editor inputValue={postWrite.inputValue} onChange={handleChange} />
         <Preview inputValue={postWrite.inputValue} onChange={handleConv} />

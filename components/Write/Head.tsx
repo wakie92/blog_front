@@ -19,9 +19,10 @@ type HeadProps = {
 		}
 	) => void;
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	reqImgUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
 };
 
-export default React.memo(function Head({ postWrite, onUpload, onChange }: HeadProps) {
+export default React.memo(function Head({reqImgUpload, postWrite, onUpload, onChange }: HeadProps) {
 	const backLink = () => {
 		history.back();
 	};
@@ -29,7 +30,7 @@ export default React.memo(function Head({ postWrite, onUpload, onChange }: HeadP
 		<Title>
 			<FiArrowLeft onClick={backLink} className="svg-icon" />
 			<input placeholder="제목" name="title" onChange={onChange} value={postWrite.title} />
-			<input type="file" className="file-upload" id="file-upload"/>
+			<input type="file" className="file-upload" id="file-upload" onChange={reqImgUpload} />
 			<label htmlFor="file-upload">
 				<FiUpload className="svg-icon" />
 			</label>
