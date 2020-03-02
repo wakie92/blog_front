@@ -9,6 +9,7 @@ import { RootState } from '../../../store/modules';
 import { asyncState, AsyncState } from '../../../lib/Utils/asyncUtils';
 import { AxiosError } from 'axios';
 import { GetPost } from '../../../lib/api/apis';
+import Footer from '../../../components/CommonUI/footer';
 
 type blogType = {
   postData: AsyncState<Post, AxiosError>;
@@ -41,6 +42,7 @@ const PostComponent: NextPage = ({ postData }: blogType) => {
     <>
       <Header />
       <PostView postData={postData} test={test} />
+      <Footer />
     </>
   );
 };
