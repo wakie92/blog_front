@@ -1,12 +1,12 @@
 import AWS from 'aws-sdk';
+import { AWSConfig } from '../../config/awsconfig';
 
-var albumBucketName = 'blog-oscar';
-var bucketRegion = 'ap-northeast-2';
-var IdentityPoolId = 'ap-northeast-2:df63c109-29c3-46e1-8598-a4693415589d';
+const { albumBucketName, bucketRegion, IdentityPoolId } = AWSConfig
+const paramKey = 'blog-oscar/images/';
 
-AWS.config.region = 'ap-northeast-2'; // 리전
+AWS.config.region = bucketRegion; // 리전
 AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-    IdentityPoolId: 'ap-northeast-2:df63c109-29c3-46e1-8598-a4693415589d',
+	IdentityPoolId: IdentityPoolId
 });
 AWS.config.update({
 	region: bucketRegion,
@@ -15,54 +15,26 @@ AWS.config.update({
 	})
 });
 
-const s3 = new AWS.S3({
-	apiVersion: '2006-03-01',
-	params: { Bucket: albumBucketName }
-});
-export const handleUpload = async (e) => {
+export const addPhoto = async (e: React.ChangeEvent<HTMLInputElement>) => {
 	const file = e.target.files[0];
-	let url = null;
-
-	const param = {
-		Bucket: 'blog-oscar',
-		Key: `blog-oscar/images/${file.name}`,
-		ACL: 'public-read',
-		Body: file,
-		ContentType: 'image/png'
-	};
-
-	console.log(s3);
-	console.log(param);
-	const dataUrl = await s3.upload(param, (err, data) => {
-		if (err) {
-			console.log('image upload err : ' + err);
-			return;
+	const upload = new AWS.S3.ManagedUpload({
+		params: {
+			Bucket: albumBucketName,
+			Key: `${paramKey}${file.name}`,
+			Body: file,
+			ACL: 'public-read'
 		}
-		return data.Location;
 	});
 
-	return dataUrl;
-};
-
-export function addPhoto(e) {
-	const file = e.target.files[0];
-	const param = {
-		Bucket: 'blog-oscar',
-		Key: `blog-oscar/images/${file.name}`,
-		ACL: 'public-read',
-		Body: file,
-		ContentType: 'image/png'
-	};
-	console.log(param);
-	const result = s3.upload(param,
-		function(err, data) {
-			if (err) {
-				console.log(err);
-				return alert('There was an error uploading your photo: ' + err);
-			}
-			alert('Successfully uploaded photo.');
+	const result = upload.promise();
+	const url: Promise<string | void> = result.then(
+		(data: AWS.S3.ManagedUpload.SendData) => {
+			alert('사진이 등록되었습니다.');
 			return data.Location;
+		},
+		(err: Error) => {
+			alert(`${err.message}`);
 		}
 	);
-	return result
-}
+	return url;
+};
