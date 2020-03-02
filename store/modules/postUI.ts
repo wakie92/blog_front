@@ -21,6 +21,7 @@ export type PostWrite = {
   title: string;
   inputValue: string;
   mdValue: string;
+  imgUrl: string | null;
 };
 
 export type PostState = {
@@ -32,6 +33,7 @@ const initialState: PostState = {
     title: '',
     inputValue: '',
     mdValue: '',
+    imgUrl: null,
   },
 };
 

@@ -10,7 +10,7 @@ export type Post = {
   title: string;
   date: string;
   content: string;
-  imgUrl?: undefined | string;
+  imgUrl?: null | string;
   contentMd: string;
 };
 
