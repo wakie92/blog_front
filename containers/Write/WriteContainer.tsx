@@ -10,7 +10,7 @@ import { removeExp } from '../../lib/Utils/utils';
 import { AxiosError } from 'axios';
 import { Post, postAsync } from '../../store/modules/post';
 import { AsyncState } from '../../lib/Utils/asyncUtils';
-import { handleUpload, addPhoto } from '../../lib/Utils/S3';
+import { addPhoto } from '../../lib/Utils/S3';
 
 type WriteContainerProps = {
   getInitList: AsyncState<Post[], AxiosError>;
@@ -40,6 +40,7 @@ const WriteContainer = ({ getInitList }: WriteContainerProps) => {
       content: withoutExp,
       contentMd: postData.mdValue,
       date: uploadDate,
+      imgUrl: postWrite.imgUrl,
       id: getInitList.data.length + 1
     }
     //img upload작업  eslint-plugin-react-hook
@@ -49,9 +50,12 @@ const WriteContainer = ({ getInitList }: WriteContainerProps) => {
   }, [dispatch, postWrite]);
   
   const reqImgUpload = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const url = await addPhoto(e);
-    console.log(url);
-  }, []);
+    const bucketData: string | void = await addPhoto(e);
+    console.log(bucketData);
+    if (typeof bucketData === 'string') {
+      dispatch(getValue({ name: 'imgUrl', value: bucketData }));
+    }
+  }, [dispatch]);
   
   return (
     <>
