@@ -12,11 +12,11 @@ import { Post, postAsync } from '../../store/modules/post';
 import { AsyncState } from '../../lib/Utils/asyncUtils';
 import { addPhoto } from '../../lib/Utils/S3';
 
-type WriteContainerProps = {
-  getInitList: AsyncState<Post[], AxiosError>;
+type EditContainerProps = {
+  postData: AsyncState<Post, AxiosError>;
 };
 
-const WriteContainer = ({ getInitList }: WriteContainerProps) => {
+const EditContainer = ({ postData }: EditContainerProps) => {
   const dispatch = useDispatch();
   const { postWrite } = useSelector((state: RootState) => ({
     postWrite: state.postUI.postWrite,
@@ -42,7 +42,7 @@ const WriteContainer = ({ getInitList }: WriteContainerProps) => {
       contentMd: postData.mdValue,
       date: uploadDate,
       imgUrl: postWrite.imgUrl,
-      id: getInitList.data.length + 1
+      id: postData.data.id
     }
     console.log(dataForUpload);
     //img upload작업  eslint-plugin-react-hook
@@ -69,14 +69,14 @@ const WriteContainer = ({ getInitList }: WriteContainerProps) => {
     <>
       <Head onUpload={onUpload} postWrite={postWrite} onChange={handleChange} reqImgUpload={reqImgUpload} />
       <EditBox>
-        <Editor inputValue={postWrite.inputValue} onChange={handleChange} />
-        <Preview inputValue={postWrite.inputValue} onChange={handleConv} />
+        <Editor inputValue={postData.data.rawContent} onChange={handleChange} />
+        <Preview inputValue={postData.data.rawContent} onChange={handleConv} />
       </EditBox>
     </>
   ); 
 }
 
-export default WriteContainer;
+export default EditContainer;
 const EditBox = styled.div`
   display: flex;
   height: 94rem;

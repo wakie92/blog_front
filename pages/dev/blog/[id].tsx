@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import Head from 'next/head'
 import Header from '../../../components/CommonUI/Header';
 import PostView from '../../../components/Posts/PostView/PostView';
 import { NextPage, NextPageContext } from 'next';
@@ -9,20 +10,17 @@ import { RootState } from '../../../store/modules';
 import { asyncState, AsyncState } from '../../../lib/Utils/asyncUtils';
 import { AxiosError } from 'axios';
 import { GetPost } from '../../../lib/api/apis';
-import Footer from '../../../components/CommonUI/footer';
+import Footer from '../../../components/CommonUI/Footer';
+import EditContainer from '../../../containers/Edit/EditContainer';
+import Maybe from '../../../components/Maybe/Maybe';
 
 type blogType = {
   postData: AsyncState<Post, AxiosError>;
 };
 const PostComponent: NextPage = ({ postData }: blogType) => {
-  const { post } = useSelector(({ post }: RootState) => ({
-    post: post.post,
-  }));
-  const test =
-    '<h1>Showdown is a Javascript Markdown to HTML converter, based on the original works by John Gruber. It can be used client side (in the browser) or server side (with Node or io). </h1>';
   const dispatch = useDispatch();
   const router = useRouter();
-  
+  const [editMode, setEditMode] = useState<boolean>(false);
   const reqGetPost = useCallback((id: number) => {
     try {
       console.log(id);
@@ -37,12 +35,23 @@ const PostComponent: NextPage = ({ postData }: blogType) => {
     const { id } = router.query; 
     reqGetPost(Number(id));
   }, [reqGetPost]);
-  console.log(postData);
+  console.log(editMode);
   return (
     <>
-      <Header />
-      <PostView postData={postData} test={test} />
-      <Footer />
+      <Head>
+        <title>{postData.data.title}</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <Maybe isVisible={editMode}>
+        <EditContainer postData={postData}/>
+      </Maybe>
+      <Maybe isVisible={!editMode}>
+        <>
+          <Header />
+          <PostView postData={postData} editMode={editMode} setEditMode={setEditMode} />
+          <Footer />
+        </>
+      </Maybe>
     </>
   );
 };

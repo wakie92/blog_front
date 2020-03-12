@@ -1,8 +1,8 @@
-import { ReactChildren } from "react";
+import { ReactChildren, ReactFragment } from "react";
 
 type MaybeProps = {
   isVisible: any,
-  children: ReactChildren | JSX.Element,
+  children: ReactChildren | JSX.Element | ReactFragment,
 }
 const Maybe = ({ isVisible, children }: MaybeProps) => {
   return <>

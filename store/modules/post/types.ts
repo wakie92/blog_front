@@ -12,6 +12,7 @@ export type Post = {
   content: string;
   imgUrl?: null | string;
   contentMd: string;
+  rawContent: string;
 };
 
 export type PostState = {
