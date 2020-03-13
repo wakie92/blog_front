@@ -44,7 +44,6 @@ const EditContainer = ({ postData }: EditContainerProps) => {
       imgUrl: postWrite.imgUrl,
       id: postData.data.id
     }
-    console.log(dataForUpload);
     //img upload작업  eslint-plugin-react-hook
     const res = dispatch(postAsync.request(dataForUpload));
     (res);
@@ -53,7 +52,6 @@ const EditContainer = ({ postData }: EditContainerProps) => {
   
   const reqImgUpload = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     const bucketData: string | void = await addPhoto(e);
-    console.log(bucketData);
     if (typeof bucketData === 'string') {
       dispatch(getValue({ name: 'imgUrl', value: bucketData }));
     }
@@ -64,7 +62,6 @@ const EditContainer = ({ postData }: EditContainerProps) => {
       dispatch(resetInputValue());
     }
   }, []);
-  console.log(postWrite.inputValue);
   return (
     <>
       <Head onUpload={onUpload} postWrite={postWrite} onChange={handleChange} reqImgUpload={reqImgUpload} />
