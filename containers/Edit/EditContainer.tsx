@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { Editor, Head, Preview } from '../../components/Write';
 import { RootState } from '../../store/modules';
-import { getValue, resetInputValue } from '../../store/modules/postUI';
+import { getValue, resetInputValue, setInputValues } from '../../store/modules/postUI';
 import { ROUTES } from '../../lib/Routes/Routes';
 import { removeExp } from '../../lib/Utils/utils';
 import { AxiosError } from 'axios';
@@ -58,6 +58,13 @@ const EditContainer = ({ postData }: EditContainerProps) => {
   }, [dispatch]);
 
   useEffect(() => {
+    const { rawContent, contentMd, imgUrl, title } = postData.data
+    dispatch(setInputValues({
+      title,
+      inputValue: rawContent,
+      mdValue:contentMd,
+      imgUrl 
+    }));
     return () => {
       dispatch(resetInputValue());
     }

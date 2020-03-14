@@ -1,6 +1,7 @@
 import { updateKey } from './loginAsync/types';
 import { createAction, ActionType, createReducer } from 'typesafe-actions';
 
+const SET_INPUT_VALUES = 'post/SET_INPUT_VALUES';
 const INPUT_VALUE = 'post/INPUT_VALUE';
 const RESET_INPUT_VALUE = 'post/RESET_INPUT_VALUE';
 export const getValue = createAction(INPUT_VALUE, ({ name, value }: updateKey) => ({
@@ -9,10 +10,17 @@ export const getValue = createAction(INPUT_VALUE, ({ name, value }: updateKey) =
 }))<updateKey>();
 
 export const resetInputValue = createAction(RESET_INPUT_VALUE)<null>();
+export const setInputValues = createAction(SET_INPUT_VALUES, ({ title, inputValue, mdValue, imgUrl }: PostWrite) => ({
+	title,
+	inputValue,
+	mdValue,
+	imgUrl
+}))<PostWrite>();
 
 const actions = {
 	getValue,
-	resetInputValue
+	resetInputValue,
+	setInputValues,
 };
 
 export type PostActions = ActionType<typeof actions>;
@@ -38,6 +46,12 @@ const initialState: PostState = {
 };
 
 const post = createReducer<PostState, PostActions>(initialState, {
+	[SET_INPUT_VALUES]: (state, action) => {
+		return {
+			...state,
+			postWrite: action.payload
+		};
+	},
 	[RESET_INPUT_VALUE]: (state, action) => {
 		return {
 			...state,
