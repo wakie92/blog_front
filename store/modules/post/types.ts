@@ -3,6 +3,11 @@ import { AxiosError } from 'axios';
 import { ActionType } from 'typesafe-actions';
 import * as actions from './actions';
 
+export type PutPostType = {
+  post: Post,
+  id: number
+}
+
 export type PostActions = ActionType<typeof actions>;
 
 export type Post = {

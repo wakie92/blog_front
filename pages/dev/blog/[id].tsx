@@ -43,7 +43,7 @@ const PostComponent: NextPage = ({ postData }: blogType) => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Maybe isVisible={editMode}>
-        <EditContainer postData={postData}/>
+        <EditContainer postData={postData} editMode={editMode}/>
       </Maybe>
       <Maybe isVisible={!editMode}>
         <>

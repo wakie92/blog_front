@@ -8,15 +8,16 @@ import { getValue, resetInputValue, setInputValues } from '../../store/modules/p
 import { ROUTES } from '../../lib/Routes/Routes';
 import { removeExp } from '../../lib/Utils/utils';
 import { AxiosError } from 'axios';
-import { Post, postAsync } from '../../store/modules/post';
+import { Post, postAsync, putPostAsync } from '../../store/modules/post';
 import { AsyncState } from '../../lib/Utils/asyncUtils';
 import { addPhoto } from '../../lib/Utils/S3';
 
 type EditContainerProps = {
   postData: AsyncState<Post, AxiosError>;
+  editMode: boolean;
 };
 
-const EditContainer = ({ postData }: EditContainerProps) => {
+const EditContainer = ({ postData, editMode }: EditContainerProps) => {
   const dispatch = useDispatch();
   const { postWrite } = useSelector((state: RootState) => ({
     postWrite: state.postUI.postWrite,
@@ -32,20 +33,21 @@ const EditContainer = ({ postData }: EditContainerProps) => {
     dispatch(getValue({ name: 'mdValue', value: html}));
   }, [dispatch]);
 
-  const onUpload = useCallback((postData) => {
+  const onUpload = useCallback((postWrite) => {
     const uploadDate = new Date().toISOString();
-    const withoutExp = removeExp(postData.inputValue);
+    const withoutExp = removeExp(postWrite.inputValue);
     const dataForUpload:Post = {
-      title: postData.title,
+      title: postWrite.title,
       rawContent: postWrite.inputValue,
       content: withoutExp,
-      contentMd: postData.mdValue,
+      contentMd: postWrite.mdValue,
       date: uploadDate,
       imgUrl: postWrite.imgUrl,
       id: postData.data.id
     }
     //img upload작업  eslint-plugin-react-hook
-    const res = dispatch(postAsync.request(dataForUpload));
+    console.log(dataForUpload);
+    const res = dispatch(putPostAsync.request({post: dataForUpload, id: postData.data.id}));
     (res);
     router.push(ROUTES.home, ROUTES.home, { shallow: true });
   }, [dispatch, postWrite]);
@@ -69,12 +71,13 @@ const EditContainer = ({ postData }: EditContainerProps) => {
       dispatch(resetInputValue());
     }
   }, []);
+  console.log(postWrite)
   return (
     <>
       <Head onUpload={onUpload} postWrite={postWrite} onChange={handleChange} reqImgUpload={reqImgUpload} />
       <EditBox>
-        <Editor inputValue={postData.data.rawContent} onChange={handleChange} />
-        <Preview inputValue={postData.data.rawContent} onChange={handleConv} />
+        <Editor inputValue={postWrite.inputValue} onChange={handleChange} />
+        <Preview inputValue={postWrite.inputValue} onChange={handleConv} />
       </EditBox>
     </>
   ); 

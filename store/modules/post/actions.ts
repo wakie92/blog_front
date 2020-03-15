@@ -1,6 +1,11 @@
 import { createAsyncAction } from 'typesafe-actions';
 import { AxiosError } from 'axios';
-import { Post } from './types';
+import { Post, PutPostType } from './types';
+
+
+export const EDIT_POST = 'post/EDIT_POST';
+export const EDIT_POST_SUCCESS = 'post/EDIT_POST_SUCCESS';
+export const EDIT_POST_ERROR = 'post/EDIT_POST_ERROR';
 
 export const UPDATE_POST = 'post/UPDATE_POST';
 export const UPDATE_POST_SUCCESS = 'post/UPDATE_POST_SUCCESS';
@@ -25,6 +30,12 @@ export const postAsync = createAsyncAction(
   UPDATE_POST_SUCCESS,
   UPDATE_POST_ERROR,
 )<Post, string, AxiosError<string>>();
+
+export const putPostAsync = createAsyncAction(
+  EDIT_POST,
+  EDIT_POST_SUCCESS,
+  EDIT_POST_ERROR,
+)<PutPostType, string, AxiosError<string>>();
 
 export const getPostAsync = createAsyncAction(
   GET_POST,

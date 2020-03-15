@@ -1,39 +1,38 @@
-import { Post } from './../../store/modules/post/types';
+import { Post, PutPostType } from './../../store/modules/post/types';
 import { Get } from './axios';
 import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 
 const SERVER = 'http://localhost:4000';
 
 export const getLoginTest = async (config: AxiosRequestConfig) => {
-  const endpoint = `${SERVER}/users`;
-  const res: string = await Get<string>(endpoint, config);
-  return res;
-}
+	const endpoint = `${SERVER}/users`;
+	const res: string = await Get<string>(endpoint, config);
+	return res;
+};
 
 export const GetPostsList = async (cnt: number) => {
-  const endpoint = `${SERVER}/posts`;
-  const response = await axios.get<Post[]>(
-    endpoint
-  );
-  return response.data;
+	const endpoint = `${SERVER}/posts`;
+	const response = await axios.get<Post[]>(endpoint);
+	return response.data;
+};
+
+export const PutPost = async ({post, id}: PutPostType) => {
+	const endpoint = `${SERVER}/posts/${id}`;
+	const response = await axios.put<string>(endpoint, post);
+	return response.data;
 };
 
 export const PostUpdate = async (data: Post) => {
-  const endpoint = `${SERVER}/posts`;
-  const response = await axios.post<string>(
-    endpoint,
-    data
-  )
-  return response.data;
-}
+	const endpoint = `${SERVER}/posts`;
+	const response = await axios.post<string>(endpoint, data);
+	return response.data;
+};
 
 export const GetPost = async (id: number) => {
-  const endpoint = `${SERVER}/posts/${id}`;
-  const response = await axios.get<Post>(
-    endpoint,
-  )
-  return response.data;
-}
+	const endpoint = `${SERVER}/posts/${id}`;
+	const response = await axios.get<Post>(endpoint);
+	return response.data;
+};
 // export async function getLogin({
 //   email,
 //   password,
@@ -51,6 +50,5 @@ export const GetPost = async (id: number) => {
 // }
 
 export type LoginType = {
-  message: string;
+	message: string;
 };
-
