@@ -33,6 +33,12 @@ export const GetPost = async (id: number) => {
 	const response = await axios.get<Post>(endpoint);
 	return response.data;
 };
+
+export const DeletePost = async (id: number) => {
+  const endpoint = `${SERVER}/posts/${id}`;
+  const response = await axios.delete(endpoint);
+  return response.data
+};
 // export async function getLogin({
 //   email,
 //   password,

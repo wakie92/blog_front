@@ -2,6 +2,9 @@ import { createAsyncAction } from 'typesafe-actions';
 import { AxiosError } from 'axios';
 import { Post, PutPostType } from './types';
 
+export const DELETE_POST = 'post/DELETE_POST';
+export const DELETE_POST_SUCCESS = 'post/DELETE_POST_SUCCESS';
+export const DELETE_POST_ERROR = 'post/DELETE_POST_ERROR';
 
 export const EDIT_POST = 'post/EDIT_POST';
 export const EDIT_POST_SUCCESS = 'post/EDIT_POST_SUCCESS';
@@ -18,6 +21,12 @@ export const GET_POSTS_LIST_ERROR = 'post/GET_POSTS_LIST_ERROR';
 export const GET_POST = 'post/GET_POST';
 export const GET_POST_SUCCESS = 'post/GET_POST_SUCCESS';
 export const GET_POST_ERROR = 'post/GET_POST_ERROR';
+
+export const deletePostAsync = createAsyncAction(
+  DELETE_POST,
+  DELETE_POST_SUCCESS,
+  DELETE_POST_ERROR,
+)<number, any, AxiosError>();
 
 export const getPostsListAsync = createAsyncAction(
   GET_POSTS_LIST,

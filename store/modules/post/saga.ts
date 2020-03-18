@@ -6,17 +6,20 @@ import {
 	postAsync,
 	UPDATE_POST,
 	getPostAsync,
-	GET_POST
+	GET_POST,
+  deletePostAsync,
+  DELETE_POST
 } from './actions';
-import { Post } from './types';
-import { GetPostsList, PostUpdate, GetPost, PutPost } from '../../../lib/api/apis';
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { GetPostsList, PostUpdate, GetPost, PutPost, DeletePost } from '../../../lib/api/apis';
+import { takeEvery, takeLatest } from 'redux-saga/effects';
 import createAsyncSaga from '../../../lib/Utils/createAsyncSaga';
 
+const deletePostSaga = createAsyncSaga(deletePostAsync, DeletePost);
 const putPostSaga = createAsyncSaga(putPostAsync, PutPost);
 const getPostsListSaga = createAsyncSaga(getPostsListAsync, GetPostsList);
 const postUpdateSaga = createAsyncSaga(postAsync, PostUpdate);
 const getPostSaga = createAsyncSaga(getPostAsync, GetPost);
+
 export function* updateSaga() {
 	yield takeLatest(UPDATE_POST, postUpdateSaga);
 }
@@ -28,4 +31,7 @@ export function* getOnePostSaga() {
 }
 export function* putSaga() {
 	yield takeLatest(EDIT_POST, putPostSaga);
+}
+export function* deleteSaga() {
+  yield takeLatest(DELETE_POST, deletePostSaga);
 }

@@ -12,11 +12,12 @@ import { Dispatch, SetStateAction } from 'react';
 
 type PostViewProps = {
   postData: AsyncState<Post, AxiosError>;
-  editMode: boolean,
-  setEditMode: Dispatch<SetStateAction<boolean>>
+  editMode: boolean;
+	setEditMode: Dispatch<SetStateAction<boolean>>;
+	reqDeletePost: (id: number) =>  void;
 };
 
-export default function PostView({ postData, setEditMode, editMode }: PostViewProps) {
+export default function PostView({ postData, setEditMode, editMode, reqDeletePost }: PostViewProps) {
 	const { data, loading, error } = postData;
 	console.log(postData);
 	if (loading) return null;
@@ -25,9 +26,24 @@ export default function PostView({ postData, setEditMode, editMode }: PostViewPr
 			<div className="wrapper">
 				<div className="reg-div">
 					<span className="reg-date">{formatDate(data.date)}</span>
-					<Button type="button" size="medium" bgColor={colors.gray1} onClick={() => setEditMode(!editMode)}>
-						수정
-					</Button>
+					<div className="">
+						<Button 
+							type="button" 
+							size="medium" 
+							bgColor={colors.gray1} 
+							onClick={() => setEditMode(!editMode)}
+						>
+							수정
+						</Button>
+						<Button 
+							type="button" 
+							size="medium" 
+							bgColor={colors.gray1} 
+							onClick={() => reqDeletePost(postData.data.id)}
+						>
+							삭제
+						</Button>
+					</div>
 				</div>
 
 				<h1>{data.title}</h1>

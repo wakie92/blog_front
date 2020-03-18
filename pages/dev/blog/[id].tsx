@@ -1,41 +1,20 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import Head from 'next/head'
-import Header from '../../../components/CommonUI/Header';
-import PostView from '../../../components/Posts/PostView/PostView';
 import { NextPage, NextPageContext } from 'next';
-import { getPostAsync, Post } from '../../../store/modules/post';
-import { useRouter } from 'next/router';
-import { RootState } from '../../../store/modules';
+import { Post } from '../../../store/modules/post';
 import { asyncState, AsyncState } from '../../../lib/Utils/asyncUtils';
 import { AxiosError } from 'axios';
 import { GetPost } from '../../../lib/api/apis';
-import Footer from '../../../components/CommonUI/Footer';
 import EditContainer from '../../../containers/Edit/EditContainer';
 import Maybe from '../../../components/Maybe/Maybe';
+import BlogPostContainer from '../../../containers/BlogPost/BlogPostContainer';
 
 type blogType = {
   postData: AsyncState<Post, AxiosError>;
 };
 const PostComponent: NextPage = ({ postData }: blogType) => {
-  const dispatch = useDispatch();
-  const router = useRouter();
   const [editMode, setEditMode] = useState<boolean>(false);
-  const reqGetPost = useCallback((id: number) => {
-    try {
-      console.log(id);
-      dispatch(getPostAsync.request(id));
-    } catch (e) {
-      throw e;
-    }
-  }, [dispatch])
-
-  
-  useEffect(() => {
-    const { id } = router.query; 
-    reqGetPost(Number(id));
-  }, [reqGetPost]);
-  console.log(editMode);
+ 
   return (
     <>
       <Head>
@@ -46,11 +25,7 @@ const PostComponent: NextPage = ({ postData }: blogType) => {
         <EditContainer postData={postData} editMode={editMode}/>
       </Maybe>
       <Maybe isVisible={!editMode}>
-        <>
-          <Header />
-          <PostView postData={postData} editMode={editMode} setEditMode={setEditMode} />
-          <Footer />
-        </>
+        <BlogPostContainer postData={postData} editMode={editMode} setEditMode={setEditMode} />
       </Maybe>
     </>
   );
