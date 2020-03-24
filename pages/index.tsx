@@ -10,6 +10,7 @@ import { GetPostsList } from '../lib/api/apis';
 import { asyncState, AsyncState } from '../lib/Utils/asyncUtils';
 import { AxiosError } from 'axios';
 import { Store } from 'redux';
+import firebase, { firebaseDB } from '../config/init-firebase';
 
 interface CustomerNextContextProps extends NextPageContext {
   store?: Store
@@ -26,11 +27,24 @@ const Home: NextPage = ({ getInitList }: homeType) => (
 
 Home.getInitialProps = async (ctx: CustomerNextContextProps) => {
   let getInitList:AsyncState<Post[], AxiosError> = asyncState.initial();
+  
   // 리팩토링 필요. 
   // const { dispatch, getState }  = ctx.store;
   const itemLimit = 30;
   try {
+    const db = await firebaseDB().firestore();
+    const test = await db.collection("blogDB").get().then((querySnapshot) => {
+      return querySnapshot.docs.map((data) => {
+        console.log(data.ref)
+        const ele = data.data()
+        return ele;
+      }
+    );
+  }).catch((e) =>  console.log(e));
+  // test 타이핑
+  console.log(test);
     const res = await GetPostsList(itemLimit);
+    
     getInitList = asyncState.success(res);
   } catch (error) {
     getInitList = asyncState.error(error);

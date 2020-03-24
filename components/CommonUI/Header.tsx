@@ -8,13 +8,20 @@ import Hamburger from './Hamburger';
 import { breakpoints } from '../../lib/styles/responsive';
 import { getLoginModal } from '../../store/modules/loginUI';
 import LoginContainer from '../../containers/Login/LoginContainer';
+import { loginPopup, logoutFn } from '../../lib/Utils/utils';
 
 const Header = () => {
-  const dispatch = useDispatch();
   const [toggle, setToggle] = useState(false);
 
   const onLoginModal = () => {
-    dispatch(getLoginModal());
+    // dispatch(getLoginModal());
+    const token = JSON.parse(sessionStorage.getItem("idToken"));
+    console.log(token);
+    if (token) {
+      logoutFn();
+    } else {
+      loginPopup()
+    }
   };
   return (
     <>
@@ -108,6 +115,7 @@ const Wrapper = styled.header<{ aColor: string; breakpoints: object }>`
       justify-content: flex-end;
       a {
         font-size: 2rem;
+        cursor: pointer;
         color: ${props => props.aColor};
         & + a {
           margin-left: 1rem;

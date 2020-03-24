@@ -1,12 +1,10 @@
 import Document, { Html, Head, Main, NextScript, DocumentContext, DocumentInitialProps } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
-import { firebaseInit } from '../config/firebase-auth';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const sheet:ServerStyleSheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
-    firebaseInit();
     try {
       ctx.renderPage = () =>
         originalRenderPage({

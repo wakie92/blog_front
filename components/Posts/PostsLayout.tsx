@@ -12,6 +12,7 @@ import PostList from "./PostList/PostList";
 import Maybe from "../Maybe/Maybe";
 import { useRouter } from "next/router";
 import { ROUTES } from "../../lib/Routes/Routes";
+import { firebaseDB } from "../../config/init-firebase";
 
 type PostLayoutProps = {
   getInitList?: AsyncState<Post[], AxiosError>
@@ -24,7 +25,7 @@ const PostsLayout = ({ getInitList }: PostLayoutProps) => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const reqGetPostsList = useCallback(() => {
+  const reqGetPostsList = useCallback(async () => {
     try {
       dispatch(getPostsListAsync.success(getInitList.data));
     } catch (e) {

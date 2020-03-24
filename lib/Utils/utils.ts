@@ -1,3 +1,5 @@
+import firebase, { provider } from '../../config/init-firebase';
+
 export const formatDate = (dateData: string) => {
   const formatted: Date = new Date(dateData);
   const year: number = formatted.getFullYear();
@@ -24,3 +26,29 @@ export const removeExp = (str: string) => {
     return result;
   } return str;
 } 
+
+export const loginPopup = () => {
+  firebase.auth().signInWithPopup(provider).then(function(result) {
+    const token = JSON.stringify(result.credential.toJSON());
+    sessionStorage.setItem("idToken", token);
+  }).catch(function(error) {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    const credential = error.credential;
+    // ...
+  });
+}
+
+export const logoutFn = () => {
+  firebase.auth().signOut().then(function() {
+    // Sign-out successful.
+    console.log('logout');
+    sessionStorage.removeItem("idToken");
+  }).catch(function(error) {
+    // An error happened.
+  });
+}

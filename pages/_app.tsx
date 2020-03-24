@@ -2,13 +2,13 @@ import App from 'next/app';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { Provider } from 'react-redux';
 import { createStore, Store, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import withRedux from 'next-redux-wrapper';
 import Layout from '../components/CommonUI/Layout';
 import Header from '../components/CommonUI/Header';
 import { colors } from '../lib/styles/global';
 import rootReducer, { rootSaga } from '../store/modules';
-import createSagaMiddleware from 'redux-saga';
 
 // styles/global.js
 
