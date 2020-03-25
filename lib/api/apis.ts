@@ -1,6 +1,10 @@
 import { Post, PutPostType } from './../../store/modules/post/types';
 import { Get } from './axios';
 import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
+import { firebaseDB } from '../../config/init-firebase';
+
+const db = firebaseDB().firestore();
+const blogDB = db.collection("blogDB");
 
 const SERVER = 'http://localhost:4000';
 
@@ -10,50 +14,59 @@ export const getLoginTest = async (config: AxiosRequestConfig) => {
 	return res;
 };
 
-export const GetPostsList = async (cnt: number) => {
-	const endpoint = `${SERVER}/posts`;
-	const response = await axios.get<Post[]>(endpoint);
-	return response.data;
+export const GetPostsList = async <T>(cnt: number): Promise<T[]> => {
+	const query = blogDB.where("id", "<=", cnt).orderBy("id", "desc");
+	const response: T[] = await query.get().then((querySnapshot) => {
+			return querySnapshot.docs.map((data) => {
+				console.log(data.id);
+				const ele: T = data.data() as T;
+				return ele;
+			});
+		}).catch((e) =>  console.log(e)) as T[];
+	return response;
 };
 
 export const PutPost = async ({post, id}: PutPostType) => {
-	const endpoint = `${SERVER}/posts/${id}`;
-	const response = await axios.put<string>(endpoint, post);
+	const query = blogDB.doc(id);
+	console.log(id);
+	const response = await query.set(post).then((res) => {
+		return 'success';
+	}).catch((err) => {
+		return err;
+	});
 	return response.data;
 };
 
 export const PostUpdate = async (data: Post) => {
-	const endpoint = `${SERVER}/posts`;
-	const response = await axios.post<string>(endpoint, data);
-	return response.data;
+	const response: string = await blogDB.add(data)
+		.then((res) => {
+			return res.id;
+		}).catch((err) => {
+			return err;
+		});
+	return response;
 };
 
-export const GetPost = async (id: number) => {
-	const endpoint = `${SERVER}/posts/${id}`;
-	const response = await axios.get<Post>(endpoint);
-	return response.data;
+export const GetPost = async (index: number) => {
+	const query = blogDB.where("id", "==", index);
+	const response = await query.get().then((doc) => {
+		return { 
+			res: doc.docs[0].data() as Post, 
+			resId: doc.docs[0].id 
+		};
+	});
+	return response;	
 };
 
-export const DeletePost = async (id: number) => {
-  const endpoint = `${SERVER}/posts/${id}`;
-  const response = await axios.delete(endpoint);
-  return response.data
+export const DeletePost = async (id: string) => {
+	const query = blogDB.doc(id);
+	const response = await query.delete().then(() => {
+		return 'success';
+	}).catch((err) => {
+		return err;
+	})
+	return response;
 };
-// export async function getLogin({
-//   email,
-//   password,
-// }: {
-//   email: string;
-//   password: string;
-// }): Promise<LoginType> {
-//   // Generic 을 통해 응답 데이터의 타입을 설정 할 수 있습니다.
-//   const response: AxiosResponse<LoginType> = await Axios({
-//     method: 'POST',
-//     url: 'http://13.125.208.46/v1/users',
-//     data: { email, password },
-//   });
-//   return response.data; // 데이터 값을 바로 반환하도록 처리합니다.
-// }
 
 export type LoginType = {
 	message: string;

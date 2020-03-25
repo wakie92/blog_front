@@ -11,10 +11,11 @@ import BlogPostContainer from '../../../containers/BlogPost/BlogPostContainer';
 
 type blogType = {
   postData: AsyncState<Post, AxiosError>;
+  resId: string;
 };
-const PostComponent: NextPage = ({ postData }: blogType) => {
+const PostComponent: NextPage = ({ postData, resId }: blogType) => {
   const [editMode, setEditMode] = useState<boolean>(false);
- 
+ console.log(resId);
   return (
     <>
       <Head>
@@ -22,10 +23,10 @@ const PostComponent: NextPage = ({ postData }: blogType) => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Maybe isVisible={editMode}>
-        <EditContainer postData={postData} editMode={editMode}/>
+        <EditContainer resId={resId} postData={postData} editMode={editMode}/>
       </Maybe>
       <Maybe isVisible={!editMode}>
-        <BlogPostContainer postData={postData} editMode={editMode} setEditMode={setEditMode} />
+        <BlogPostContainer resId={resId} postData={postData} editMode={editMode} setEditMode={setEditMode} />
       </Maybe>
     </>
   );
@@ -34,14 +35,18 @@ const PostComponent: NextPage = ({ postData }: blogType) => {
 PostComponent.getInitialProps = async (ctx: NextPageContext) => {
   const isServer: string = ctx.req ? 'server' : 'client';
   let postData: AsyncState<Post, AxiosError> = asyncState.initial();
+  let resId = '';
   const { id } = ctx.query;
+  console.log(postData);
   try {
-    const res:Post = await GetPost(Number(id));
-    postData = asyncState.success(res);
+    const res = await GetPost(Number(id));
+    resId = res.resId;
+    console.log(res);
+    postData = asyncState.success(res.res);
   } catch (error) {
     postData = asyncState.error(error);
   }
-  return { postData };
+  return { postData, resId };
 };
 
 export default PostComponent;

@@ -13,6 +13,7 @@ import {
 import { GetPostsList, PostUpdate, GetPost, PutPost, DeletePost } from '../../../lib/api/apis';
 import { takeEvery, takeLatest } from 'redux-saga/effects';
 import createAsyncSaga from '../../../lib/Utils/createAsyncSaga';
+import { Post } from './types';
 
 const deletePostSaga = createAsyncSaga(deletePostAsync, DeletePost);
 const putPostSaga = createAsyncSaga(putPostAsync, PutPost);

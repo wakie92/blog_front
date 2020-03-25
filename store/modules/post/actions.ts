@@ -26,7 +26,7 @@ export const deletePostAsync = createAsyncAction(
   DELETE_POST,
   DELETE_POST_SUCCESS,
   DELETE_POST_ERROR,
-)<number, any, AxiosError>();
+)<string, any, AxiosError>();
 
 export const getPostsListAsync = createAsyncAction(
   GET_POSTS_LIST,
@@ -50,4 +50,4 @@ export const getPostAsync = createAsyncAction(
   GET_POST,
   GET_POST_SUCCESS,
   GET_POST_ERROR,
-)<number, Post, AxiosError<string>>();
+)<number, {res: Post, resId: string}, AxiosError<string>>();

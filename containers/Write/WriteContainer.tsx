@@ -42,7 +42,7 @@ const WriteContainer = ({ getInitList }: WriteContainerProps) => {
       contentMd: postData.mdValue,
       date: uploadDate,
       imgUrl: postWrite.imgUrl,
-      id: getInitList.data.length + 1
+      id: getInitList.data[0].id + 1
     }
     console.log(dataForUpload);
     //img upload작업  eslint-plugin-react-hook
