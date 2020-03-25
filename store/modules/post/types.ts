@@ -5,7 +5,7 @@ import * as actions from './actions';
 
 export type PutPostType = {
   post: Post,
-  id: number
+  id: string
 }
 
 export type PostActions = ActionType<typeof actions>;
@@ -23,5 +23,5 @@ export type Post = {
 export type PostState = {
   postsList: AsyncState<Post[], AxiosError>
   reqPost: AsyncState<string, AxiosError>
-  post: AsyncState<Post, AxiosError>
+  post: AsyncState<{res: Post, resId: string}, AxiosError>
 };

@@ -32,18 +32,7 @@ Home.getInitialProps = async (ctx: CustomerNextContextProps) => {
   // const { dispatch, getState }  = ctx.store;
   const itemLimit = 30;
   try {
-    const db = await firebaseDB().firestore();
-    const test = await db.collection("blogDB").get().then((querySnapshot) => {
-      return querySnapshot.docs.map((data) => {
-        console.log(data.ref)
-        const ele = data.data()
-        return ele;
-      }
-    );
-  }).catch((e) =>  console.log(e));
-  // test 타이핑
-  console.log(test);
-    const res = await GetPostsList(itemLimit);
+    const res = await GetPostsList<Post>(itemLimit);
     
     getInitList = asyncState.success(res);
   } catch (error) {

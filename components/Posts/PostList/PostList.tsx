@@ -10,7 +10,8 @@ type PostListsProps = {
 const PostList = ({ postsList, onGetPost }: PostListsProps) => {
   const { data, loading, error } = postsList;
   if (!data) return null;
-  const list = data.sort((a, b) => Number(b.id) - Number(a.id)).map(item => (
+  console.log(data);
+  const list = data.map(item => (
     <PostComponent
       title={item.title}
       preContent={item.content}

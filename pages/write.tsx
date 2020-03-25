@@ -25,7 +25,7 @@ const Write: NextPage = ({ getInitList }: writeProps) => {
 Write.getInitialProps = async (ctx: NextPageContext) => {
   let getInitList:AsyncState<Post[], AxiosError> = asyncState.initial();
   try {
-    const res = await GetPostsList(30);
+    const res = await GetPostsList<Post>(30);
     getInitList = asyncState.success(res);
   } catch (error) {
     getInitList = asyncState.error(error);

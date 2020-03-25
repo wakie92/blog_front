@@ -12,9 +12,10 @@ import { ROUTES } from '../../lib/Routes/Routes';
 type BlogPostProps = {
   postData: AsyncState<Post, AxiosError>;
   editMode: boolean;
+  resId: string;
   setEditMode: Dispatch<SetStateAction<boolean>>; 
 };
-const BlogPostContainer = ({ postData, editMode, setEditMode }: BlogPostProps) => {
+const BlogPostContainer = ({ postData, editMode, resId, setEditMode }: BlogPostProps) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const reqGetPost = useCallback((id: number) => {
@@ -28,7 +29,7 @@ const BlogPostContainer = ({ postData, editMode, setEditMode }: BlogPostProps) =
 
   const reqDeletePost = useCallback((id: number) => {
     try {
-      dispatch(deletePostAsync.request(id));
+      dispatch(deletePostAsync.request(resId));
       router.push(ROUTES.home, ROUTES.home, { shallow: true })
     } catch (e) {
       throw e;

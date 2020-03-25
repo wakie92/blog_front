@@ -15,9 +15,10 @@ import { addPhoto } from '../../lib/Utils/S3';
 type EditContainerProps = {
   postData: AsyncState<Post, AxiosError>;
   editMode: boolean;
+  resId: string;
 };
 
-const EditContainer = ({ postData, editMode }: EditContainerProps) => {
+const EditContainer = ({ postData, editMode, resId }: EditContainerProps) => {
   const dispatch = useDispatch();
   const { postWrite } = useSelector((state: RootState) => ({
     postWrite: state.postUI.postWrite,
@@ -47,7 +48,7 @@ const EditContainer = ({ postData, editMode }: EditContainerProps) => {
     }
     //img upload작업  eslint-plugin-react-hook
     console.log(dataForUpload);
-    const res = dispatch(putPostAsync.request({post: dataForUpload, id: postData.data.id}));
+    const res = dispatch(putPostAsync.request({post: dataForUpload, id: resId}));
     (res);
     router.push(ROUTES.home, ROUTES.home, { shallow: true });
   }, [dispatch, postWrite]);
@@ -71,7 +72,6 @@ const EditContainer = ({ postData, editMode }: EditContainerProps) => {
       dispatch(resetInputValue());
     }
   }, []);
-  console.log(postWrite)
   return (
     <>
       <Head onUpload={onUpload} postWrite={postWrite} onChange={handleChange} reqImgUpload={reqImgUpload} />
