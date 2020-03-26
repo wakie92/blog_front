@@ -11,6 +11,7 @@ import { asyncState, AsyncState } from '../lib/Utils/asyncUtils';
 import { AxiosError } from 'axios';
 import { Store } from 'redux';
 import firebase, { firebaseDB } from '../config/init-firebase';
+import HeaderContainer from '../containers/Header/HeaderContainer';
 
 interface CustomerNextContextProps extends NextPageContext {
   store?: Store
@@ -20,14 +21,13 @@ type homeType = {
 };
 const Home: NextPage = ({ getInitList }: homeType) => (
   <>
-    <Header />
+    <HeaderContainer />
     <PostsLayout getInitList={getInitList} />
   </>
 );
 
 Home.getInitialProps = async (ctx: CustomerNextContextProps) => {
   let getInitList:AsyncState<Post[], AxiosError> = asyncState.initial();
-  
   // 리팩토링 필요. 
   // const { dispatch, getState }  = ctx.store;
   const itemLimit = 30;

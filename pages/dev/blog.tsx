@@ -1,6 +1,7 @@
 import { PostsLayout } from '../../components/Posts';
 import Header from '../../components/CommonUI/Header';
 import { NextPage, NextPageContext } from 'next';
+import HeaderContainer from '../../containers/Header/HeaderContainer';
 
 type blogType = {
   isServer: string;
@@ -8,7 +9,7 @@ type blogType = {
 const Blog: NextPage = ({ isServer }: blogType) => {
   return (
     <>
-      <Header />
+      <HeaderContainer />
       <PostsLayout />
     </>
   );

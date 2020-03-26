@@ -1,6 +1,7 @@
 import { Intro } from '../components/Intro';
 import Header from '../components/CommonUI/Header';
 import { NextPage, NextPageContext } from 'next';
+import HeaderContainer from '../containers/Header/HeaderContainer';
 
 type aboutProps = {
   isServer: string;
@@ -8,7 +9,7 @@ type aboutProps = {
 const About: NextPage = ({ isServer }: aboutProps) => {
   return (
     <>
-      <Header />
+      <HeaderContainer />
       <Intro />
     </>
   );
