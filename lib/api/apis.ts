@@ -18,7 +18,6 @@ export const GetPostsList = async <T>(cnt: number): Promise<T[]> => {
 	const query = blogDB.where("id", "<=", cnt).orderBy("id", "desc");
 	const response: T[] = await query.get().then((querySnapshot) => {
 			return querySnapshot.docs.map((data) => {
-				console.log(data.id);
 				const ele: T = data.data() as T;
 				return ele;
 			});
@@ -28,7 +27,6 @@ export const GetPostsList = async <T>(cnt: number): Promise<T[]> => {
 
 export const PutPost = async ({post, id}: PutPostType) => {
 	const query = blogDB.doc(id);
-	console.log(id);
 	const response = await query.set(post).then((res) => {
 		return 'success';
 	}).catch((err) => {
