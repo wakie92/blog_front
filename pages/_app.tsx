@@ -26,11 +26,13 @@ const makeStore = () => {
 };
 
 class MyApp extends App<IProps> {
-  // Only uncomment this method if you have blocking data requirements for
-  // every single page in your application. This disables the ability to
-  // perform automatic static optimization, causing every page in your app to
-  // be server-side rendered.
-  //
+  state = {
+    token: null
+  }
+  componentDidMount() {
+    const token = JSON.parse(sessionStorage.getItem("idToken"));
+    this.setState({token});
+  }
   static async getInitialProps({ Component, ctx }) {
     const pageProps = Component.getInitialProps
     ? await Component.getInitialProps(ctx)
@@ -43,7 +45,7 @@ class MyApp extends App<IProps> {
       <ThemeProvider theme={{ fontFamily: 'Noto Sans KR' }}>
         {/* <Header /> */}
         <Provider store={store}>
-          <Layout>
+          <Layout token={this.state.token}>
             <Component {...pageProps} />
           </Layout>
         </Provider>
