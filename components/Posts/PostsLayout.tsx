@@ -68,19 +68,23 @@ const Layout = styled.main<{ breakpoints: object }>`
   ul {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 50rem;
+    grid-auto-rows: minmax(30rem, auto);
     grid-gap: 2.5rem;
     @media screen and (max-width: ${breakpoints.xlarge}) {
       grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: 40rem;
+      grid-auto-rows: 30rem;
     }
     @media screen and (max-width: ${breakpoints.large}) {
       grid-template-columns: repeat(2, 1fr);
-      grid-auto-rows: 40rem;
+      grid-auto-rows: 30rem;
     }
     @media screen and (max-width: ${breakpoints.medium}) {
       grid-template-columns: repeat(1, 1fr);
-      grid-auto-rows: 40rem;
+      grid-auto-rows: minmax(15rem, 20rem);
+    }
+    @media screen and (max-width: ${breakpoints.small}) {
+      grid-template-columns: repeat(1, 1fr);
+      grid-auto-rows: 30rem;
     }
   }
 `;
