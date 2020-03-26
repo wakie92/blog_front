@@ -7,4 +7,5 @@ export type LoginUIState = {
   isLoginModal: boolean,
   email: string,
   password: string,
+  isLogged: boolean,
 };

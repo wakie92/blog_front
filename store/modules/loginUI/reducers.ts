@@ -1,14 +1,21 @@
 import { createReducer } from 'typesafe-actions';
 import { LoginUIState, LoginUIActions } from './types';
-import { GET_LOGIN_MODAL, GET_AUTH, INITIALIZE } from './actions';
+import { GET_LOGIN_MODAL, GET_AUTH, INITIALIZE, IS_LOGGED } from './actions';
 
 const initialState: LoginUIState = {
   isLoginModal: false,
   email: '',
   password: '',
+  isLogged: false,
 };
 
 const loginUI = createReducer<LoginUIState, LoginUIActions>(initialState, {
+  [IS_LOGGED]: (state, action) => {
+    return ({
+      ...state,
+      isLogged: action.payload,
+    })
+  },
   [GET_LOGIN_MODAL]: state => {
     return ({
     ...state,
