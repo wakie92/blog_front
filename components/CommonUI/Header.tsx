@@ -10,22 +10,14 @@ import { getLoginModal } from '../../store/modules/loginUI';
 import LoginContainer from '../../containers/Login/LoginContainer';
 import { loginPopup, logoutFn } from '../../lib/Utils/utils';
 
-const Header = () => {
-  const [toggle, setToggle] = useState(false);
-
-  const onLoginModal = () => {
-    // dispatch(getLoginModal());
-    const token = JSON.parse(sessionStorage.getItem("idToken"));
-    console.log(token);
-    if (token) {
-      logoutFn();
-    } else {
-      loginPopup()
-    }
-  };
+type HeaderProps = {
+  onLoginModal: () => void;
+  handleToggle: () => void;
+  toggle: boolean;
+}
+const Header = ({ onLoginModal, handleToggle, toggle }: HeaderProps) => {
   return (
     <>
-      <LoginContainer />
       <Wrapper aColor={colors.violet9} breakpoints={breakpoints}>
         <div className="nav-box">
           <Link href={ROUTES.home}>
@@ -62,7 +54,7 @@ const Header = () => {
               </a>
             </Link>
           </SmallNav>
-          <Hamburger toggle={toggle} onToggle={() => setToggle(!toggle)} />
+          <Hamburger toggle={toggle} onToggle={handleToggle} />
           <nav className="nav">
             <Link href={ROUTES.about}>
               <a>
