@@ -42,7 +42,7 @@ export default React.memo(function Head({reqImgUpload, postWrite, onUpload, onCh
 });
 
 const Title = styled.div`
-	width: calc(100% - 0.5rem);
+	width: 100%;
 	background-color: ${colors.defaultBlack};
 	height: 7rem;
 	button {

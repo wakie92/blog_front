@@ -8,7 +8,6 @@ interface EditorProps {
 	onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 export default React.memo(function Editor({ inputValue, onChange }: EditorProps) {
-	(inputValue);
 	return <TextArea onChange={onChange} value={inputValue} name="inputValue" />;
 }, (preProps, nextProps) => preProps.inputValue === nextProps.inputValue);
 
