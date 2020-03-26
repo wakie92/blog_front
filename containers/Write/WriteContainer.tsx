@@ -11,6 +11,7 @@ import { AxiosError } from 'axios';
 import { Post, postAsync } from '../../store/modules/post';
 import { AsyncState } from '../../lib/Utils/asyncUtils';
 import { addPhoto } from '../../lib/Utils/S3';
+import TagAndImg from '../../components/Write/TagAndImg';
 
 type WriteContainerProps = {
   getInitList: AsyncState<Post[], AxiosError>;
@@ -57,6 +58,15 @@ const WriteContainer = ({ getInitList }: WriteContainerProps) => {
     if (typeof bucketData === 'string') {
       dispatch(getValue({ name: 'imgUrl', value: bucketData }));
     }
+  }, [dispatch])
+
+  const reqGetImgUrl = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const bucketData: string | void = await addPhoto(e);
+    console.log(bucketData);
+    if (typeof bucketData === 'string') {
+      const imgMarkdown = `![](${bucketData})`;
+      dispatch(getValue({ name: 'inputValue', value: imgMarkdown }));
+    }
   }, [dispatch]);
 
   useEffect(() => {
@@ -68,6 +78,7 @@ const WriteContainer = ({ getInitList }: WriteContainerProps) => {
   return (
     <>
       <Head onUpload={onUpload} postWrite={postWrite} onChange={handleChange} reqImgUpload={reqImgUpload} />
+      <TagAndImg reqGetImgUrl={reqGetImgUrl} />
       <EditBox>
         <Editor inputValue={postWrite.inputValue} onChange={handleChange} />
         <Preview inputValue={postWrite.inputValue} onChange={handleConv} />
