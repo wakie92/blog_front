@@ -11,6 +11,7 @@ import { AxiosError } from 'axios';
 import { Post, postAsync, putPostAsync } from '../../store/modules/post';
 import { AsyncState } from '../../lib/Utils/asyncUtils';
 import { addPhoto } from '../../lib/Utils/S3';
+import TagAndImg from '../../components/Write/TagAndImg';
 
 type EditContainerProps = {
   postData: AsyncState<Post, AxiosError>;
@@ -60,6 +61,15 @@ const EditContainer = ({ postData, editMode, resId }: EditContainerProps) => {
     }
   }, [dispatch]);
 
+  const reqGetImgUrl = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const bucketData: string | void = await addPhoto(e);
+    console.log(bucketData);
+    if (typeof bucketData === 'string') {
+      const imgMarkdown = `![](${bucketData})`;
+      dispatch(getValue({ name: 'inputValue', value: imgMarkdown }));
+    }
+  }, [dispatch]);
+
   useEffect(() => {
     const { rawContent, contentMd, imgUrl, title } = postData.data
     dispatch(setInputValues({
@@ -75,6 +85,7 @@ const EditContainer = ({ postData, editMode, resId }: EditContainerProps) => {
   return (
     <>
       <Head onUpload={onUpload} postWrite={postWrite} onChange={handleChange} reqImgUpload={reqImgUpload} />
+      <TagAndImg reqGetImgUrl={reqGetImgUrl} />
       <EditBox>
         <Editor inputValue={postWrite.inputValue} onChange={handleChange} />
         <Preview inputValue={postWrite.inputValue} onChange={handleConv} />

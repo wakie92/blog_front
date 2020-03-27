@@ -19,7 +19,7 @@ export default function Layout(props) {
       css={css`
       width: 100%;
       /* padding: 0 3%; */
-      padding-bottom: 100px;
+      // padding-bottom: 100px;
       margin: 0 auto;
     `}
     className="page-layout">

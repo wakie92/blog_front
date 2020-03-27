@@ -21,8 +21,8 @@ export default function Preview({ inputValue, onChange }: PreviewProps) {
 }
 
 const Wrapper = styled.div`
-  padding: 0.8rem;
-  width: calc(50% - 1.6rem);
+  padding: 3rem 1rem;
+  width: calc(50% - 2rem);
   background-color: white;
   overflow-y: scroll;
   word-break: break-all;

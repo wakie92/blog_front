@@ -18,20 +18,15 @@ export default function Post({ title, preContent, date, onClick, imgUrl, id }: P
 	const pre = `${preContent.substring(0, 150)}...`;
 	return (
 		<WrpperProps onClick={onClick} imgUrl={imgUrl} dateColor={colors.gray4}>
-			<div className="image-container" onClick={onClick}>
-				<img alt="" className="thumb-nail" />
+			<div className="image-container">
+				<img alt="" className="thumb-nail" src={imgUrl}/>
 			</div>
 			<div className="li-article">
 				<div className="post-info">
 					<h3 className="title" onClick={onClick}>
 						{title}
 					</h3>
-					<div className="date-comment">
-						<span className="date">{formatDate(date)}</span>
-						<div className="commetns">
-							<img src={COMMENT_SVG} alt="comments" />
-						</div>
-					</div>
+					<span className="date">{formatDate(date)}</span>
 				</div>
 				<div className="pre-content">{pre}</div>
 			</div>
@@ -44,35 +39,23 @@ const WrpperProps = (props) => (
 		css={css`
 			border-radius: 4px;
 			box-shadow: 0px 4px 8px 8px rgba(0, 0, 0, 0.05);
+			cursor: pointer;
 			.li-article {
 				padding: 1rem 1.5rem;
-				height: ${props.imgUrl ? '19rem' : '37rem'};
+				height: ${props.imgUrl ? '29rem' : '41rem'};
 				padding-top: 2rem;
 				.post-info {
-					height: ${props.imgUrl ? '12rem' : '13rem'};
+					min-height: ${props.imgUrl ? '12rem' : '13rem'};
 					border-bottom: 1px solid ${props.dateColor};
 					.title {
-						cursor: pointer;
-						margin-bottom: 2rem;
+						max-height: 11.5rem;
+						overflow: hidden;
+						word-break: break-all;
 					}
-					.date-comment {
-						display: flex;
-						justify-content: space-between;
-						margin-bottom: 1rem;
-						.commetns {
-							background-color: ${props.dataColor};
-							img {
-								height: 2rem;
-								margin-right: 0.5rem;
-								margin-top: 0.3rem;
-								color: ${props.dataColor};
-							}
-						}
-						.date {
-							color: ${props.dateColor};
-							font-size: 1.5rem;
-							margin-bottom: 2rem;
-						}
+					.date {
+						color: ${props.dateColor};
+						font-size: 1.5rem;
+						margin-bottom: 2rem;
 					}
 				}
 				.pre-content {
@@ -92,10 +75,7 @@ const WrpperProps = (props) => (
 				cursor: pointer;
 				display: ${!props.imgUrl && 'none'};
 				img {
-					border-radius: 4px;
-					background-image: url(${props.imgUrl});
-					background-size: cover;
-					background-repeat: no-repeat;
+					object-fit: cover;
 					height: 100%;
 					width: 100%;
 					border-radius: 4px 4px 0 0;
