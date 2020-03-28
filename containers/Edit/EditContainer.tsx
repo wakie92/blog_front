@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
@@ -21,6 +21,8 @@ type EditContainerProps = {
 
 const EditContainer = ({ postData, editMode, resId }: EditContainerProps) => {
   const dispatch = useDispatch();
+  const mdRef = useRef<HTMLDivElement>();
+
   const { postWrite } = useSelector((state: RootState) => ({
     postWrite: state.postUI.postWrite,
   }))
@@ -45,7 +47,8 @@ const EditContainer = ({ postData, editMode, resId }: EditContainerProps) => {
       contentMd: postWrite.mdValue,
       date: uploadDate,
       imgUrl: postWrite.imgUrl,
-      id: postData.data.id
+      id: postData.data.id,
+  		subTitle: postWrite.subTitle,
     }
     //img upload작업  eslint-plugin-react-hook
     console.log(dataForUpload);
@@ -70,13 +73,19 @@ const EditContainer = ({ postData, editMode, resId }: EditContainerProps) => {
     }
   }, [dispatch]);
 
+
   useEffect(() => {
-    const { rawContent, contentMd, imgUrl, title } = postData.data
+    mdRef.current.scrollTo(0, mdRef.current.scrollHeight);
+  }, [postWrite.inputValue])
+
+  useEffect(() => {
+    const { rawContent, contentMd, imgUrl, title, subTitle } = postData.data
     dispatch(setInputValues({
       title,
       inputValue: rawContent,
       mdValue:contentMd,
-      imgUrl 
+      imgUrl, 
+      subTitle 
     }));
     return () => {
       dispatch(resetInputValue());
@@ -88,7 +97,7 @@ const EditContainer = ({ postData, editMode, resId }: EditContainerProps) => {
       <TagAndImg reqGetImgUrl={reqGetImgUrl} />
       <EditBox>
         <Editor inputValue={postWrite.inputValue} onChange={handleChange} />
-        <Preview inputValue={postWrite.inputValue} onChange={handleConv} />
+        <Preview inputValue={postWrite.inputValue} mdRef={mdRef} onChange={handleConv} />
       </EditBox>
     </>
   ); 

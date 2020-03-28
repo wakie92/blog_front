@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useRef, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
@@ -19,6 +19,7 @@ type WriteContainerProps = {
 
 const WriteContainer = ({ getInitList }: WriteContainerProps) => {
   const dispatch = useDispatch();
+  const mdRef = useRef<HTMLDivElement>();
   const { postWrite } = useSelector((state: RootState) => ({
     postWrite: state.postUI.postWrite,
   }))
@@ -43,7 +44,8 @@ const WriteContainer = ({ getInitList }: WriteContainerProps) => {
       contentMd: postData.mdValue,
       date: uploadDate,
       imgUrl: postWrite.imgUrl,
-      id: getInitList.data[0].id + 1
+      id: getInitList.data[0].id + 1,
+  		subTitle: postWrite.subTitle,
     }
     console.log(dataForUpload);
     //img upload작업  eslint-plugin-react-hook
@@ -70,20 +72,24 @@ const WriteContainer = ({ getInitList }: WriteContainerProps) => {
   }, [dispatch]);
 
   useEffect(() => {
+    mdRef.current.scrollTo(0, mdRef.current.scrollHeight);
+  }, [postWrite.inputValue])
+
+  useEffect(() => {
     return () => {
       dispatch(resetInputValue());
     }
   }, []);
   console.log(postWrite.inputValue);
   return (
-    <>
-      <Head onUpload={onUpload} postWrite={postWrite} onChange={handleChange} reqImgUpload={reqImgUpload} />
-      <TagAndImg reqGetImgUrl={reqGetImgUrl} />
-      <EditBox>
+    <EditBox> 
+      <EditPart>
+        <Head onUpload={onUpload} postWrite={postWrite} onChange={handleChange} reqImgUpload={reqImgUpload} />
+        <TagAndImg reqGetImgUrl={reqGetImgUrl} />
         <Editor inputValue={postWrite.inputValue} onChange={handleChange} />
-        <Preview inputValue={postWrite.inputValue} onChange={handleConv} />
-      </EditBox>
-    </>
+      </EditPart>
+      <Preview inputValue={postWrite.inputValue} mdRef={mdRef} onChange={handleConv} />
+    </EditBox>
   ); 
 }
 
@@ -93,3 +99,8 @@ const EditBox = styled.div`
   height: 94rem;
   justify-content: space-between;
 `;
+
+const EditPart = styled.div`
+	width: calc(50% - 1.6rem);
+
+`
