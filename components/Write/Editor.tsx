@@ -12,7 +12,7 @@ export default React.memo(function Editor({ inputValue, onChange }: EditorProps)
 }, (preProps, nextProps) => preProps.inputValue === nextProps.inputValue);
 
 const TextArea = styled.textarea`
-	width: calc(50% - 1.6rem);
+	width: calc(100% - 1.6rem);
 	height: calc(100% - 1.6rem);
 	font-size: 1.6rem;
 	padding: 0.8rem;
