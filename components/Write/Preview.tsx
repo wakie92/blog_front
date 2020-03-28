@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, createRef } from 'react';
 import styled from 'styled-components';
 import showdown from 'showdown';
 import '../../lib/styles/github-markdown.css';
@@ -6,14 +6,18 @@ import '../../lib/styles/github-markdown.css';
 interface PreviewProps {
   inputValue: string;
   onChange: (html: string) => void;
+  mdRef: React.RefObject<HTMLDivElement>;
 }
-export default function Preview({ inputValue, onChange }: PreviewProps) {
+export default function Preview({ inputValue, mdRef, onChange }: PreviewProps) {
   const converter = new showdown.Converter();
+
   const html = converter.makeHtml(inputValue);
   useEffect(() => {
     onChange(html);
-  }, [html])
-  return <Wrapper>
+  }, [html]);
+
+ 
+  return <Wrapper ref={mdRef}>
     <div className='markdown-body' dangerouslySetInnerHTML={{ __html: html }}>
 
     </div>
