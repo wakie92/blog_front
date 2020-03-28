@@ -10,11 +10,13 @@ export const getValue = createAction(INPUT_VALUE, ({ name, value }: updateKey) =
 }))<updateKey>();
 
 export const resetInputValue = createAction(RESET_INPUT_VALUE)<null>();
-export const setInputValues = createAction(SET_INPUT_VALUES, ({ title, inputValue, mdValue, imgUrl }: PostWrite) => ({
+export const setInputValues = createAction(SET_INPUT_VALUES, 
+	({ title, inputValue, mdValue, imgUrl, subTitle }: PostWrite) => ({
 	title,
 	inputValue,
 	mdValue,
-	imgUrl
+	imgUrl,
+	subTitle
 }))<PostWrite>();
 
 const actions = {
@@ -30,6 +32,7 @@ export type PostWrite = {
 	inputValue: string;
 	mdValue: string;
 	imgUrl: string | null;
+	subTitle: string;
 };
 
 export type PostState = {
@@ -41,6 +44,7 @@ const initialState: PostState = {
 		title: '',
 		inputValue: '',
 		mdValue: '',
+		subTitle:'',
 		imgUrl: null
 	}
 };
@@ -59,6 +63,7 @@ const post = createReducer<PostState, PostActions>(initialState, {
 				title: '',
 				inputValue: '',
 				mdValue: '',
+				subTitle:'',
 				imgUrl: null
 			}
 		};

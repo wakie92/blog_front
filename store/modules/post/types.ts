@@ -18,6 +18,7 @@ export type Post = {
   imgUrl?: null | string;
   contentMd: string;
   rawContent: string;
+  subTitle: string;
 };
 
 export type PostState = {
