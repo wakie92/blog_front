@@ -14,8 +14,9 @@ type HeaderProps = {
   onLoginModal: () => void;
   handleToggle: () => void;
   toggle: boolean;
+  isLogged: boolean;
 }
-const Header = ({ onLoginModal, handleToggle, toggle }: HeaderProps) => {
+const Header = ({ onLoginModal, handleToggle, toggle, isLogged }: HeaderProps) => {
   return (
     <>
       <Wrapper aColor={colors.violet9} breakpoints={breakpoints}>
@@ -29,18 +30,6 @@ const Header = ({ onLoginModal, handleToggle, toggle }: HeaderProps) => {
             <Link href={ROUTES.about}>
               <a>
                 <span>About</span>
-              </a>
-            </Link>
-            <Link href={ROUTES.devBlog}>
-              <a>
-                <span>Development</span>
-                <ul className="bolg-category">
-                  <li>Web</li>
-                  <li>Javascript</li>
-                  <li>React</li>
-                  <li>Node</li>
-                  <li>Html/css</li>
-                </ul>
               </a>
             </Link>
             <Link href={ROUTES.write}>
@@ -63,12 +52,9 @@ const Header = ({ onLoginModal, handleToggle, toggle }: HeaderProps) => {
             </Link>
             <Link href={ROUTES.write}>
               <a>
-                <span>GitHub</span>
+                <span>write</span>
               </a>
             </Link>
-            <a onClick={onLoginModal}>
-              <span>Facebook</span>
-            </a>
           </nav>
         </div>
       </Wrapper>

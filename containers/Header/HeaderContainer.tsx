@@ -6,7 +6,7 @@ import { RootState } from "../../store/modules";
 
 const HeaderContainer = () => {
   const { isLogged } = useSelector((state: RootState) => ({
-    isLogged: state.loginUI.isLogged
+    isLogged: state.loginUI.isLogged,
   }))
   const [toggle, setToggle] = useState(false);
 
@@ -25,7 +25,12 @@ const HeaderContainer = () => {
   }, [toggle]);
   console.log(isLogged);
   return (
-    <Header onLoginModal={onLoginModal} toggle={toggle} handleToggle={handleToggle} />
+    <Header 
+      onLoginModal={onLoginModal} 
+      isLogged={isLogged} 
+      toggle={toggle} 
+      handleToggle={handleToggle} 
+    />
   )
 }
 export default HeaderContainer;
