@@ -19,6 +19,7 @@ export type Post = {
   contentMd: string;
   rawContent: string;
   subTitle: string;
+  tagArr: string[];
 };
 
 export type PostState = {

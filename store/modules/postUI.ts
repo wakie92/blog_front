@@ -4,6 +4,9 @@ import { createAction, ActionType, createReducer } from 'typesafe-actions';
 const SET_INPUT_VALUES = 'post/SET_INPUT_VALUES';
 const INPUT_VALUE = 'post/INPUT_VALUE';
 const RESET_INPUT_VALUE = 'post/RESET_INPUT_VALUE';
+const ADD_TAG_ARR = 'post/ADD_TAG_ARR';
+
+export const addTagArr = createAction(ADD_TAG_ARR)<null>();
 export const getValue = createAction(INPUT_VALUE, ({ name, value }: updateKey) => ({
 	name,
 	value
@@ -23,6 +26,7 @@ const actions = {
 	getValue,
 	resetInputValue,
 	setInputValues,
+	addTagArr,
 };
 
 export type PostActions = ActionType<typeof actions>;
@@ -31,8 +35,10 @@ export type PostWrite = {
 	title: string;
 	inputValue: string;
 	mdValue: string;
-	imgUrl: string | null;
+	imgUrl: null | string;
 	subTitle: string;
+	tagArr: string[] ;
+	tag: string;
 };
 
 export type PostState = {
@@ -45,7 +51,9 @@ const initialState: PostState = {
 		inputValue: '',
 		mdValue: '',
 		subTitle:'',
-		imgUrl: null
+		imgUrl: null,
+		tagArr: [],
+		tag: '',
 	}
 };
 
@@ -64,7 +72,9 @@ const post = createReducer<PostState, PostActions>(initialState, {
 				inputValue: '',
 				mdValue: '',
 				subTitle:'',
-				imgUrl: null
+				imgUrl: null,
+				tagArr: [],
+				tag: ''
 			}
 		};
 	},
@@ -76,6 +86,19 @@ const post = createReducer<PostState, PostActions>(initialState, {
 				[name]: value
 			}
 		};
+	},
+	[ADD_TAG_ARR]: (state, action) => {
+		const{ tagArr, tag } = state.postWrite
+		const addTagArr = tagArr.concat(tag.replace(',', ''));
+		console.log(addTagArr);
+		return {
+			...state,
+			postWrite: {
+				...state.postWrite,
+				tagArr: addTagArr,
+				tag: '',
+			}
+		}
 	}
 });
 
