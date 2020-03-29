@@ -14,9 +14,9 @@ const PostList = ({ postsList, onGetPost }: PostListsProps) => {
   const list = data.map(item => (
     <PostComponent
       title={item.title}
-      preContent={item.content}
+      preContent={item.subTitle}
       date={item.date}
-      id={item.id}
+      tagArr={item.tagArr}
       imgUrl={item.imgUrl}
       onClick={() => onGetPost(item.id)}
       key={`card-${String(item.date)}-${item.title}`}

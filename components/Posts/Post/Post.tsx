@@ -4,6 +4,8 @@ import styled from '@emotion/styled';
 import showdown from 'showdown';
 import { colors } from '../../../lib/styles/global';
 import { formatDate } from '../../../lib/Utils/utils';
+import Maybe from '../../Maybe/Maybe';
+import Tags from './Tags';
 
 export type PostProps = {
 	title: string;
@@ -11,11 +13,9 @@ export type PostProps = {
 	date: string;
 	onClick?: () => void;
 	imgUrl?: string;
-	id: number;
+	tagArr: string[];
 };
-const COMMENT_SVG = '/svg/iconmonstr-speech-bubble-comment-thin.svg';
-export default function Post({ title, preContent, date, onClick, imgUrl, id }: PostProps) {
-	const pre = `${preContent.substring(0, 150)}...`;
+export default function Post({ title, preContent, date, onClick, imgUrl, tagArr }: PostProps) {
 	return (
 		<WrpperProps onClick={onClick} imgUrl={imgUrl} dateColor={colors.gray4}>
 			<div className="image-container">
@@ -26,9 +26,12 @@ export default function Post({ title, preContent, date, onClick, imgUrl, id }: P
 					<h3 className="title" onClick={onClick}>
 						{title}
 					</h3>
+					<Maybe isVisible={tagArr}>
+						<Tags tagArr={tagArr} />
+					</Maybe>
 					<span className="date">{formatDate(date)}</span>
 				</div>
-				<div className="pre-content">{pre}</div>
+				<div className="pre-content">{preContent}</div>
 			</div>
 		</WrpperProps>
 	);
@@ -51,6 +54,13 @@ const WrpperProps = (props) => (
 						max-height: 11.5rem;
 						overflow: hidden;
 						word-break: break-all;
+					}
+					.tags {
+						border-radius: 1.6rem;
+						background-color: #ccc;
+						margin: 0.5rem;
+						padding: 0.5rem;
+						line-height: 1.5;
 					}
 					.date {
 						color: ${props.dateColor};
