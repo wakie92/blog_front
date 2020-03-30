@@ -23,7 +23,7 @@ export default function Post({ title, preContent, date, onClick, imgUrl, tagArr 
 			</div>
 			<div className="li-article">
 				<div className="post-info">
-					<h3 className="title" onClick={onClick}>
+					<h3 className="title">
 						{title}
 					</h3>
 					<Maybe isVisible={tagArr}>
@@ -39,6 +39,7 @@ export default function Post({ title, preContent, date, onClick, imgUrl, tagArr 
 
 const WrpperProps = (props) => (
 	<li
+		onClick={props.onClick}
 		css={css`
 			border-radius: 4px;
 			box-shadow: 0px 4px 8px 8px rgba(0, 0, 0, 0.05);

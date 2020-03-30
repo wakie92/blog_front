@@ -25,10 +25,13 @@ const post = createReducer<PostState, PostActions>(initialState, {
 		...state,
 		postsList: asyncState.loading()
 	}),
-	[GET_POSTS_LIST_SUCCESS]: (state, action) => ({
+	[GET_POSTS_LIST_SUCCESS]: (state, action) => {
+		console.log('actions')
+		console.log(action.payload);
+		return {
 		...state,
 		postsList: asyncState.success(action.payload)
-	}),
+	}},
 	[GET_POSTS_LIST_ERROR]: (state, action) => ({
 		...state,
 		postsList: asyncState.error(action.payload)

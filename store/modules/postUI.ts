@@ -14,12 +14,14 @@ export const getValue = createAction(INPUT_VALUE, ({ name, value }: updateKey) =
 
 export const resetInputValue = createAction(RESET_INPUT_VALUE)<null>();
 export const setInputValues = createAction(SET_INPUT_VALUES, 
-	({ title, inputValue, mdValue, imgUrl, subTitle }: PostWrite) => ({
+	({ title, inputValue, mdValue, imgUrl, subTitle, tagArr, tag }: PostWrite) => ({
 	title,
 	inputValue,
 	mdValue,
 	imgUrl,
-	subTitle
+	tagArr,
+	subTitle,
+	tag
 }))<PostWrite>();
 
 const actions = {

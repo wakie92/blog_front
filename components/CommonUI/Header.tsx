@@ -9,6 +9,7 @@ import { breakpoints } from '../../lib/styles/responsive';
 import { getLoginModal } from '../../store/modules/loginUI';
 import LoginContainer from '../../containers/Login/LoginContainer';
 import { loginPopup, logoutFn } from '../../lib/Utils/utils';
+import Maybe from '../Maybe/Maybe';
 
 type HeaderProps = {
   onLoginModal: () => void;
@@ -32,16 +33,6 @@ const Header = ({ onLoginModal, handleToggle, toggle, isLogged }: HeaderProps) =
                 <span>About</span>
               </a>
             </Link>
-            <Link href={ROUTES.write}>
-              <a>
-                <span>GitHub</span>
-              </a>
-            </Link>
-            <Link href={ROUTES.about}>
-              <a>
-                <span>Facebook</span>
-              </a>
-            </Link>
           </SmallNav>
           <Hamburger toggle={toggle} onToggle={handleToggle} />
           <nav className="nav">
@@ -50,11 +41,15 @@ const Header = ({ onLoginModal, handleToggle, toggle, isLogged }: HeaderProps) =
                 <span>About</span>
               </a>
             </Link>
-            <Link href={ROUTES.write}>
-              <a>
-                <span>write</span>
-              </a>
-            </Link>
+            <Maybe isVisible={isLogged}>
+              <>
+                <Link href={ROUTES.write}>
+                  <a>
+                    write
+                  </a>
+                </Link>
+              </>
+            </Maybe>
           </nav>
         </div>
       </Wrapper>

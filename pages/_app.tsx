@@ -1,4 +1,4 @@
-import App from 'next/app';
+import App, { AppProps, AppContext } from 'next/app';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { Provider } from 'react-redux';
 import { createStore, Store, applyMiddleware } from 'redux';
@@ -7,7 +7,6 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import withRedux from 'next-redux-wrapper';
 import Layout from '../components/CommonUI/Layout';
 import Header from '../components/CommonUI/Header';
-import { colors } from '../lib/styles/global';
 import rootReducer, { rootSaga } from '../store/modules';
 
 // styles/global.js
@@ -33,7 +32,7 @@ class MyApp extends App<IProps> {
     const token = JSON.parse(sessionStorage.getItem("idToken"));
     this.setState({token});
   }
-  static async getInitialProps({ Component, ctx }) {
+  static async getInitialProps({ Component, ctx}: AppContext) {
     const pageProps = Component.getInitialProps
     ? await Component.getInitialProps(ctx)
     : {};

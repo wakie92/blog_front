@@ -10,18 +10,24 @@ interface PreviewProps {
 }
 export default function Preview({ inputValue, mdRef, onChange }: PreviewProps) {
   const converter = new showdown.Converter();
-
+  console.log(inputValue);
   const html = converter.makeHtml(inputValue);
   useEffect(() => {
     onChange(html);
   }, [html]);
 
  
-  return <Wrapper ref={mdRef}>
-    <div className='markdown-body' dangerouslySetInnerHTML={{ __html: html }}>
+  return (
+    <>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+			<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/vs2015.min.css" />
+      <script>hljs.initHighlightingOnLoad();</script>  
+      <Wrapper ref={mdRef}>
+        <div className='markdown-body' dangerouslySetInnerHTML={{ __html: html }}>
 
-    </div>
-  </Wrapper>;
+        </div>
+      </Wrapper>
+  </>);
 }
 
 const Wrapper = styled.div`

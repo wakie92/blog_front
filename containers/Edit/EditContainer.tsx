@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { Editor, Head, Preview } from '../../components/Write';
 import { RootState } from '../../store/modules';
-import { getValue, resetInputValue, setInputValues } from '../../store/modules/postUI';
+import { getValue, resetInputValue, setInputValues, addTagArr } from '../../store/modules/postUI';
 import { ROUTES } from '../../lib/Routes/Routes';
 import { removeExp } from '../../lib/Utils/utils';
 import { AxiosError } from 'axios';
@@ -12,6 +12,7 @@ import { Post, postAsync, putPostAsync } from '../../store/modules/post';
 import { AsyncState } from '../../lib/Utils/asyncUtils';
 import { addPhoto } from '../../lib/Utils/S3';
 import TagAndImg from '../../components/Write/TagAndImg';
+import SubTitleInput from '../../components/Write/SubTItleInput';
 
 type EditContainerProps = {
   postData: AsyncState<Post, AxiosError>;
@@ -33,6 +34,12 @@ const EditContainer = ({ postData, editMode, resId }: EditContainerProps) => {
     dispatch(getValue({ name, value }));
   }, [dispatch]);
 
+  const handleTags = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+    if(e.keyCode === 188 && postWrite.tag !== ',') {
+      dispatch(addTagArr());
+    }
+  }, [dispatch, postWrite.tag]);
+  
   const handleConv = useCallback((html: string) => {
     dispatch(getValue({ name: 'mdValue', value: html}));
   }, [dispatch]);
@@ -49,6 +56,7 @@ const EditContainer = ({ postData, editMode, resId }: EditContainerProps) => {
       imgUrl: postWrite.imgUrl,
       id: postData.data.id,
   		subTitle: postWrite.subTitle,
+      tagArr: postWrite.tagArr,
     }
     //img upload작업  eslint-plugin-react-hook
     console.log(dataForUpload);
@@ -79,13 +87,15 @@ const EditContainer = ({ postData, editMode, resId }: EditContainerProps) => {
   }, [postWrite.inputValue])
 
   useEffect(() => {
-    const { rawContent, contentMd, imgUrl, title, subTitle } = postData.data
+    const { rawContent, contentMd, imgUrl, title, subTitle, tagArr } = postData.data
     dispatch(setInputValues({
       title,
       inputValue: rawContent,
       mdValue:contentMd,
       imgUrl, 
-      subTitle 
+      subTitle,
+      tagArr,
+      tag: '', 
     }));
     return () => {
       dispatch(resetInputValue());
@@ -93,19 +103,30 @@ const EditContainer = ({ postData, editMode, resId }: EditContainerProps) => {
   }, []);
   return (
     <>
-      <Head onUpload={onUpload} postWrite={postWrite} onChange={handleChange} reqImgUpload={reqImgUpload} />
-      <TagAndImg reqGetImgUrl={reqGetImgUrl} />
       <EditBox>
-        <Editor inputValue={postWrite.inputValue} onChange={handleChange} />
+        <EditPart>
+          <Head onUpload={onUpload} postWrite={postWrite} onChange={handleChange} reqImgUpload={reqImgUpload} />
+          <SubTitleInput subTitle={postWrite.subTitle} onChange={handleChange} />
+          <TagAndImg
+            reqGetImgUrl={reqGetImgUrl}
+            tag={postWrite.tag}
+            tagArr={postWrite.tagArr}
+            onChange={handleChange}
+            onAddTag={handleTags}
+          />
+          <Editor inputValue={postWrite.inputValue} onChange={handleChange} />
+        </EditPart>
         <Preview inputValue={postWrite.inputValue} mdRef={mdRef} onChange={handleConv} />
-      </EditBox>
+		  </EditBox>
     </>
   ); 
 }
 
 export default EditContainer;
 const EditBox = styled.div`
-  display: flex;
-  height: 94rem;
-  justify-content: space-between;
+	display: flex;
+	height: 94rem;
+	justify-content: space-between;
 `;
+
+const EditPart = styled.div`width: calc(50% - 1.6rem);`;

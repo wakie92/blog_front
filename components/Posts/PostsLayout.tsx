@@ -42,10 +42,12 @@ const PostsLayout = ({ getInitList }: PostLayoutProps) => {
       throw e;
     }
   }, [dispatch])
+  console.log(getInitList);
+  console.log(postsList);
 
-  useEffect(() => {
-    reqGetPostsList();  
-  }, []);
+  // useEffect(() => {
+  //   reqGetPostsList();  
+  // }, []);
   return (
     <Layout breakpoints={breakpoints}>
       <h1>Development(전체글)</h1>

@@ -17,8 +17,8 @@ import { Post } from './types';
 
 const deletePostSaga = createAsyncSaga(deletePostAsync, DeletePost);
 const putPostSaga = createAsyncSaga(putPostAsync, PutPost);
-const getPostsListSaga = createAsyncSaga(getPostsListAsync, GetPostsList);
 const postUpdateSaga = createAsyncSaga(postAsync, PostUpdate);
+const getPostsListSaga = createAsyncSaga(getPostsListAsync, GetPostsList);
 const getPostSaga = createAsyncSaga(getPostAsync, GetPost);
 
 export function* updateSaga() {
