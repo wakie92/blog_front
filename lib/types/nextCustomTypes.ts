@@ -44,6 +44,6 @@ interface nextPageProps {
   AppTree: AppType;
 
   // 커스텀 항목 추가
-  store: Store<RootState>;
+  store: Store<RootState> | any;
   isServer: boolean;
 }
