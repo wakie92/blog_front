@@ -1,61 +1,69 @@
-import App, { AppProps, AppContext } from 'next/app';
+import App, { AppProps, AppContext, AppInitialProps } from 'next/app';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { Provider } from 'react-redux';
 import { createStore, Store, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import withRedux from 'next-redux-wrapper';
+import withReduxSaga from 'next-redux-saga';
 import Layout from '../components/CommonUI/Layout';
 import Header from '../components/CommonUI/Header';
 import rootReducer, { rootSaga } from '../store/modules';
-
+import configureStore from '../store/configureStore';
+import { useState, useEffect } from 'react';
+import Prism from "prismjs";
+import 'prismjs/themes/prism-okaidia.css';
+import 'prismjs/components/prism-jsx.min.js';
 // styles/global.js
 
-interface IProps {
-  store: Store;
-}
+type IProps = { store: Store } & AppInitialProps & AppContext
 
 // composeWithDevTools()
-const makeStore = () => {
-  const sagaMiddleware = createSagaMiddleware();
-  const middleware = [composeWithDevTools(), sagaMiddleware]
-  const store = createStore(rootReducer, applyMiddleware(sagaMiddleware) );
-  sagaMiddleware.run(rootSaga);
-  return store;
-};
+// const configureStore = () => {
+//   const sagaMiddleware = createSagaMiddleware();
+//   const middleware = [composeWithDevTools(), sagaMiddleware]
+//   const store = createStore(rootReducer,  applyMiddleware(sagaMiddleware) );
+//   // if (req || !isServer) {
+//     sagaMiddleware.run(rootSaga)
+//   // }
+//   return store;
+// };
+const MyApp2 = (props: IProps) => {
+  const { Component, pageProps, store } = props;
+  const [token, setToken] = useState(null);
 
-class MyApp extends App<IProps> {
-  state = {
-    token: null
-  }
-  componentDidMount() {
-    const token = JSON.parse(sessionStorage.getItem("idToken"));
-    this.setState({token});
-  }
-  static async getInitialProps({ Component, ctx}: AppContext) {
-    const pageProps = Component.getInitialProps
-    ? await Component.getInitialProps(ctx)
-    : {};
-    return { pageProps };
-  }
-  render() {
-    const { Component, pageProps, store } = this.props;
-    return (
-      <ThemeProvider theme={{ fontFamily: 'Noto Sans KR' }}>
-        {/* <Header /> */}
-        <Provider store={store}>
-          <Layout token={this.state.token}>
-            <Component {...pageProps} />
-          </Layout>
-        </Provider>
-        <>
-          <GlobalStyle />
-        </>
-      </ThemeProvider>
-    );
-  }
+  useEffect(() => {
+    const tokenData = JSON.parse(sessionStorage.getItem("idToken"));
+    setToken(tokenData);
+  }, []);
+  return (
+    <ThemeProvider theme={{ fontFamily: 'Noto Sans KR' }}>
+      {/* <Header /> */}
+      <Provider store={store}>
+        <Layout token={token}>
+          <Component {...pageProps} />
+        </Layout>
+      </Provider>
+      <>
+        <GlobalStyle />
+      </>
+    </ThemeProvider>
+  );
 }
-export default withRedux(makeStore)(MyApp);
+MyApp2.getInitialProps = async ({ Component, ctx }) => {
+  let pageProps = {}
+  console.log(Component.type);
+  console.log(ctx.isServer);
+  // 서버사이드에서 리덕스 연결 성공. 원인 공부
+    if (ctx.isServer) {
+      pageProps = await Component.getInitialProps(ctx)
+      console.log(pageProps)
+    }
+
+    return { pageProps }
+}
+
+export default withRedux(configureStore)(withReduxSaga(MyApp2));
 
 const GlobalStyle = createGlobalStyle`
   html {
