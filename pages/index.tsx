@@ -8,34 +8,32 @@ import { Store } from 'redux';
 import HeaderContainer from '../containers/Header/HeaderContainer';
 import { RootState } from '../store/modules';
 import { NextPageCustom } from '../lib/types/nextCustomTypes';
+import { useSelector } from 'react-redux';
+import LoadingPost from '../components/Posts/Post/LoadingPost';
 
 interface CustomerNextContextProps extends NextPage {
   store?: Store<RootState>
   }
 type homeType = {
-  getInitList: AsyncState<Post[], AxiosError>;
+  getInitList?: AsyncState<Post[], AxiosError>;
 };
-const Home: NextPageCustom<{}, homeType> = ({ getInitList }: homeType) => (
+const Home: NextPageCustom<homeType> = () => {
+  const { postsList } = useSelector(({ post }: RootState) => ({
+		postsList: post.postsList
+  }));
+  const renderPosts = postsList.loading ? <LoadingPost/> : <PostsLayout getInitList={postsList}/>;
+  return (
   <>
     <HeaderContainer />
-    <PostsLayout getInitList={getInitList} />
+    {renderPosts}
   </>
-);
+)};
 
 Home.getInitialProps = async ({ store, isServer }) => {
-  let getInitList:AsyncState<Post[], AxiosError> = asyncState.initial();
   console.log(store, isServer);
   if(isServer) {
-    console.log('-----------')
-    try {
-      await store.dispatch(getPostsListAsync.request(30));
-      getInitList = store.getState().post.postsList;
-      console.log(store.getState().post.postsList)
-    //   getInitList = asyncState.success(res);
-    } catch (error) {
-      getInitList = asyncState.error(error);
-    }
+    await store.dispatch(getPostsListAsync.request(30));
   }
-  return { getInitList };
+  return { };
 };
 export default Home;
