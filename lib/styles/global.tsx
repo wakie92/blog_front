@@ -11,4 +11,10 @@ export const colors = {
   gray8: '#343A40',
   gray9: '#212529',
   violet9: '#5f3dc4',
+  mainThemeColor: 'rgba(255, 255, 255, 0.88)',
+  whiteL1: '#c6cbd1',
+  whiteL2: '#dfe2e5',
+  whiteL3: '#f6f8fa',
+  whiteColor: '#1f1f1f',  
+  markdownCodeColor: '#c2cab9',
 };
