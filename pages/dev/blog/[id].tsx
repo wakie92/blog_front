@@ -1,19 +1,22 @@
 import { useState } from 'react';
 import Head from 'next/head'
 import { NextPage, NextPageContext } from 'next';
-import { Post } from '../../../store/modules/post';
+import { Post, getPostAsync } from '../../../store/modules/post';
 import { asyncState, AsyncState } from '../../../lib/Utils/asyncUtils';
 import { AxiosError } from 'axios';
 import { GetPost } from '../../../lib/api/apis';
 import EditContainer from '../../../containers/Edit/EditContainer';
 import Maybe from '../../../components/Maybe/Maybe';
 import BlogPostContainer from '../../../containers/BlogPost/BlogPostContainer';
+import { NextPageCustom } from '../../../lib/types/nextCustomTypes';
+import { setInputValues } from '../../../store/modules/postUI';
+import { RootState } from '../../../store/modules';
 
 type blogType = {
   postData: AsyncState<Post, AxiosError>;
   resId: string;
 };
-const PostComponent: NextPage = ({ postData, resId }: blogType) => {
+const PostComponent: NextPageCustom = ({ postData, resId }: blogType) => {
   const [editMode, setEditMode] = useState<boolean>(false);
  console.log(resId);
   return (
@@ -32,14 +35,29 @@ const PostComponent: NextPage = ({ postData, resId }: blogType) => {
   );
 };
 
-PostComponent.getInitialProps = async (ctx: NextPageContext) => {
-  const isServer: string = ctx.req ? 'server' : 'client';
+PostComponent.getInitialProps = async ({ store, isServer, query  }) => {
   let postData: AsyncState<Post, AxiosError> = asyncState.initial();
+  const posProps = store.getState().post.post.data;
   let resId = '';
-  const { id } = ctx.query;
-  console.log(postData);
+  const { id } = query;
+  if(isServer) {
+    await store.dispatch(getPostAsync.request(Number(id)));
+    
+    // store.dispatch(setInputValues({
+    //   title,
+    //   inputValue: rawContent,
+    //   mdValue:contentMd,
+    //   imgUrl, 
+    //   subTitle,
+    //   tagArr,
+    //   tag: '', 
+    // }));
+  }
   try {
     const res = await GetPost(Number(id));
+    console.log('******')
+    console.log(posProps);
+    console.log('******')
     resId = res.resId;
     console.log(res);
     postData = asyncState.success(res.res);

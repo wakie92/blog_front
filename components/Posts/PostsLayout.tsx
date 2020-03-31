@@ -1,67 +1,74 @@
-import styled from "styled-components";
-import { useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import PostComponent from "./Post/Post";
-import LoadingPost from "./Post/LoadingPost";
-import { breakpoints } from "../../lib/styles/responsive";
-import { RootState } from "../../store/modules";
-import { getPostsListAsync, Post, getPostAsync } from "../../store/modules/post";
-import { AxiosError } from "axios";
-import { AsyncState } from "../../lib/Utils/asyncUtils";
-import PostList from "./PostList/PostList";
-import Maybe from "../Maybe/Maybe";
-import { useRouter } from "next/router";
-import { ROUTES } from "../../lib/Routes/Routes";
-import { firebaseDB } from "../../config/init-firebase";
+import styled from 'styled-components';
+import { useEffect, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
+import { AxiosError } from 'axios';
+
+import PostComponent from './Post/Post';
+import LoadingPost from './Post/LoadingPost';
+import { breakpoints } from '../../lib/styles/responsive';
+import { RootState } from '../../store/modules';
+import { getPostsListAsync, Post, getPostAsync } from '../../store/modules/post';
+import { AsyncState } from '../../lib/Utils/asyncUtils';
+import PostList from './PostList/PostList';
+import Maybe from '../Maybe/Maybe';
+import { ROUTES } from '../../lib/Routes/Routes';
 
 type PostLayoutProps = {
-  getInitList?: AsyncState<Post[], AxiosError>
-}
+	getInitList?: AsyncState<Post[], AxiosError>;
+};
 
 const PostsLayout = ({ getInitList }: PostLayoutProps) => {
-  const { postsList } = useSelector(({ post }: RootState) => ({
-    postsList: post.postsList,
-  }));
-  const dispatch = useDispatch();
-  const router = useRouter();
+	const { postsList } = useSelector(({ post }: RootState) => ({
+		postsList: post.postsList
+	}));
+	const dispatch = useDispatch();
+	const router = useRouter();
 
-  const reqGetPostsList = useCallback(async () => {
-    try {
-      dispatch(getPostsListAsync.success(getInitList.data));
-    } catch (e) {
-      throw e;
-    }
-  }, [dispatch]);
+	const reqGetPostsList = useCallback(
+		async () => {
+			try {
+				dispatch(getPostsListAsync.success(getInitList.data));
+			} catch (e) {
+				throw e;
+			}
+		},
+		[ dispatch ]
+	);
 
-  const reqGetPost = useCallback((id: number) => {
-    try {
-      console.log(id);
-      dispatch(getPostAsync.request(id))
-      router.push(`${ROUTES.devBlog}/${id}`, `${ROUTES.devBlog}/${id}`);
-    } catch (e) {
-      throw e;
-    }
-  }, [dispatch])
-  console.log(getInitList);
-  console.log(postsList);
+	const reqGetPost = useCallback(
+		(id: number) => {
+			try {
+				console.log(id);
+				dispatch(getPostAsync.request(id));
+				router.push(`${ROUTES.devBlog}/${id}`, `${ROUTES.devBlog}/${id}`);
+			} catch (e) {
+				throw e;
+			}
+		},
+		[ dispatch ]
+	);
+	console.log(getInitList);
+	console.log(postsList);
 
-  // useEffect(() => {
-  //   reqGetPostsList();  
-  // }, []);
-  return (
-    <Layout breakpoints={breakpoints}>
-      <h1>Development(전체글)</h1>
-      <ul>
-        <Maybe isVisible={getInitList.loading}>
-          <LoadingPost />
-        </Maybe>
-        <PostList onGetPost = {reqGetPost} postsList={getInitList ? getInitList : postsList} />
-      </ul>
-    </Layout>
-  );
-}
+	// useEffect(() => {
+	//   reqGetPostsList();
+	// }, []);
+	return (
+		<Layout breakpoints={breakpoints}>
+			<h1>Development(전체글)</h1>
+			<ul>
+				<PostList onGetPost={reqGetPost} postsList={getInitList} />
+			</ul>
+		</Layout>
+	);
+};
+
 export default PostsLayout;
-const Layout = styled.main<{ breakpoints: object }>`
+const Layout =
+	styled.main <
+	{ breakpoints: object } >
+	`
   width: 90%;
   margin: auto;
   ul, li, ol {

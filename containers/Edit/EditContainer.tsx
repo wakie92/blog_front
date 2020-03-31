@@ -24,8 +24,9 @@ const EditContainer = ({ postData, editMode, resId }: EditContainerProps) => {
   const dispatch = useDispatch();
   const mdRef = useRef<HTMLDivElement>();
 
-  const { postWrite } = useSelector((state: RootState) => ({
+  const { postWrite, post } = useSelector((state: RootState) => ({
     postWrite: state.postUI.postWrite,
+    post: state.post.post,
   }))
   const router = useRouter();
 
@@ -88,6 +89,7 @@ const EditContainer = ({ postData, editMode, resId }: EditContainerProps) => {
 
   useEffect(() => {
     const { rawContent, contentMd, imgUrl, title, subTitle, tagArr } = postData.data
+    console.log(post);
     dispatch(setInputValues({
       title,
       inputValue: rawContent,

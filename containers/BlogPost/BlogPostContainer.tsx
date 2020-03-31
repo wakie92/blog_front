@@ -43,7 +43,7 @@ const BlogPostContainer = ({ postData, editMode, resId, setEditMode }: BlogPostP
 
   useEffect(() => {
     const { id } = router.query; 
-    reqGetPost(Number(id));
+    // reqGetPost(Number(id));
   }, [reqGetPost]);
   return (
     <>
