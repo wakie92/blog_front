@@ -11,9 +11,6 @@ import Header from '../components/CommonUI/Header';
 import rootReducer, { rootSaga } from '../store/modules';
 import configureStore from '../store/configureStore';
 import { useState, useEffect } from 'react';
-import Prism from "prismjs";
-import 'prismjs/themes/prism-okaidia.css';
-import 'prismjs/components/prism-jsx.min.js';
 // styles/global.js
 
 type IProps = { store: Store } & AppInitialProps & AppContext
@@ -52,12 +49,9 @@ const MyApp2 = (props: IProps) => {
 }
 MyApp2.getInitialProps = async ({ Component, ctx }) => {
   let pageProps = {}
-  console.log(Component.type);
-  console.log(ctx.isServer);
   // 서버사이드에서 리덕스 연결 성공. 원인 공부
     if (ctx.isServer) {
       pageProps = await Component.getInitialProps(ctx)
-      console.log(pageProps)
     }
 
     return { pageProps }

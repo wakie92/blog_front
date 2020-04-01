@@ -5,17 +5,7 @@ import '../../lib/styles/github-markdown.css';
 import { breakpoints } from '../../lib/styles/responsive';
 import Prism from "prismjs";
 import { colors } from '../../lib/styles/global';
-// import 'prismjs/themes/prism-okaidia.css';
-// import 'prismjs/components/prism-jsx.min.js';
-// let Prism = null;
-// const isBrowser = process.env.APP_ENV === 'browser';
-// if(isBrowser) {
-//   Prism = require('prismjs');
-//   require('prismjs/components/prism-bash.min.js');
-//   require('prismjs/components/prism-javascript.min.js');
-//   require('prismjs/components/prism-jsx.min.js');
-//   require('prismjs/components/prism-css.min.js');
-// }
+import 'prismjs/themes/prism-okaidia.css';
 
 interface PreviewProps {
   inputValue: string;
@@ -35,7 +25,7 @@ export default function Preview({ inputValue, mdRef, onChange }: PreviewProps) {
   return (
     <>
       <Wrapper ref={mdRef}>
-        <div className="md" dangerouslySetInnerHTML={{ __html: html }}>
+        <div className="markdown-body" dangerouslySetInnerHTML={{ __html: html }}>
 
         </div>
       </Wrapper>
