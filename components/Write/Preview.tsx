@@ -1,11 +1,11 @@
 import { useEffect, createRef } from 'react';
 import styled from 'styled-components';
 import showdown from 'showdown';
-import '../../lib/styles/github-markdown.css';
+// import '../../lib/styles/github-markdown.css';
 import { breakpoints } from '../../lib/styles/responsive';
 import Prism from "prismjs";
 import { colors } from '../../lib/styles/global';
-import 'prismjs/themes/prism-okaidia.css';
+// import 'prismjs/themes/prism-okaidia.css';
 
 interface PreviewProps {
   inputValue: string;

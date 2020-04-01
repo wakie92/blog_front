@@ -11,6 +11,8 @@ import Header from '../components/CommonUI/Header';
 import rootReducer, { rootSaga } from '../store/modules';
 import configureStore from '../store/configureStore';
 import { useState, useEffect } from 'react';
+// import '../lib/styles/prism.css';
+// import '../lib/styles/github-markdown.css';
 // styles/global.js
 
 type IProps = { store: Store } & AppInitialProps & AppContext
