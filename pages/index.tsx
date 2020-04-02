@@ -10,18 +10,14 @@ import { RootState } from '../store/modules';
 import { NextPageCustom } from '../lib/types/nextCustomTypes';
 import { useSelector } from 'react-redux';
 import LoadingPost from '../components/Posts/Post/LoadingPost';
+import PostListContainer from '../containers/Post/PostListContainer';
 
-interface CustomerNextContextProps extends NextPage {
-  store?: Store<RootState>
-  }
-type homeType = {
-  getInitList?: AsyncState<Post[], AxiosError>;
-};
-const Home: NextPageCustom<homeType> = () => {
+type homeType = {};
+const Home: NextPageCustom = () => {
   const { postsList } = useSelector(({ post }: RootState) => ({
 		postsList: post.postsList
   }));
-  const renderPosts = postsList.loading ? <LoadingPost/> : <PostsLayout getInitList={postsList}/>;
+  const renderPosts = postsList.loading ? <LoadingPost/> : <PostListContainer />;
   return (
   <>
     <HeaderContainer />
