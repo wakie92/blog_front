@@ -18,7 +18,6 @@ class NextHeadWithInlineCss extends Head {
           }}
         />
       ));
-      console.log(filtered);
       return filtered;
   }
 

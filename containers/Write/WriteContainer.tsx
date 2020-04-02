@@ -105,7 +105,7 @@ const WriteContainer = ({ getInitList }: WriteContainerProps) => {
 			dispatch(resetInputValue());
 		};
 	}, []);
-	console.log(postWrite);
+	console.log(getInitList);
 	return (
 		<EditBox>
 			<EditPart>
