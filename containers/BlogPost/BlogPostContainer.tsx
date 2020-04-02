@@ -12,43 +12,30 @@ import HeaderContainer from '../Header/HeaderContainer';
 import { RootState } from '../../store/modules';
 
 type BlogPostProps = {
-  postData: AsyncState<Post, AxiosError>;
   editMode: boolean;
-  resId: string;
   setEditMode: Dispatch<SetStateAction<boolean>>; 
 };
-const BlogPostContainer = ({ postData, editMode, resId, setEditMode }: BlogPostProps) => {
+const BlogPostContainer = ({ editMode, setEditMode }: BlogPostProps) => {
   const dispatch = useDispatch();
-  const router = useRouter();
-  const { isLogged } = useSelector((state: RootState) => ({
+  const { postData, isLogged } = useSelector(( state : RootState ) => ({
+    postData: state.post.post,
     isLogged: state.loginUI.isLogged
   }))
-  const reqGetPost = useCallback((id: number) => {
-    try {
-      console.log(id);
-      dispatch(getPostAsync.request(id));
-    } catch (e) { 
-      throw e;
-    }
-  }, [dispatch])
+  const router = useRouter();
 
   const reqDeletePost = useCallback((id: number) => {
     try {
-      dispatch(deletePostAsync.request(resId));
+      dispatch(deletePostAsync.request(postData.data.resId));
       router.push(ROUTES.home, ROUTES.home, { shallow: true })
     } catch (e) {
       throw e;
     }
   }, [dispatch]);
 
-  useEffect(() => {
-    const { id } = router.query; 
-    // reqGetPost(Number(id));
-  }, [reqGetPost]);
   return (
     <>
       <HeaderContainer />
-      <PostView isLogged={isLogged} reqDeletePost={reqDeletePost} postData={postData} editMode={editMode} setEditMode={setEditMode} />
+      <PostView isLogged={isLogged} reqDeletePost={reqDeletePost} postData={postData.data.res} editMode={editMode} setEditMode={setEditMode} />
       <Footer />
     </>
   )
