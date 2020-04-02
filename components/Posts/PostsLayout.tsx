@@ -15,60 +15,21 @@ import Maybe from '../Maybe/Maybe';
 import { ROUTES } from '../../lib/Routes/Routes';
 
 type PostLayoutProps = {
-	getInitList?: AsyncState<Post[], AxiosError>;
+	postsList?: AsyncState<Post[], AxiosError>;
 };
 
-const PostsLayout = ({ getInitList }: PostLayoutProps) => {
-	const { postsList } = useSelector(({ post }: RootState) => ({
-		postsList: post.postsList
-	}));
-	const dispatch = useDispatch();
-	const router = useRouter();
-
-	const reqGetPostsList = useCallback(
-		async () => {
-			try {
-				dispatch(getPostsListAsync.success(getInitList.data));
-			} catch (e) {
-				throw e;
-			}
-		},
-		[ dispatch ]
-	);
-
-	const reqGetPost = useCallback(
-		(id: number) => {
-			try {
-				console.log(id);
-				dispatch(getPostAsync.request(id));
-				router.push(`${ROUTES.devBlog}/${id}`, `${ROUTES.devBlog}/${id}`);
-			} catch (e) {
-				throw e;
-			}
-		},
-		[ dispatch ]
-	);
-	console.log(getInitList);
-	console.log(postsList);
-
-	// useEffect(() => {
-	//   reqGetPostsList();
-	// }, []);
-	return (
-		<Layout breakpoints={breakpoints}>
-			<h1>Development(전체글)</h1>
-			<ul>
-				<PostList onGetPost={reqGetPost} postsList={getInitList} />
-			</ul>
-		</Layout>
-	);
-};
+const PostsLayout = ({ postsList }: PostLayoutProps) => (
+	<Layout>
+		<h1>Development(전체글)</h1>
+		<ul>
+			<PostList postsList={postsList} />
+		</ul>
+	</Layout>
+)
 
 export default PostsLayout;
-const Layout =
-	styled.main <
-	{ breakpoints: object } >
-	`
+
+const Layout = styled.main`
   width: 90%;
   margin: auto;
   ul, li, ol {
