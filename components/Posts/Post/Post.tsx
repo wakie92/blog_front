@@ -6,6 +6,7 @@ import { colors } from '../../../lib/styles/global';
 import { formatDate } from '../../../lib/Utils/utils';
 import Maybe from '../../Maybe/Maybe';
 import Tags from './Tags';
+import { breakpoints } from '../../../lib/styles/responsive';
 
 export type PostProps = {
 	title: string;
@@ -46,10 +47,11 @@ const WrpperProps = (props) => (
 			cursor: pointer;
 			.li-article {
 				padding: 1rem 1.5rem;
-				height: ${props.imgUrl ? '29rem' : '41rem'};
+				height: ${props.imgUrl ? '29rem' : '47rem'};
 				padding-top: 2rem;
 				.post-info {
-					min-height: ${props.imgUrl ? '12rem' : '13rem'};
+					// min-height: ${props.imgUrl ? '12rem' : '13rem'};
+					min-height: 12rem;
 					border-bottom: 1px solid ${props.dateColor};
 					.title {
 						max-height: 11.5rem;
@@ -74,7 +76,7 @@ const WrpperProps = (props) => (
 					color: #868e96;
 					font-size: 1.5rem;
 					overflow: hidden;
-					height: ${props.imgUrl ? '5rem' : '20rem'};
+					max-height: ${props.imgUrl ? '15rem' : '32rem'};
 					line-height: 1.9;
 					word-break: break-word;
 				}
@@ -109,7 +111,37 @@ const WrpperProps = (props) => (
 					}
 				}
 			}
+			@media screen and (max-width: ${breakpoints.xlarge}) {
+				.image-container {
+					height: 15rem;
+				}
+				.li-article {
+					height: 22rem;
+				}
+			}
+			@media screen and (max-width: ${breakpoints.large}) {
+				.image-container {
+					// height: 15rem;
+					display: none;
+				}
+				.li-article {
+					height: 27rem;
+				}
+			}
+			@media screen and (max-width: ${breakpoints.medium}) {
+				.li-article {
+					height: 20rem;
+					.post-info {
+  					border-bottom: none;
+					}
+					.pre-content {
+						max-height: 6rem;
+					}
+				}
+			}
+			
 		`}
+
 	>
 		{props.children}
 	</li>
