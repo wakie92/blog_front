@@ -1,19 +1,12 @@
-import App, { AppProps, AppContext, AppInitialProps } from 'next/app';
+import {  AppContext, AppInitialProps } from 'next/app';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { Provider } from 'react-redux';
-import { createStore, Store, applyMiddleware } from 'redux';
-import createSagaMiddleware from 'redux-saga';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { Store } from 'redux';
 import withRedux from 'next-redux-wrapper';
 import withReduxSaga from 'next-redux-saga';
 import Layout from '../components/CommonUI/Layout';
-import Header from '../components/CommonUI/Header';
-import rootReducer, { rootSaga } from '../store/modules';
 import configureStore from '../store/configureStore';
 import { useState, useEffect } from 'react';
-// import '../lib/styles/prism.css';
-// import '../lib/styles/github-markdown.css';
-// styles/global.js
 
 type IProps = { store: Store } & AppInitialProps & AppContext
 
@@ -35,6 +28,7 @@ const MyApp2 = (props: IProps) => {
     const tokenData = JSON.parse(sessionStorage.getItem("idToken"));
     setToken(tokenData);
   }, []);
+  
   return (
     <ThemeProvider theme={{ fontFamily: 'Noto Sans KR' }}>
       {/* <Header /> */}
@@ -49,13 +43,13 @@ const MyApp2 = (props: IProps) => {
     </ThemeProvider>
   );
 }
-MyApp2.getInitialProps = async ({ Component, ctx }) => {
+MyApp2.getInitialProps = async ({ Component, ctx, sessionStorage }) => {
   let pageProps = {}
   // 서버사이드에서 리덕스 연결 성공. 원인 공부
-    if (ctx.isServer) {
-      pageProps = await Component.getInitialProps(ctx)
+  // console.log(ctx.req.cookies);
+  if (ctx.isServer) {
+    pageProps = await Component.getInitialProps(ctx)
     }
-
     return { pageProps }
 }
 

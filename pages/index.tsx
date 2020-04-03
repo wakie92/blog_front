@@ -1,10 +1,4 @@
-import { PostsLayout } from '../components/Posts';
-import { NextPage, NextPageContext } from 'next';
-import { getPostsListAsync, Post } from '../store/modules/post';
-import { GetPostsList } from '../lib/api/apis';
-import { asyncState, AsyncState } from '../lib/Utils/asyncUtils';
-import { AxiosError } from 'axios';
-import { Store } from 'redux';
+import { getPostsListAsync } from '../store/modules/post';
 import HeaderContainer from '../containers/Header/HeaderContainer';
 import { RootState } from '../store/modules';
 import { NextPageCustom } from '../lib/types/nextCustomTypes';
@@ -12,22 +6,16 @@ import { useSelector } from 'react-redux';
 import LoadingPost from '../components/Posts/Post/LoadingPost';
 import PostListContainer from '../containers/Post/PostListContainer';
 
-type homeType = {};
-const Home: NextPageCustom = () => {
-  const { postsList } = useSelector(({ post }: RootState) => ({
-		postsList: post.postsList
-  }));
-  const renderPosts = postsList.loading ? <LoadingPost/> : <PostListContainer />;
-  return (
+const Home: NextPageCustom = () => (
   <>
     <HeaderContainer />
-    {renderPosts}
+    <PostListContainer />
   </>
-)};
+);
 
 Home.getInitialProps = async ({ store, isServer }) => {
-  console.log(store, isServer);
   if(isServer) {
+    console.log('index');
     await store.dispatch(getPostsListAsync.request(30));
   }
   return { };
