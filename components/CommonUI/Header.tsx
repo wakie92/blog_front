@@ -1,53 +1,36 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import Link from 'next/link';
 import { ROUTES } from '../../lib/Routes/Routes';
 import { colors } from '../../lib/styles/global';
 import Hamburger from './Hamburger';
 import { breakpoints } from '../../lib/styles/responsive';
-import { getLoginModal } from '../../store/modules/loginUI';
-import LoginContainer from '../../containers/Login/LoginContainer';
-import { loginPopup, logoutFn } from '../../lib/Utils/utils';
 import Maybe from '../Maybe/Maybe';
 
 type HeaderProps = {
-  onLoginModal: () => void;
   handleToggle: () => void;
   toggle: boolean;
   isLogged: boolean;
 }
-const Header = ({ onLoginModal, handleToggle, toggle, isLogged }: HeaderProps) => {
+const Header = ({ handleToggle, toggle, isLogged }: HeaderProps) => {
   return (
     <>
       <Wrapper aColor={colors.violet9} breakpoints={breakpoints}>
         <div className="nav-box">
-          <Link href={ROUTES.home}>
-            <a>
+            <a href={ROUTES.home}>
               <span className="blog-name">건망증 개발자 기록지</span>
             </a>
-          </Link>
           <SmallNav toggle={toggle}>
-            <Link href={ROUTES.about}>
-              <a>
-                <span>About</span>
-              </a>
-            </Link>
+            <a href={ROUTES.about}>
+              <span>About</span>
+            </a>
           </SmallNav>
           <Hamburger toggle={toggle} onToggle={handleToggle} />
           <nav className="nav">
-            <Link href={ROUTES.about}>
-              <a>
-                <span>About</span>
-              </a>
-            </Link>
+            <a href={ROUTES.about}>
+              <span>About</span>
+            </a>
             <Maybe isVisible={isLogged}>
               <>
-                <Link href={ROUTES.write}>
-                  <a>
-                    write
-                  </a>
-                </Link>
+                <a href={ROUTES.write}>write</a>
               </>
             </Maybe>
           </nav>
