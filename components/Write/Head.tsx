@@ -11,13 +11,7 @@ type HeadProps = {
 		inputValue: string;
 		mdValue: string;
 	};
-	onUpload: (
-		postData: {
-			title: string;
-			inputValue: string;
-			mdValue: string;
-		}
-	) => void;
+	onUpload: () => void;
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	reqImgUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
 };
@@ -34,7 +28,7 @@ export default React.memo(function Head({reqImgUpload, postWrite, onUpload, onCh
 			<label htmlFor="file-upload">
 				<FiUpload className="svg-icon" />
 			</label>
-			<button type="button" onClick={() => onUpload(postWrite)}>
+			<button type="button" onClick={onUpload}>
 				작성하기
 			</button>
 		</Title>

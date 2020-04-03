@@ -1,12 +1,8 @@
 import { useEffect, createRef } from 'react';
 import styled from 'styled-components';
 import showdown from 'showdown';
-// import '../../lib/styles/github-markdown.css';
-import { breakpoints } from '../../lib/styles/responsive';
-import Prism from "prismjs";
-import { colors } from '../../lib/styles/global';
+import '../../lib/styles/githubMarkdown.css';
 import RenderMarkdownView from '../CommonUI/RenderMarkdownView';
-// import 'prismjs/themes/prism-okaidia.css';
 
 interface PreviewProps {
   inputValue: string;
@@ -19,17 +15,13 @@ export default function Preview({ inputValue, mdRef, onChange }: PreviewProps) {
   const html = converter.makeHtml(inputValue);
   useEffect(() => {
     onChange(html);
-    Prism.highlightAll();
   }, [html]);
 
  
   return (
     <>
       <Wrapper ref={mdRef}>
-      <RenderMarkdownView html={html} /> 
-        {/* <div className="markdown-body" dangerouslySetInnerHTML={{ __html: html }}>
-
-        </div> */}
+      <RenderMarkdownView html={inputValue} /> 
       </Wrapper>
   </>);
 }
