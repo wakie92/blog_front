@@ -3,34 +3,31 @@ import styled from 'styled-components';
 import { NextPage, NextPageContext } from 'next';
 import { AsyncState, asyncState } from '../lib/Utils/asyncUtils';
 import { AxiosError } from 'axios';
-import { Post } from '../store/modules/post';
+import { Post, getPostsListAsync } from '../store/modules/post';
 import { GetPostsList } from '../lib/api/apis';
+import { NextPageCustom } from '../lib/types/nextCustomTypes';
 
 type writeProps = {
-  getInitList: AsyncState<Post[], AxiosError>;
 };
 const Wrapper = styled.main`
   width: 100%;
   height: 100rem;
   margin: auto;
 `;
-const Write: NextPage = ({ getInitList }: writeProps) => {
+const Write: NextPageCustom = ({}: writeProps) => {
   return (
     <Wrapper>
-      <WriteContainer getInitList={getInitList} />
+      <WriteContainer />
     </Wrapper>
   );
 };
 
-Write.getInitialProps = async (ctx: NextPageContext) => {
-  let getInitList:AsyncState<Post[], AxiosError> = asyncState.initial();
-  try {
-    const res = await GetPostsList<Post>(30);
-    getInitList = asyncState.success(res);
-  } catch (error) {
-    getInitList = asyncState.error(error);
+Write.getInitialProps = async ({ store, isServer }) => {
+  if(isServer) {
+    console.log('write');
+    await store.dispatch(getPostsListAsync.request(30));
   }
-  return { getInitList };
+  return { };
 };
 
 export default Write;

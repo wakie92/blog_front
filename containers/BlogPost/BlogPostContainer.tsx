@@ -1,15 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useCallback, useEffect, useState, Dispatch, SetStateAction } from 'react';
-import { AxiosError } from 'axios';
+import { useCallback, Dispatch, SetStateAction } from 'react';
 import { useRouter } from 'next/router';
-import Header from '../../components/CommonUI/Header';
 import PostView from '../../components/Posts/PostView/PostView';
 import { getPostAsync, Post, deletePostAsync } from '../../store/modules/post';
-import { AsyncState } from '../../lib/Utils/asyncUtils';
 import Footer from '../../components/CommonUI/Footer';
 import { ROUTES } from '../../lib/Routes/Routes';
 import HeaderContainer from '../Header/HeaderContainer';
 import { RootState } from '../../store/modules';
+import { setInputValues } from '../../store/modules/postUI';
 
 type BlogPostProps = {
   editMode: boolean;
@@ -23,10 +21,10 @@ const BlogPostContainer = ({ editMode, setEditMode }: BlogPostProps) => {
   }))
   const router = useRouter();
 
-  const reqDeletePost = useCallback((id: number) => {
+  const reqDeletePost = useCallback(() => {
     try {
       dispatch(deletePostAsync.request(postData.data.resId));
-      router.push(ROUTES.home, ROUTES.home, { shallow: true })
+      router.back();
     } catch (e) {
       throw e;
     }
@@ -35,7 +33,13 @@ const BlogPostContainer = ({ editMode, setEditMode }: BlogPostProps) => {
   return (
     <>
       <HeaderContainer />
-      <PostView isLogged={isLogged} reqDeletePost={reqDeletePost} postData={postData.data.res} editMode={editMode} setEditMode={setEditMode} />
+      <PostView 
+        isLogged={isLogged} 
+        reqDeletePost={reqDeletePost} 
+        postData={postData} 
+        editMode={editMode} 
+        setEditMode={setEditMode} 
+      />
       <Footer />
     </>
   )

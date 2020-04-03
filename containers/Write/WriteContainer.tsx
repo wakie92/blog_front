@@ -1,5 +1,5 @@
 import React, { useRef, useCallback, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { Editor, Head, Preview } from '../../components/Write';
@@ -13,16 +13,16 @@ import { AsyncState } from '../../lib/Utils/asyncUtils';
 import { addPhoto } from '../../lib/Utils/S3';
 import TagAndImg from '../../components/Write/TagAndImg';
 import SubTitleInput from '../../components/Write/SubTItleInput';
+import EditorHeaderContainer from '../Common/EditorHeaderContainer';
 
-type WriteContainerProps = {
-	getInitList: AsyncState<Post[], AxiosError>;
-};
+type WriteContainerProps = {};
 
-const WriteContainer = ({ getInitList }: WriteContainerProps) => {
+const WriteContainer = ({}: WriteContainerProps) => {
 	const dispatch = useDispatch();
 	const mdRef = useRef<HTMLDivElement>();
-	const { postWrite } = useSelector((state: RootState) => ({
-		postWrite: state.postUI.postWrite
+	const { postWrite, postsList } = useSelector((state: RootState) => ({
+		postWrite: state.postUI.postWrite,
+    postsList: state.post.postsList,
 	}));
 	const router = useRouter();
 
@@ -34,12 +34,6 @@ const WriteContainer = ({ getInitList }: WriteContainerProps) => {
 		[ dispatch ]
 	);
 
-	const handleTags = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
-    if(e.keyCode === 188 && postWrite.tag !== ',') {
-      dispatch(addTagArr());
-    }
-  }, [dispatch, postWrite.tag]);
-  
 	const handleConv = useCallback(
 		(html: string) => {
 			dispatch(getValue({ name: 'mdValue', value: html }));
@@ -47,51 +41,31 @@ const WriteContainer = ({ getInitList }: WriteContainerProps) => {
 		[ dispatch ]
 	);
 
-	const onUpload = useCallback(
-		(postData) => {
-			const uploadDate = new Date().toISOString();
-			const withoutExp = removeExp(postData.inputValue);
-			const dataForUpload: Post = {
-				title: postData.title,
-				rawContent: postWrite.inputValue,
-				content: withoutExp,
-				contentMd: postData.mdValue,
-				date: uploadDate,
-				imgUrl: postWrite.imgUrl,
-				id: getInitList.data[0].id + 1,
-        subTitle: postWrite.subTitle,
-        tagArr: postWrite.tagArr,
-			};
-			console.log(dataForUpload);
-			//img upload작업  eslint-plugin-react-hook
-			const res = dispatch(postAsync.request(dataForUpload));
-			router.push(ROUTES.home, ROUTES.home, { shallow: true });
-		},
-		[ dispatch, postWrite ]
+	const onUpload = useCallback(async () => {
+		const uploadDate = new Date().toISOString();
+		const { title, inputValue, mdValue, imgUrl, subTitle, tagArr} = postWrite
+		const withoutExp = removeExp(inputValue);
+		const dataForUpload: Post = {
+			title: title,
+			rawContent: inputValue,
+			content: withoutExp,
+			contentMd: mdValue,
+			date: uploadDate,
+			imgUrl: imgUrl,
+			id: postsList.data[0].id + 1,
+       subTitle: subTitle,
+       tagArr: tagArr,
+		};
+		console.log(dataForUpload);
+		try {
+			dispatch(postAsync.request(dataForUpload));
+			Router.push(ROUTES.home, ROUTES.home, { shallow: true });
+		} catch (err) {
+			throw err;
+		}
+	},[ dispatch, postWrite ]
 	);
 
-	const reqImgUpload = useCallback(
-		async (e: React.ChangeEvent<HTMLInputElement>) => {
-			const bucketData: string | void = await addPhoto(e);
-			console.log(bucketData);
-			if (typeof bucketData === 'string') {
-				dispatch(getValue({ name: 'imgUrl', value: bucketData }));
-			}
-		},
-		[ dispatch ]
-	);
-
-	const reqGetImgUrl = useCallback(
-		async (e: React.ChangeEvent<HTMLInputElement>) => {
-			const bucketData: string | void = await addPhoto(e);
-			console.log(bucketData);
-			if (typeof bucketData === 'string') {
-				const imgMarkdown = `![](${bucketData})`;
-				dispatch(getValue({ name: 'inputValue', value: imgMarkdown }));
-			}
-		},
-		[ dispatch ]
-	);
 
 	useEffect(
 		() => {
@@ -105,19 +79,15 @@ const WriteContainer = ({ getInitList }: WriteContainerProps) => {
 			dispatch(resetInputValue());
 		};
 	}, []);
-	console.log(getInitList);
+	console.log(postWrite);
 	return (
 		<EditBox>
 			<EditPart>
-				<Head onUpload={onUpload} postWrite={postWrite} onChange={handleChange} reqImgUpload={reqImgUpload} />
-				<SubTitleInput subTitle={postWrite.subTitle} onChange={handleChange} />
-				<TagAndImg
-					reqGetImgUrl={reqGetImgUrl}
-					tag={postWrite.tag}
-					tagArr={postWrite.tagArr}
-					onChange={handleChange}
-					onAddTag={handleTags}
-				/>
+				<EditorHeaderContainer 
+          postWrite={postWrite}
+          onChange={handleChange}
+          onUpload={onUpload}
+        />
 				<Editor inputValue={postWrite.inputValue} onChange={handleChange} />
 			</EditPart>
 			<Preview inputValue={postWrite.inputValue} mdRef={mdRef} onChange={handleConv} />
