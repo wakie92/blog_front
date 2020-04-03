@@ -11,7 +11,7 @@ const CodeHighlighter = ({ value, language }: CodeHighlighterProps) => {
   console.log(value, language);
   return (
     <SyntaxHighlighter language={language} style={atomOneDark}>
-      {value}
+      {value === undefined ? '' : value}
     </SyntaxHighlighter>
   );
 };
