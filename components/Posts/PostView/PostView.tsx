@@ -1,64 +1,48 @@
+import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import { colors } from '../../../lib/styles/global';
+import { AxiosError } from 'axios';
+
 import { breakpoints } from '../../../lib/styles/responsive';
 import { Post } from '../../../store/modules/post';
 import { AsyncState } from '../../../lib/Utils/asyncUtils';
-import { AxiosError } from 'axios';
-import { formatDate } from '../../../lib/Utils/utils';
-// import '../../../lib/styles/githubMarkdown.css';
-// import '../../../lib/styles/prism.css';
-import Maybe from '../../Maybe/Maybe';
-import Button from '../../CommonUI/Button';
-import { Dispatch, SetStateAction } from 'react';
-import RenderMarkdownView from '../../CommonUI/RenderMarkdownView';
+import { PostHeader, PostContent } from '.';
 
 type PostViewProps = {
-  postData: Post;
+  postData: AsyncState<{
+    res: Post;
+    resId: string;
+}, AxiosError<any>>;
 	editMode: boolean;
 	isLogged: boolean;
-	setEditMode: Dispatch<SetStateAction<boolean>>;
-	reqDeletePost: (id: number) =>  void;
+  setEditMode: Dispatch<SetStateAction<boolean>>; 
+	reqDeletePost: () =>  void;
 };
 
-export default function PostView({ postData, isLogged, setEditMode, editMode, reqDeletePost }: PostViewProps) {
-	// const { data, loading, error } = postData;
-	console.log(postData);
-	// if (loading) return null;
+export default function PostView({ 
+	postData, 
+	isLogged, 
+	setEditMode, 
+	editMode, 
+	reqDeletePost 
+}: PostViewProps) {
+	const { loading } = postData;
+	const { date, title, imgUrl, rawContent, id } = postData.data.res;
+	if (loading) return null;
 	return (
 		<Layout>
 			<div className="wrapper">
-				<div className="reg-div">
-					<span className="reg-date">{formatDate(postData.date)}</span>
-					<Maybe isVisible={isLogged}>
-						<div className="">
-							<Button 
-								type="button" 
-								size="medium" 
-								bgColor={colors.gray1} 
-								onClick={() => setEditMode(!editMode)}
-							>
-								수정
-							</Button>
-							<Button 
-								type="button" 
-								size="medium" 
-								bgColor={colors.gray1} 
-								onClick={() => reqDeletePost(postData.id)}
-							>
-								삭제
-							</Button>
-						</div>
-					</Maybe>
-				</div>
-
-				<h1>{postData.title}</h1>
-				<hr />
-				<main>
-					<Maybe isVisible={postData.imgUrl}>
-						<img className="main-img" src={postData.imgUrl} alt="대표이미지" />
-					</Maybe>
-					<RenderMarkdownView html={postData.rawContent}/>
-				</main>
+				<PostHeader
+					date={date} 
+					isLogged={isLogged}
+					id={id}
+					setEditMode={setEditMode}
+					reqDeletePost={reqDeletePost}
+				/>
+				<PostContent
+					title={title}
+					imgUrl={imgUrl}
+					rawContent={rawContent}
+				/>
 			</div>
 		</Layout>
 	);
@@ -70,40 +54,7 @@ const Layout = styled.div`
 	min-height: 70rem;
 	padding: 2rem;
 	margin-top: 20rem;
-	hr {
-		width: 100%;
-		border: 1px solid ${colors.gray5};
-		margin: 2rem 0;
-	}
-	.reg-div {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		button {
-			font-family: inherit;
-		}
-	}
-	.reg-date {
-		color: ${colors.gray5};
-	}
-	.wrapper {
-		width: 100%;
-		main {
-			width: 90%;
-			margin: auto;
-			display: flex;
-			flex-direction: column;
-			.main-img {
-				margin: auto;
-				padding-bottom: 4rem;
-				max-height: 50rem;
-				max-width: 100%;
-			}
-		}
-	}
 	@media screen and (max-width: ${breakpoints.large}) {
 		width: calc(100% - 4rem);
-	}
-	@media screen and (max-width: ${breakpoints.medium}) {
 	}
 `;
