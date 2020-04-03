@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { FiImage } from 'react-icons/fi';
+import Tag from '../CommonUI/Tag';
 
 type TagAndImg = {
 	reqGetImgUrl: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -12,7 +13,7 @@ const TagAndImg = ({ reqGetImgUrl, tag, tagArr, onChange, onAddTag }: TagAndImg)
 	return (
 		<Wrapper>
       {tagArr.map((tagEle, index) => (
-        <Tags key={`${tagEle}_${index}`}>{tagEle}</Tags>
+        <Tag key={`${tagEle}_${index}`} tagString={tagEle} />
       ))}
       <input 
         className="tag-input" 
@@ -57,13 +58,6 @@ const Wrapper = styled.div`
 		padding-right: 1.8rem;
 		cursor: pointer;
 	}
-`;
-const Tags = styled.div`
-	border-radius: 1.6rem;
-	background-color: #ccc;
-	margin: 0.5rem;
-	padding: 0.5rem;
-	line-height: 1.5;
 `;
 
 export default TagAndImg;
