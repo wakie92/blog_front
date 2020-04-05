@@ -31,7 +31,6 @@ const MyApp2 = (props: IProps) => {
   
   return (
     <ThemeProvider theme={{ fontFamily: 'Noto Sans KR' }}>
-      {/* <Header /> */}
       <Provider store={store}>
         <Layout token={token}>
           <Component {...pageProps} />
@@ -46,7 +45,6 @@ const MyApp2 = (props: IProps) => {
 MyApp2.getInitialProps = async ({ Component, ctx, sessionStorage }) => {
   let pageProps = {}
   // 서버사이드에서 리덕스 연결 성공. 원인 공부
-  // console.log(ctx.req.cookies);
   if (ctx.isServer) {
     pageProps = await Component.getInitialProps(ctx)
     }

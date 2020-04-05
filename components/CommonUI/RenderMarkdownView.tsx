@@ -1,7 +1,4 @@
 import ReactMarkdown from 'react-markdown';
-import styled from 'styled-components';
-import { colors } from '../../lib/styles/global';
-import { breakpoints } from '../../lib/styles/responsive';
 import CodeHighlighter from './CodeHighlighter';
 import '../../lib/styles/prism.css';
 import '../../lib/styles/githubMarkdown.css';

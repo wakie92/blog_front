@@ -7,8 +7,7 @@ import { Post, getPostsListAsync } from '../store/modules/post';
 import { GetPostsList } from '../lib/api/apis';
 import { NextPageCustom } from '../lib/types/nextCustomTypes';
 
-type writeProps = {
-};
+type writeProps = {};
 const Wrapper = styled.main`
   width: 100%;
   height: 100rem;
@@ -24,7 +23,6 @@ const Write: NextPageCustom = ({}: writeProps) => {
 
 Write.getInitialProps = async ({ store, isServer }) => {
   if(isServer) {
-    console.log('write');
     await store.dispatch(getPostsListAsync.request(30));
   }
   return { };
