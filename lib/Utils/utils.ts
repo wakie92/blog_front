@@ -30,7 +30,9 @@ export const removeExp = (str: string) => {
 export const loginPopup = () => {
   firebase.auth().signInWithPopup(provider).then(function(result) {
     const token = JSON.stringify(result.credential.toJSON());
+    console.log(result);
     sessionStorage.setItem("idToken", token);
+    return result.user
   }).catch(function(error) {
     // Handle Errors here.
     const errorCode = error.code;
@@ -51,4 +53,11 @@ export const logoutFn = () => {
   }).catch(function(error) {
     // An error happened.
   });
+}
+
+export const checkUser = async () => {
+  const user = await firebase.auth().onAuthStateChanged(function(user) {
+    console.log(user);
+  });
+  return user;
 }

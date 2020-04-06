@@ -1,18 +1,8 @@
 import { Post, PutPostType } from './../../store/modules/post/types';
-import { Get } from './axios';
-import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 import { firebaseDB } from '../../config/init-firebase';
 
 const db = firebaseDB().firestore();
 const blogDB = db.collection("blogDB");
-
-const SERVER = 'http://localhost:4000';
-
-export const getLoginTest = async (config: AxiosRequestConfig) => {
-	const endpoint = `${SERVER}/users`;
-	const res: string = await Get<string>(endpoint, config);
-	return res;
-};
 
 export const GetPostsList = async <T>(cnt: number): Promise<T[]> => {
 	const query = blogDB.where("id", "<=", cnt).orderBy("id", "desc");

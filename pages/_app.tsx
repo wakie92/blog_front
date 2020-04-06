@@ -7,6 +7,7 @@ import withReduxSaga from 'next-redux-saga';
 import Layout from '../components/CommonUI/Layout';
 import configureStore from '../store/configureStore';
 import { useState, useEffect } from 'react';
+import { checkUser } from '../lib/Utils/utils';
 
 type IProps = { store: Store } & AppInitialProps & AppContext
 
@@ -24,9 +25,14 @@ const MyApp2 = (props: IProps) => {
   const { Component, pageProps, store } = props;
   const [token, setToken] = useState(null);
 
+  const test = async () => {
+    const user = await checkUser();
+    console.log(user);
+  }
   useEffect(() => {
     const tokenData = JSON.parse(sessionStorage.getItem("idToken"));
     setToken(tokenData);
+    test();
   }, []);
   
   return (

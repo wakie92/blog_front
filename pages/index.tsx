@@ -5,6 +5,7 @@ import { NextPageCustom } from '../lib/types/nextCustomTypes';
 import { useSelector } from 'react-redux';
 import LoadingPost from '../components/Posts/Post/LoadingPost';
 import PostListContainer from '../containers/Post/PostListContainer';
+import { checkUser } from '../lib/Utils/utils';
 
 const Home: NextPageCustom = () => (
   <>
@@ -16,6 +17,7 @@ const Home: NextPageCustom = () => (
 Home.getInitialProps = async ({ store, isServer }) => {
   if(isServer) {
     console.log('index');
+    await checkUser();
     await store.dispatch(getPostsListAsync.request(30));
   }
   return { };

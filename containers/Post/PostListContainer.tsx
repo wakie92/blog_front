@@ -1,7 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { AxiosError } from "axios";
-
+import * as firebase from  'firebase/app';
+import 'firebase/auth';
 import { AsyncState } from "../../lib/Utils/asyncUtils";
 import { Post, getPostsListAsync } from "../../store/modules/post";
 import { RootState } from "../../store/modules";
@@ -27,7 +28,6 @@ const PostListContainer = () => {
   useEffect(() => {
     !postsList.data && reqGetPostsList();
   }, [postsList]);
-  
   return (
     <PostsLayout postsList={postsList} />
   );
