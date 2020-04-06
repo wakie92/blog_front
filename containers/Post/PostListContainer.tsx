@@ -26,8 +26,10 @@ const PostListContainer = () => {
 	},[ dispatch ]);
 
   useEffect(() => {
-    !postsList.data && reqGetPostsList();
-  }, [postsList]);
+    // reqGetPostsList();
+	}, []);
+	
+	if (!postsList.data) return null;
   return (
     <PostsLayout postsList={postsList} />
   );

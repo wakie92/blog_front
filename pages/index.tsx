@@ -18,7 +18,7 @@ Home.getInitialProps = async ({ store, isServer }) => {
   if(isServer) {
     console.log('index');
     await checkUser();
-    await store.dispatch(getPostsListAsync.request(30));
+    // await store.dispatch(getPostsListAsync.request(30));
   }
   return { };
 };

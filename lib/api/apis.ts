@@ -5,6 +5,7 @@ const db = firebaseDB().firestore();
 const blogDB = db.collection("blogDB");
 
 export const GetPostsList = async <T>(cnt: number): Promise<T[]> => {
+	// const user = firebase.auth().currentUser
 	const query = blogDB.where("id", "<=", cnt).orderBy("id", "desc");
 	const response: T[] = await query.get().then((querySnapshot) => {
 			return querySnapshot.docs.map((data) => {

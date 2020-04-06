@@ -7,10 +7,11 @@ import Maybe from '../Maybe/Maybe';
 
 type HeaderProps = {
   handleToggle: () => void;
+  moveRouter: (url: string) => void;
   toggle: boolean;
   isLogged: boolean;
 }
-const Header = ({ handleToggle, toggle, isLogged }: HeaderProps) => {
+const Header = ({ handleToggle, toggle, isLogged, moveRouter }: HeaderProps) => {
   return (
     <>
       <Wrapper aColor={colors.violet9} breakpoints={breakpoints}>
@@ -24,16 +25,17 @@ const Header = ({ handleToggle, toggle, isLogged }: HeaderProps) => {
             </a>
           </SmallNav>
           <Hamburger toggle={toggle} onToggle={handleToggle} />
-          <nav className="nav">
-            <a href={ROUTES.about}>
+          <div className="nav">
+            <NavRouter onClick={() => moveRouter('about')}>About</NavRouter>
+            {/* <a href={ROUTES.about}>
               <span>About</span>
-            </a>
+            </a> */}
             <Maybe isVisible={isLogged}>
               <>
                 <a href={ROUTES.write}>write</a>
               </>
             </Maybe>
-          </nav>
+          </div>
         </div>
       </Wrapper>
     </>
@@ -84,6 +86,9 @@ const Wrapper = styled.header<{ aColor: string; breakpoints: object }>`
   }
 `;
 
+const NavRouter = styled.div`
+
+`;
 const SmallNav = styled.aside<{ toggle: boolean }>`
   display: flex;
   flex-direction: column;

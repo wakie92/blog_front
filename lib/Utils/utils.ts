@@ -56,8 +56,11 @@ export const logoutFn = () => {
 }
 
 export const checkUser = async () => {
-  const user = await firebase.auth().onAuthStateChanged(function(user) {
-    console.log(user);
-  });
+  const user = await firebase.auth().currentUser;
+  console.log(user);
   return user;
+}
+
+export const loginEmail = (email: string, password: string) => {
+  firebase.auth().signInWithEmailAndPassword(email, password)
 }

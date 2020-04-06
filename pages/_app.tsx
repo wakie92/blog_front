@@ -25,14 +25,9 @@ const MyApp2 = (props: IProps) => {
   const { Component, pageProps, store } = props;
   const [token, setToken] = useState(null);
 
-  const test = async () => {
-    const user = await checkUser();
-    console.log(user);
-  }
   useEffect(() => {
     const tokenData = JSON.parse(sessionStorage.getItem("idToken"));
     setToken(tokenData);
-    test();
   }, []);
   
   return (
@@ -52,6 +47,7 @@ MyApp2.getInitialProps = async ({ Component, ctx, sessionStorage }) => {
   let pageProps = {}
   // 서버사이드에서 리덕스 연결 성공. 원인 공부
   if (ctx.isServer) {
+    checkUser();
     pageProps = await Component.getInitialProps(ctx)
     }
     return { pageProps }

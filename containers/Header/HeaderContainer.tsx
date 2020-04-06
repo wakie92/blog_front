@@ -10,16 +10,23 @@ const HeaderContainer = () => {
   const { isLogged } = useSelector((state: RootState) => ({
     isLogged: state.loginUI.isLogged,
   }))
+  const router = useRouter();
   const [toggle, setToggle] = useState(false);
   
   const handleToggle = useCallback(() => {
     setToggle(!toggle);
   }, [toggle]);
+
+  const moveRouter = () => {
+    router.push(`${ROUTES.about}`, `${ROUTES.about}`);
+  };
+
   return (
     <Header 
       isLogged={isLogged} 
       toggle={toggle} 
-      handleToggle={handleToggle} 
+      handleToggle={handleToggle}
+      moveRouter={moveRouter} 
     />
   )
 }
