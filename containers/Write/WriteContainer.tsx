@@ -6,7 +6,7 @@ import { Editor, Head, Preview } from '../../components/Write';
 import { RootState } from '../../store/modules';
 import { getValue, resetInputValue, addTagArr } from '../../store/modules/postUI';
 import { ROUTES } from '../../lib/Routes/Routes';
-import { removeExp } from '../../lib/Utils/utils';
+import { removeExp, checkUser } from '../../lib/Utils/utils';
 import { AxiosError } from 'axios';
 import { Post, postAsync } from '../../store/modules/post';
 import { AsyncState } from '../../lib/Utils/asyncUtils';
@@ -77,6 +77,7 @@ const WriteContainer = ({}: WriteContainerProps) => {
 	useEffect(() => {
 		return () => {
 			dispatch(resetInputValue());
+			checkUser();
 		};
 	}, []);
 	console.log(postWrite);

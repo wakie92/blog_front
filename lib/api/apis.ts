@@ -9,7 +9,7 @@ export const GetPostsList = async <T>(cnt: number): Promise<T[]> => {
 	const query = blogDB.where("id", "<=", cnt).orderBy("id", "desc");
 	const response: T[] = await query.get().then((querySnapshot) => {
 			return querySnapshot.docs.map((data) => {
-				const ele: T = data.data() as T;
+				const ele: T = { ...data.data(), id: data.id } as unknown as T;
 				return ele;
 			});
 		}).catch((e) =>  console.log(e)) as T[];
@@ -36,12 +36,12 @@ export const PostUpdate = async (data: Post) => {
 	return response;
 };
 
-export const GetPost = async (index: number) => {
-	const query = blogDB.where("id", "==", index);
+export const GetPost = async (index: string) => {
+	const query = blogDB.doc(index);
 	const response = await query.get().then((doc) => {
 		return { 
-			res: doc.docs[0].data() as Post, 
-			resId: doc.docs[0].id 
+			res: { ...doc.data(), id: doc.id } as unknown as Post, 
+			resId: doc.id 
 		};
 	});
 	return response;	

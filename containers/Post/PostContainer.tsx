@@ -10,7 +10,7 @@ type PostContainerProps = {
 	preContent: string;
 	date: string;
   imgUrl?: string;
-  id: number;
+  id: string;
 	tagArr: string[];
 };
 
@@ -19,7 +19,7 @@ const PostContainer = ({ title, preContent, date, id, imgUrl, tagArr }: PostCont
 	const router = useRouter();
 
 	const reqGetPost = useCallback(
-		(id: number) => {
+		(id: string) => {
 			try {
 				console.log(id);
 				dispatch(getPostAsync.request(id));

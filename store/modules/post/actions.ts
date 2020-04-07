@@ -50,4 +50,4 @@ export const getPostAsync = createAsyncAction(
   GET_POST,
   GET_POST_SUCCESS,
   GET_POST_ERROR,
-)<number, {res: Post, resId: string}, AxiosError<string>>();
+)<string, {res: Post, resId: string}, AxiosError<string>>();

@@ -8,7 +8,7 @@ import { formatDate } from "../../../lib/Utils/utils";
 type PostHeaderProps = {
   date: string;
   isLogged: boolean;
-  id: number;
+  id: string;
   setEditMode: Dispatch<SetStateAction<boolean>>; 
 	reqDeletePost: () =>  void;
 }

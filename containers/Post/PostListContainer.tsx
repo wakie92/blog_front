@@ -8,6 +8,8 @@ import { Post, getPostsListAsync } from "../../store/modules/post";
 import { RootState } from "../../store/modules";
 import { useCallback, useEffect } from "react";
 import { PostsLayout } from "../../components/Posts";
+import { checkUser } from "../../lib/Utils/utils";
+import LoadingPost from "../../components/Posts/Post/LoadingPost";
 
 const limitCnt = 30;
 const PostListContainer = () => {
@@ -25,11 +27,12 @@ const PostListContainer = () => {
 		}
 	},[ dispatch ]);
 
-  useEffect(() => {
-    // reqGetPostsList();
-	}, []);
+  // useEffect(() => {
+	// 	console.log(checkUser());
+  //   reqGetPostsList();
+	// }, []);
 	
-	if (!postsList.data) return null;
+	if (!postsList.data) return <LoadingPost />;
   return (
     <PostsLayout postsList={postsList} />
   );

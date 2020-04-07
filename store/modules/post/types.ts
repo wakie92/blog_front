@@ -11,7 +11,7 @@ export type PutPostType = {
 export type PostActions = ActionType<typeof actions>;
 
 export type Post = {
-  id?: number;
+  id?: string;
   title: string;
   date: string;
   content: string;
