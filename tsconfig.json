@@ -14,7 +14,10 @@
     "target": "esnext",
     "jsx": "preserve",
     "allowSyntheticDefaultImports": true,
-    "lib": ["es6", "dom"],
+    "lib": [
+      "es6",
+      "dom"
+    ]
   },
   "exclude": [
     "node_modules"
@@ -22,6 +25,10 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx", "next.config.js", "config/init-firebase.ts", "store/configureStore.js"
+    "**/*.tsx",
+    "next.config.js",
+    "config/init-firebase.ts",
+    "store/configureStore.js",
+    "routes.js"
   ]
 }
