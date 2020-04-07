@@ -57,10 +57,21 @@ export const logoutFn = () => {
 
 export const checkUser = async () => {
   const user = await firebase.auth().currentUser;
+  console.log(user, ' checkUserAuth');
+  return user;
+}
+export const checkUserTest = async () => {
+  const user = await firebase.auth();
   console.log(user);
   return user;
 }
 
 export const loginEmail = (email: string, password: string) => {
-  firebase.auth().signInWithEmailAndPassword(email, password)
+  const result = firebase.auth()
+    .signInWithEmailAndPassword(email, password)
+    .then((res) => {
+      console.log(res);
+      return res
+  }).catch(err =>  console.log(err));
+  return result;
 }
