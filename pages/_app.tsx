@@ -47,7 +47,6 @@ MyApp2.getInitialProps = async ({ Component, ctx, sessionStorage }) => {
   let pageProps = {}
   // 서버사이드에서 리덕스 연결 성공. 원인 공부
   if (ctx.isServer) {
-    checkUser();
     pageProps = await Component.getInitialProps(ctx)
     }
     return { pageProps }

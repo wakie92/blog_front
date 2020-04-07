@@ -6,19 +6,25 @@ import { useSelector } from 'react-redux';
 import LoadingPost from '../components/Posts/Post/LoadingPost';
 import PostListContainer from '../containers/Post/PostListContainer';
 import { checkUser } from '../lib/Utils/utils';
+import { useEffect } from 'react';
 
-const Home: NextPageCustom = () => (
+const Home: NextPageCustom = () => {
+  
+  useEffect(() => {
+    checkUser();
+  }, [])
+  return (
   <>
     <HeaderContainer />
     <PostListContainer />
   </>
-);
+)};
 
 Home.getInitialProps = async ({ store, isServer }) => {
   if(isServer) {
     console.log('index');
     await checkUser();
-    // await store.dispatch(getPostsListAsync.request(30));
+    await store.dispatch(getPostsListAsync.request(30));
   }
   return { };
 };
