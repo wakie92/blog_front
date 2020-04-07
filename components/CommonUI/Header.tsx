@@ -4,6 +4,7 @@ import { colors } from '../../lib/styles/global';
 import Hamburger from './Hamburger';
 import { breakpoints } from '../../lib/styles/responsive';
 import Maybe from '../Maybe/Maybe';
+import router  from '../../routes';
 
 type HeaderProps = {
   handleToggle: () => void;
@@ -12,13 +13,16 @@ type HeaderProps = {
   isLogged: boolean;
 }
 const Header = ({ handleToggle, toggle, isLogged, moveRouter }: HeaderProps) => {
+  const { Link } = router;
   return (
     <>
       <Wrapper aColor={colors.violet9} breakpoints={breakpoints}>
         <div className="nav-box">
-            <a href={ROUTES.home}>
+          <Link route='/'>
+            <a>
               <span className="blog-name">건망증 개발자 기록지</span>
             </a>
+          </Link>
           <SmallNav toggle={toggle}>
             <a href={ROUTES.about}>
               <span>About</span>
@@ -26,10 +30,6 @@ const Header = ({ handleToggle, toggle, isLogged, moveRouter }: HeaderProps) => 
           </SmallNav>
           <Hamburger toggle={toggle} onToggle={handleToggle} />
           <div className="nav">
-            <NavRouter onClick={() => moveRouter('about')}>About</NavRouter>
-            {/* <a href={ROUTES.about}>
-              <span>About</span>
-            </a> */}
             <Maybe isVisible={isLogged}>
               <>
                 <a href={ROUTES.write}>write</a>
