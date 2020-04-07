@@ -14,6 +14,7 @@ const post: NextPageCustom = ({}: blogType) => {
   const { postData } = useSelector(( state : RootState ) => ({
     postData: state.post.post
   }))
+  console.log(postData);
   const { data } = postData;
   return (
     <>
@@ -34,7 +35,8 @@ const post: NextPageCustom = ({}: blogType) => {
 post.getInitialProps = async ({ store, isServer, query  }) => {
   const { id } = query;
   if(isServer) {
-    await store.dispatch(getPostAsync.request(Number(id)));
+    console.log(id);
+    await store.dispatch(getPostAsync.request(id as string));
   }
   return { };
 };
