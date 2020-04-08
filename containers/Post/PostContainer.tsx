@@ -21,7 +21,6 @@ const PostContainer = ({ title, preContent, date, id, imgUrl, tagArr }: PostCont
 	const reqGetPost = useCallback(
 		(id: string) => {
 			try {
-				console.log(id);
 				dispatch(getPostAsync.request(id));
 				router.push(`${ROUTES.devBlog}/${id}`, `${ROUTES.devBlog}/${id}`);
 			} catch (e) {

@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 const Home: NextPageCustom = () => {
   
   useEffect(() => {
+    console.log('index [useeffect]')
     checkUser();
   }, [])
   return (
@@ -22,8 +23,8 @@ const Home: NextPageCustom = () => {
 
 Home.getInitialProps = async ({ store, isServer }) => {
   if(isServer) {
-    console.log('index');
     await checkUser();
+    console.log('home');
     await store.dispatch(getPostsListAsync.request(30));
   }
   return { };

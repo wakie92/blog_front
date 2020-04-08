@@ -18,9 +18,9 @@ const Header = ({ handleToggle, toggle, isLogged, moveRouter }: HeaderProps) => 
     <>
       <Wrapper aColor={colors.violet9} breakpoints={breakpoints}>
         <div className="nav-box">
-          <Link route='/'>
-            <a>
-              <span className="blog-name">건망증 개발자 기록지</span>
+          <Link route='home'>
+            <a className="blog-name">
+              건망증 개발자 기록지
             </a>
           </Link>
           <SmallNav toggle={toggle}>

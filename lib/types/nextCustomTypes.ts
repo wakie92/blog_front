@@ -11,7 +11,7 @@ export type NextPageCustom<P = {}, IP = P> = {
   getInitialProps?(ctx: nextPageProps): Promise<IP>
 }
 
-interface nextPageProps {
+export interface nextPageProps {
   /**
    * Error object if encountered during rendering
    */

@@ -5,8 +5,7 @@ import '../../lib/styles/githubMarkdown.css';
 type RenderMarkdownViewProps = {
   html: string;
 }
-const RenderMarkdownView = ({ html }: RenderMarkdownViewProps) =>{
-  console.log(html);
+const RenderMarkdownView = ({ html }: RenderMarkdownViewProps) => {
   return (
     <div className="markdown-body">
       <ReactMarkdown 

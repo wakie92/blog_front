@@ -11,7 +11,6 @@ interface PreviewProps {
 }
 export default function Preview({ inputValue, mdRef, onChange }: PreviewProps) {
   const converter = new showdown.Converter();
-  console.log(inputValue);
   const html = converter.makeHtml(inputValue);
   useEffect(() => {
     onChange(html);

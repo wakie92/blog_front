@@ -8,7 +8,6 @@ type CodeHighlighterProps = {
   codeEl?: HTMLElement;
 }
 const CodeHighlighter = ({ value, language }: CodeHighlighterProps) => {
-  console.log(value, language);
   return (
     <SyntaxHighlighter language={language} style={atomOneDark}>
       {value === undefined ? '' : value}

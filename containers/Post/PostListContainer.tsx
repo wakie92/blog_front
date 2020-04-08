@@ -1,21 +1,16 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useRouter } from "next/router";
-import { AxiosError } from "axios";
-import * as firebase from  'firebase/app';
-import 'firebase/auth';
-import { AsyncState } from "../../lib/Utils/asyncUtils";
-import { Post, getPostsListAsync } from "../../store/modules/post";
-import { RootState } from "../../store/modules";
 import { useCallback, useEffect } from "react";
+import 'firebase/auth';
+import { getPostsListAsync } from "../../store/modules/post";
+import { RootState } from "../../store/modules";
 import { PostsLayout } from "../../components/Posts";
-import { checkUser } from "../../lib/Utils/utils";
-import LoadingPost from "../../components/Posts/Post/LoadingPost";
 
 const limitCnt = 30;
 const PostListContainer = () => {
 
-  const { postsList } = useSelector(({ post }: RootState) => ({
-		postsList: post.postsList
+  const { postsList, isLogged } = useSelector(({ post, loginUI }: RootState) => ({
+		postsList: post.postsList,
+		isLogged: loginUI.isLogged,
 	}));
 	const dispatch = useDispatch();
 
@@ -27,12 +22,11 @@ const PostListContainer = () => {
 		}
 	},[ dispatch ]);
 
-  // useEffect(() => {
-	// 	console.log(checkUser());
-  //   reqGetPostsList();
-	// }, []);
-	
-	if (!postsList.data) return <LoadingPost />;
+  useEffect(() => {
+		if (!postsList.data) {
+			reqGetPostsList();
+			}
+	}, [isLogged]);
   return (
     <PostsLayout postsList={postsList} />
   );

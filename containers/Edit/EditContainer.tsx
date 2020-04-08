@@ -59,7 +59,6 @@ const EditContainer = ({ editMode }: EditContainerProps) => {
 
   useEffect(() => {
     const { rawContent, contentMd, imgUrl, title, subTitle, tagArr } = post.data.res
-    console.log(post);
     dispatch(setInputValues({
       title,
       inputValue: rawContent,

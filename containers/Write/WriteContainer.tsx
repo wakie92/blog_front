@@ -56,7 +56,6 @@ const WriteContainer = ({}: WriteContainerProps) => {
        subTitle: subTitle,
        tagArr: tagArr,
 		};
-		console.log(dataForUpload);
 		try {
 			dispatch(postAsync.request(dataForUpload));
 			Router.push(ROUTES.home, ROUTES.home, { shallow: true });
@@ -80,7 +79,6 @@ const WriteContainer = ({}: WriteContainerProps) => {
 			checkUser();
 		};
 	}, []);
-	console.log(postWrite);
 	return (
 		<EditBox>
 			<EditPart>

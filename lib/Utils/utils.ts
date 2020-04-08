@@ -30,7 +30,6 @@ export const removeExp = (str: string) => {
 export const loginPopup = () => {
   firebase.auth().signInWithPopup(provider).then(function(result) {
     const token = JSON.stringify(result.credential.toJSON());
-    console.log(result);
     sessionStorage.setItem("idToken", token);
     return result.user
   }).catch(function(error) {
@@ -48,7 +47,6 @@ export const loginPopup = () => {
 export const logoutFn = () => {
   firebase.auth().signOut().then(function() {
     // Sign-out successful.
-    console.log('logout');
     sessionStorage.removeItem("idToken");
   }).catch(function(error) {
     // An error happened.
@@ -57,12 +55,6 @@ export const logoutFn = () => {
 
 export const checkUser = async () => {
   const user = await firebase.auth().currentUser;
-  console.log(user, ' checkUserAuth');
-  return user;
-}
-export const checkUserTest = async () => {
-  const user = await firebase.auth();
-  console.log(user);
   return user;
 }
 
@@ -70,7 +62,8 @@ export const loginEmail = (email: string, password: string) => {
   const result = firebase.auth()
     .signInWithEmailAndPassword(email, password)
     .then((res) => {
-      console.log(res);
+      const token = JSON.stringify(res.user);
+      sessionStorage.setItem("idToken", token);
       return res
   }).catch(err =>  console.log(err));
   return result;

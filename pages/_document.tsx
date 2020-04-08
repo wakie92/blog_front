@@ -8,7 +8,7 @@ class NextHeadWithInlineCss extends Head {
 
   getInlineCss() {
       const {files} = this.context._documentProps;
-      console.log(files); 
+      console.log('files', files); 
       if (!files || files.length === 0) return null;
 
       const filtered = files.filter(file => /\.css$/.test(file)).map(file => (

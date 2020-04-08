@@ -92,7 +92,6 @@ const post = createReducer<PostState, PostActions>(initialState, {
 	[ADD_TAG_ARR]: (state, action) => {
 		const{ tagArr, tag } = state.postWrite
 		const addTagArr = tagArr.concat(tag.replace(',', ''));
-		console.log(addTagArr);
 		return {
 			...state,
 			postWrite: {

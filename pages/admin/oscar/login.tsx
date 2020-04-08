@@ -1,6 +1,7 @@
-import { logoutFn, loginPopup, loginEmail, checkUser } from "../../../lib/Utils/utils";
+import { loginEmail } from "../../../lib/Utils/utils";
 import { RootState } from "../../../store/modules";
-import { useSelector } from "react-redux";
+import { getIsLogged } from '../../../store/modules/loginUI';
+import { useSelector, useDispatch } from "react-redux";
 import { NextPage, NextPageContext } from "next";
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -10,6 +11,7 @@ type loginProps = {
   isServer: string;
 };
 const login: NextPage = ({ isServer }: loginProps) => {
+  const dispatch = useDispatch();
   const { isLogged } = useSelector((state: RootState) => ({
     isLogged: state.loginUI.isLogged,
   }))
@@ -18,17 +20,6 @@ const login: NextPage = ({ isServer }: loginProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onLoginModal = () => {
-    // dispatch(getLoginModal());
-    // const token = JSON.parse(sessionStorage.getItem("idToken"));
-    // console.log(token);
-    // if (token) {
-    //   logoutFn();
-    // } else {
-    //   loginPopup()
-    // }
-    // loginEmail
-  };
   const onChangeEmail = (e: React.ChangeEvent<any>) => {
     const { value, name } = e.target;
     setEmail(value);
@@ -40,7 +31,10 @@ const login: NextPage = ({ isServer }: loginProps) => {
   const onSumit = async (e: React.FormEvent) => {
     e.preventDefault();
     const res = await loginEmail(email, password);
-    res && router.push('/', '/');
+    if (res) {
+      dispatch(getIsLogged(true));
+      router.push('/', '/');
+    }
 
   }
   return (
