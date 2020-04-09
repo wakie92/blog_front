@@ -14,7 +14,7 @@ const PostListContainer = () => {
 	}));
 	const dispatch = useDispatch();
 
-  const reqGetPostsList = useCallback(async () => {
+  const reqGetPostsList = useCallback(() => {
 		try {
 			dispatch(getPostsListAsync.request(limitCnt));
 		} catch (e) {
@@ -23,10 +23,12 @@ const PostListContainer = () => {
 	},[ dispatch ]);
 
   useEffect(() => {
+		console.log('dfdfdf');
 		if (!postsList.data) {
 			reqGetPostsList();
 			}
-	}, [isLogged]);
+	}, []);
+	console.log(postsList);
   return (
     <PostsLayout postsList={postsList} />
   );

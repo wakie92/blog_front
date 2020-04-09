@@ -12,7 +12,7 @@
 
 const routes = module.exports = require('next-routes')()
 routes
-  .add('home', '/')
+  .add('index', '/')
   .add('about', '/about')
   .add('post', 'dev/blog/:id')
   .add('postEdit', 'dev/edit/:id')

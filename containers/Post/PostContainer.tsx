@@ -1,6 +1,8 @@
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
+import Router from 'next-routes';
+import routers  from '../../routes';
 import { getPostAsync } from "../../store/modules/post";
 import { ROUTES } from "../../lib/Routes/Routes";
 import Post from "../../components/Posts/Post/Post";
@@ -17,12 +19,13 @@ type PostContainerProps = {
 const PostContainer = ({ title, preContent, date, id, imgUrl, tagArr }: PostContainerProps) => {
   const dispatch = useDispatch();
 	const router = useRouter();
-
+	const { pushRoute } = routers.Router;
 	const reqGetPost = useCallback(
 		(id: string) => {
 			try {
 				dispatch(getPostAsync.request(id));
-				router.push(`${ROUTES.devBlog}/${id}`, `${ROUTES.devBlog}/${id}`);
+				// router.push(`${ROUTES.devBlog}/${id}`, `${ROUTES.devBlog}/${id}`);
+				pushRoute(`post`, { id });
 			} catch (e) {
 				throw e;
 			}

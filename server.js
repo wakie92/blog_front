@@ -12,6 +12,7 @@ app.prepare().then(() => {
   const server = express();
   server.use(handle);
   server.get("*", (req, res) => {
+    console.log('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++', req);
     return handler(req, res)
   })
   server.listen(port, err => {
