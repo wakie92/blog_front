@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "node start -p 8081"
+    "start": "next start",
+    "now-build": "next build"
   },
   "eslintConfig": {
     "extends": [
