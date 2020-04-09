@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "node start"
+    "start": "node start -p 8081"
   },
   "eslintConfig": {
     "extends": [
