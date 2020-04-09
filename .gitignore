@@ -25,4 +25,4 @@ yarn-debug.log*
 yarn-error.log*
 
 .now
-/lib/Utils/S3.ts
+/lib/Utils/.S3.ts
