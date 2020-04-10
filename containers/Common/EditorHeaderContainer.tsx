@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { PostWrite, getValue, addTagArr } from "../../store/modules/postUI";
 import { AsyncState } from "../../lib/Utils/asyncUtils";
 import { Post } from "../../store/modules/post";
-import { addPhoto } from "../../config/S3";
+import { addPhoto } from "../../lib/Utils/S3";
 import { Head } from "../../components/Write";
 import SubTitleInput from "../../components/Write/SubTItleInput";
 import TagAndImg from '../../components/Write/TagAndImg';
