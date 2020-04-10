@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { PostWrite, getValue, addTagArr } from "../../store/modules/postUI";
 import { AsyncState } from "../../lib/Utils/asyncUtils";
 import { Post } from "../../store/modules/post";
-import { addPhoto } from "../../lib/Utils/S3";
+// import { addPhoto } from "../../lib/Utils/S3";
 import { Head } from "../../components/Write";
 import SubTitleInput from "../../components/Write/SubTItleInput";
 import TagAndImg from '../../components/Write/TagAndImg';
@@ -25,18 +25,18 @@ const EditorHeaderContainer = ({ onChange, postWrite, onUpload }: EditorHeaderPr
   }, [dispatch, postWrite.tag]);
   
   const reqImgUpload = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const bucketData: string | void = await addPhoto(e);
-    if (typeof bucketData === 'string') {
-      dispatch(getValue({ name: 'imgUrl', value: bucketData }));
-    }
+    // const bucketData: string | void = await addPhoto(e);
+    // if (typeof bucketData === 'string') {
+    //   dispatch(getValue({ name: 'imgUrl', value: bucketData }));
+    // }
   }, [dispatch]);
 
   const reqGetImgUrl = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const bucketData: string | void = await addPhoto(e);
-    if (typeof bucketData === 'string') {
-      const imgMarkdown = `![](${bucketData})`;
-      dispatch(getValue({ name: 'inputValue', value: imgMarkdown }));
-    }
+    // const bucketData: string | void = await addPhoto(e);
+    // if (typeof bucketData === 'string') {
+    //   const imgMarkdown = `![](${bucketData})`;
+    //   dispatch(getValue({ name: 'inputValue', value: imgMarkdown }));
+    // }
   }, [dispatch]);
 
   return (
