@@ -10,7 +10,6 @@ import { removeExp, checkUser } from '../../lib/Utils/utils';
 import { AxiosError } from 'axios';
 import { Post, postAsync } from '../../store/modules/post';
 import { AsyncState } from '../../lib/Utils/asyncUtils';
-// import { addPhoto } from '../../lib/Utils/S3';
 import TagAndImg from '../../components/Write/TagAndImg';
 import SubTitleInput from '../../components/Write/SubTItleInput';
 import EditorHeaderContainer from '../Common/EditorHeaderContainer';
