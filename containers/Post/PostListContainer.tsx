@@ -28,7 +28,7 @@ const PostListContainer = () => {
 			reqGetPostsList();
 			}
 	}, []);
-	console.log(postsList);
+	
   return (
     <PostsLayout postsList={postsList} />
   );

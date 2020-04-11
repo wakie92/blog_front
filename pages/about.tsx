@@ -19,7 +19,6 @@ const About: NextPage = ({ isServer }: aboutProps) => {
 
 About.getInitialProps = async (ctx: NextPageContext) => {
   const isServer = ctx.req ? 'server' : 'client';
-  console.log(isServer);
   return { isServer };
 };
 
