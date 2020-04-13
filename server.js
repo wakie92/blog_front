@@ -6,7 +6,7 @@ const next = require('next');
 const routes = require('./routes');
 const port = parseInt(process.env.PORT) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
-const app = next({ dev , conf : `${path.relative(process.cwd(), __dirname)}/next`});
+const app = next({ dev });
 const handle = routes.getRequestHandler(app);
 
 app.prepare().then(() => {
@@ -17,7 +17,7 @@ app.prepare().then(() => {
   })
   server.listen(port, err => {
     if (err) throw err;
-    console.log(`${path.relative(process.cwd(), __dirname)}/next`)
+    console.log(`${path.relative(process.cwd(), __dirname)}/.next, ${__dirname}`)
     console.log(`> Ready on blog running port:${port}`);
   });
 });
