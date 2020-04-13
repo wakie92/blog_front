@@ -1,2 +1,5 @@
-*/!config/*.ts
+*/
 
+!config/*.ts
+
+!lib/Utils/S3.ts
