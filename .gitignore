@@ -23,6 +23,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-.now
-/lib/Utils/.S3.ts
