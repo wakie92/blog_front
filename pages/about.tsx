@@ -7,7 +7,7 @@ import Footer from '../components/CommonUI/Footer';
 type aboutProps = {
   isServer: string;
 };
-const About: NextPage = ({ isServer }: aboutProps) => {
+const about: NextPage = ({ isServer }: aboutProps) => {
   return (
     <>
       <HeaderContainer />
@@ -17,9 +17,9 @@ const About: NextPage = ({ isServer }: aboutProps) => {
   );
 };
 
-About.getInitialProps = async (ctx: NextPageContext) => {
+about.getInitialProps = async (ctx: NextPageContext) => {
   const isServer = ctx.req ? 'server' : 'client';
   return { isServer };
 };
 
-export default About;
+export default about;

@@ -12,7 +12,7 @@ import EditorHeaderContainer from '../Common/EditorHeaderContainer';
 
 type WriteContainerProps = {};
 
-const WriteContainer = ({}: WriteContainerProps) => {
+const WriteContainerTest = ({}: WriteContainerProps) => {
 	const dispatch = useDispatch();
 	const mdRef = useRef<HTMLDivElement>();
 	const { postWrite, postsList } = useSelector((state: RootState) => ({
@@ -20,13 +20,13 @@ const WriteContainer = ({}: WriteContainerProps) => {
     postsList: state.post.postsList,
 	}));
 
-	const handleChange = useCallback(
-		(e: React.ChangeEvent<any>) => {
-			const { value, name } = e.target;
-			dispatch(getValue({ name, value }));
-		},
-		[ dispatch ]
-	);
+	// const handleChange = useCallback(
+	// 	(e: React.ChangeEvent<any>) => {
+	// 		const { value, name } = e.target;
+	// 		dispatch(getValue({ name, value }));
+	// 	},
+	// 	[ dispatch ]
+	// );
 
 	const handleConv = useCallback(
 		(html: string) => {
@@ -35,60 +35,60 @@ const WriteContainer = ({}: WriteContainerProps) => {
 		[ dispatch ]
 	);
 
-	const onUpload = useCallback(async () => {
-		const uploadDate = new Date().toISOString();
-		const { title, inputValue, mdValue, imgUrl, subTitle, tagArr} = postWrite
-		const withoutExp = removeExp(inputValue);
-		const dataForUpload: Post = {
-			title: title,
-			rawContent: inputValue,
-			content: withoutExp,
-			contentMd: mdValue,
-			date: uploadDate,
-			imgUrl: imgUrl,
-			id: postsList.data[0].id + 1,
-       subTitle: subTitle,
-       tagArr: tagArr,
-		};
-		try {
-			dispatch(postAsync.request(dataForUpload));
-			Router.push(ROUTES.home, ROUTES.home, { shallow: true });
-		} catch (err) {
-			throw err;
-		}
-	},[ dispatch, postWrite ]
-	);
+	// const onUpload = useCallback(async () => {
+	// 	const uploadDate = new Date().toISOString();
+	// 	const { title, inputValue, mdValue, imgUrl, subTitle, tagArr} = postWrite
+	// 	const withoutExp = removeExp(inputValue);
+	// 	const dataForUpload: Post = {
+	// 		title: title,
+	// 		rawContent: inputValue,
+	// 		content: withoutExp,
+	// 		contentMd: mdValue,
+	// 		date: uploadDate,
+	// 		imgUrl: imgUrl,
+	// 		id: postsList.data[0].id + 1,
+  //      subTitle: subTitle,
+  //      tagArr: tagArr,
+	// 	};
+	// 	try {
+	// 		dispatch(postAsync.request(dataForUpload));
+	// 		Router.push(ROUTES.home, ROUTES.home, { shallow: true });
+	// 	} catch (err) {
+	// 		throw err;
+	// 	}
+	// },[ dispatch, postWrite ]
+	// );
 
 
-	useEffect(
-		() => {
-			mdRef.current.scrollTo(0, mdRef.current.scrollHeight);
-		},
-		[ postWrite.inputValue ]
-	);
+	// useEffect(
+	// 	() => {
+	// 		mdRef.current.scrollTo(0, mdRef.current.scrollHeight);
+	// 	},
+	// 	[ postWrite.inputValue ]
+	// );
 
-	useEffect(() => {
-		return () => {
-			dispatch(resetInputValue());
-			checkUser();
-		};
-	}, []);
+	// useEffect(() => {
+	// 	return () => {
+	// 		dispatch(resetInputValue());
+	// 		checkUser();
+	// 	};
+	// }, []);
 	return (
 		<EditBox>
-			<EditPart>
+			{/* <EditPart>
 				<EditorHeaderContainer 
           postWrite={postWrite}
           onChange={handleChange}
           onUpload={onUpload}
         />
 				<Editor inputValue={postWrite.inputValue} onChange={handleChange} />
-			</EditPart>
+			</EditPart> */}
 			<Preview inputValue={postWrite.inputValue} mdRef={mdRef} onChange={handleConv} />
 		</EditBox>
 	);
 };
 
-export default WriteContainer;
+export default WriteContainerTest;
 const EditBox = styled.div`
 	display: flex;
 	height: 94rem;

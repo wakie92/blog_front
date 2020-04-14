@@ -24,8 +24,8 @@ const PostContainer = ({ title, preContent, date, id, imgUrl, tagArr }: PostCont
 		(id: string) => {
 			try {
 				dispatch(getPostAsync.request(id));
-				// router.push(`${ROUTES.devBlog}/${id}`, `${ROUTES.devBlog}/${id}`);
-				pushRoute(`post`, { id });
+				router.push(`${ROUTES.devBlog}/${id}`, `${ROUTES.devBlog}/${id}`);
+				// pushRoute(`post`, { id });
 			} catch (e) {
 				throw e;
 			}

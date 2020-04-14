@@ -43,10 +43,10 @@ const MyApp2 = (props: IProps) => {
     </ThemeProvider>
   );
 }
-MyApp2.getInitialProps = async ({ Component, ctx, sessionStorage }) => {
+MyApp2.getInitialProps = async ({ Component, ctx, }: AppContext) => {
   let pageProps = {}
   // 서버사이드에서 리덕스 연결 성공. 원인 공부
-  if (ctx.isServer) {
+  if (ctx) {
     pageProps = await Component.getInitialProps(ctx)
     }
     return { pageProps }

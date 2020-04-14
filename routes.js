@@ -13,8 +13,4 @@
 const routes = module.exports = require('next-routes')()
 routes
   .add('index', '/')
-  .add('about', '/about')
-  .add('post', 'dev/blog/:id')
-  .add('postEdit', 'dev/edit/:id')
-  .add('write', 'write')
-// export default routes;
+// // export default routes;
