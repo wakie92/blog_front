@@ -5,9 +5,9 @@
 /.pnp
 .pnp.js
 
-# /config
 # testing
 /coverage
+/configs
 
 # next.js
 /.next/
