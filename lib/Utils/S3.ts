@@ -1,5 +1,5 @@
 import AWS from 'aws-sdk';
-import { AWSConfig } from '../../configure/awsconfig';
+import { AWSConfig } from '../../config/awsconfig';
 
 const { albumBucketName, bucketRegion, IdentityPoolId } = AWSConfig
 const paramKey = 'blog-oscar/images/';
