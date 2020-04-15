@@ -4,7 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
-/config
+
+/configure
 # testing
 /coverage
 
@@ -14,7 +15,8 @@
 
 # production
 /build
-
+Untitled.html
+Untitled.md
 # misc
 .DS_Store
 .env*
