@@ -1,0 +1,54 @@
+{
+  "devFiles": [],
+  "pages": {
+    "/": [
+      "static/runtime/webpack-9369c5c69dbf6d4912cb.js",
+      "static/chunks/commons.f0b9210ecc3222efe8d1.js",
+      "static/runtime/main-868bf095ec3b5cd57cff.js"
+    ],
+    "/_app": [
+      "static/runtime/webpack-9369c5c69dbf6d4912cb.js",
+      "static/chunks/commons.f0b9210ecc3222efe8d1.js",
+      "static/runtime/main-868bf095ec3b5cd57cff.js"
+    ],
+    "/_error": [
+      "static/runtime/webpack-9369c5c69dbf6d4912cb.js",
+      "static/chunks/commons.f0b9210ecc3222efe8d1.js",
+      "static/runtime/main-868bf095ec3b5cd57cff.js"
+    ],
+    "/_polyfills": [
+      "static/runtime/polyfills-456cde7b57b6c4de308c.js"
+    ],
+    "/about": [
+      "static/runtime/webpack-9369c5c69dbf6d4912cb.js",
+      "static/chunks/commons.f0b9210ecc3222efe8d1.js",
+      "static/css/styles.5a1745ed.chunk.css",
+      "static/chunks/styles.d12102e60878a281d093.js",
+      "static/runtime/main-868bf095ec3b5cd57cff.js"
+    ],
+    "/admin/oscar/login": [
+      "static/runtime/webpack-9369c5c69dbf6d4912cb.js",
+      "static/chunks/commons.f0b9210ecc3222efe8d1.js",
+      "static/runtime/main-868bf095ec3b5cd57cff.js"
+    ],
+    "/dev/blog/[id]": [
+      "static/runtime/webpack-9369c5c69dbf6d4912cb.js",
+      "static/chunks/commons.f0b9210ecc3222efe8d1.js",
+      "static/css/styles.5a1745ed.chunk.css",
+      "static/chunks/styles.d12102e60878a281d093.js",
+      "static/runtime/main-868bf095ec3b5cd57cff.js"
+    ],
+    "/index": [
+      "static/runtime/webpack-9369c5c69dbf6d4912cb.js",
+      "static/chunks/commons.f0b9210ecc3222efe8d1.js",
+      "static/runtime/main-868bf095ec3b5cd57cff.js"
+    ],
+    "/write": [
+      "static/runtime/webpack-9369c5c69dbf6d4912cb.js",
+      "static/chunks/commons.f0b9210ecc3222efe8d1.js",
+      "static/css/styles.5a1745ed.chunk.css",
+      "static/chunks/styles.d12102e60878a281d093.js",
+      "static/runtime/main-868bf095ec3b5cd57cff.js"
+    ]
+  }
+}

@@ -10,9 +10,9 @@
 /configs
 
 # next.js
-/.next/
+# /.next/
 /out/
-
+/.now/
 # production
 /build
 Untitled.html
