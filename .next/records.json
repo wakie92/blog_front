@@ -77,22 +77,29 @@
       "static\\V-gmWN6tv__Xc5N1G9TJh\\pages\\admin\\oscar\\login.js": 8,
       "static\\V-gmWN6tv__Xc5N1G9TJh\\pages\\dev\\blog\\[id].js": 9,
       "static\\V-gmWN6tv__Xc5N1G9TJh\\pages\\index.js": 10,
-      "static\\V-gmWN6tv__Xc5N1G9TJh\\pages\\write.js": 11
+      "static\\V-gmWN6tv__Xc5N1G9TJh\\pages\\write.js": 11,
+      "static\\nvJZSHF8OthKgnQgs-65D\\pages\\_app.js": 12,
+      "static\\nvJZSHF8OthKgnQgs-65D\\pages\\_error.js": 13,
+      "static\\nvJZSHF8OthKgnQgs-65D\\pages\\about.js": 14,
+      "static\\nvJZSHF8OthKgnQgs-65D\\pages\\admin\\oscar\\login.js": 15,
+      "static\\nvJZSHF8OthKgnQgs-65D\\pages\\dev\\blog\\[id].js": 16,
+      "static\\nvJZSHF8OthKgnQgs-65D\\pages\\index.js": 17,
+      "static\\nvJZSHF8OthKgnQgs-65D\\pages\\write.js": 18
     },
     "bySource": {},
     "usedIds": [
       0,
       1,
-      10,
-      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
       2,
       3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9
+      4
     ]
   }
 }
