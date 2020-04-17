@@ -1,0 +1,10 @@
+{
+  "apps": [
+    {
+      "name": "blog-front",
+      "script": "npm",
+      "args": "start",
+      "watch": true
+    }
+  ]
+}
