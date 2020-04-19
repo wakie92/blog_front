@@ -9,3 +9,8 @@ export type LoginUIState = {
   password: string,
   isLogged: boolean,
 };
+
+export type updateKey = {
+  name: string,
+  value: string,
+};

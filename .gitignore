@@ -10,7 +10,7 @@
 /configs
 
 # next.js
-/.nexts/
+/.next/
 /out/
 /.now/
 # production

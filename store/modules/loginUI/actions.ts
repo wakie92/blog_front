@@ -1,5 +1,5 @@
 import { createAction } from 'typesafe-actions';
-import { updateKey } from '../loginAsync/types';
+import { updateKey } from './types';
 
 
 export const GET_AUTH = 'loginUI/GET_AUTH';

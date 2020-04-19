@@ -4,13 +4,11 @@ import postUI  from './postUI';
 import { postSaga, updateSaga, getOnePostSaga, putSaga, deleteSaga } from './post';
 import post from './post/reducers';
 import loginUI from './loginUI';
-import loginAsync from './loginAsync';
 
 const rootReducer = combineReducers({
   postUI,
   post,
   loginUI,
-  loginAsync,
 });
 
 export default rootReducer;

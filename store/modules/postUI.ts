@@ -1,5 +1,5 @@
-import { updateKey } from './loginAsync/types';
 import { createAction, ActionType, createReducer } from 'typesafe-actions';
+import { updateKey } from './loginUI';
 
 const SET_INPUT_VALUES = 'post/SET_INPUT_VALUES';
 const INPUT_VALUE = 'post/INPUT_VALUE';
