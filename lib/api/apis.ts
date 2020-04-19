@@ -1,5 +1,5 @@
 import { Post, PutPostType } from './../../store/modules/post/types';
-import { firebaseDB } from '../../configs/init-firebase';
+import { firebaseDB } from '../../config/init-firebase';
 
 const db = firebaseDB().firestore();
 const blogDB = db.collection("blogDB");
