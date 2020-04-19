@@ -1,1 +1,0 @@
-{"ast":null,"code":"import { createAsyncAction } from 'typesafe-actions';\nexport var GET_LOGIN = 'login/GET_LOGIN';\nexport var GET_LOGIN_SUCCESS = 'login/GET_LOGIN_SUCCESS';\nexport var GET_LOGIN_ERROR = 'login/GET_LOGIN_ERROR';\nexport var getLoginReqAsync = createAsyncAction(GET_LOGIN, GET_LOGIN_SUCCESS, GET_LOGIN_ERROR)();","map":null,"metadata":{},"sourceType":"module"}
