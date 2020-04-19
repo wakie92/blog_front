@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { AxiosError } from 'axios';
-
 import { breakpoints } from '../../../lib/styles/responsive';
 import { Post } from '../../../store/modules/post';
 import { AsyncState } from '../../../lib/Utils/asyncUtils';

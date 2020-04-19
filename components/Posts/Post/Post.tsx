@@ -1,7 +1,5 @@
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core';
-import styled from '@emotion/styled';
-import showdown from 'showdown';
 import { colors } from '../../../lib/styles/global';
 import { formatDate } from '../../../lib/Utils/utils';
 import Maybe from '../../Maybe/Maybe';

@@ -8,11 +8,10 @@ import router  from '../../routes';
 
 type HeaderProps = {
   handleToggle: () => void;
-  moveRouter: (url: string) => void;
   toggle: boolean;
   isLogged: boolean;
 }
-const Header = ({ handleToggle, toggle, isLogged, moveRouter }: HeaderProps) => {
+const Header = ({ handleToggle, toggle, isLogged }: HeaderProps) => {
   const { Link } = router;
   return (
     <>

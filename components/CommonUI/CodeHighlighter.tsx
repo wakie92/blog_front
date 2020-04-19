@@ -1,5 +1,4 @@
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import prismThemes from '../../lib/styles/prismThemes';
 import atomOneDark from '../../lib/styles/AtomOneDark';
 
 type CodeHighlighterProps = {

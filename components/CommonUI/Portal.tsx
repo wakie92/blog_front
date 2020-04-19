@@ -6,7 +6,6 @@ type Portal = {
   visible: boolean;
 };
 const Portal = ({ children, visible }: Portal) => {
-  // const test = document.getElementById('d');
   const ref = useRef()
   const [mounted, setMounted] = useState(false)
 

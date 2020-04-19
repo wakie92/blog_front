@@ -6,7 +6,7 @@ interface HamburgerProps {
   toggle: boolean;
   onToggle: () => void;
 }
-export default function Hamburger({ toggle, onToggle }: HamburgerProps) {
+const Hamburger = ({ toggle, onToggle }: HamburgerProps) => {
   return (
     <BurgerIcon
       colors={colors}
@@ -20,7 +20,7 @@ export default function Hamburger({ toggle, onToggle }: HamburgerProps) {
     </BurgerIcon>
   );
 }
-
+export default Hamburger;
 const BurgerIcon = styled.button<{
   colors: object;
   breakpoints: object;

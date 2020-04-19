@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { string } from 'prop-types';
 import { colors } from '../../lib/styles/global';
 
 interface EditorProps {

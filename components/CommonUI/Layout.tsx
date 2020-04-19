@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getIsLogged } from '../../store/modules/loginUI';
 
-export default function Layout(props) {
+const Layout = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,3 +27,5 @@ export default function Layout(props) {
     </div>
   )
 };
+
+export default Layout;

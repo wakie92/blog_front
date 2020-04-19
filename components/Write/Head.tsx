@@ -1,9 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Link from 'next/link';
-import { colors } from '../../lib/styles/global';
 import { FiArrowLeft, FiUpload } from 'react-icons/fi';
-import { ROUTES } from '../../lib/Routes/Routes';
+import { colors } from '../../lib/styles/global';
 
 type HeadProps = {
 	postWrite: {
