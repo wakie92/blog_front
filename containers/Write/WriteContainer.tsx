@@ -2,16 +2,12 @@ import React, { useRef, useCallback, useEffect } from 'react';
 import Router, { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { Editor, Head, Preview } from '../../components/Write';
+import { Editor, Preview } from '../../components/Write';
 import { RootState } from '../../store/modules';
-import { getValue, resetInputValue, addTagArr } from '../../store/modules/postUI';
+import { getValue, resetInputValue } from '../../store/modules/postUI';
 import { ROUTES } from '../../lib/Routes/Routes';
 import { removeExp, checkUser } from '../../lib/Utils/utils';
-import { AxiosError } from 'axios';
 import { Post, postAsync } from '../../store/modules/post';
-import { AsyncState } from '../../lib/Utils/asyncUtils';
-import TagAndImg from '../../components/Write/TagAndImg';
-import SubTitleInput from '../../components/Write/SubTItleInput';
 import EditorHeaderContainer from '../Common/EditorHeaderContainer';
 
 type WriteContainerProps = {};
@@ -64,6 +60,18 @@ const WriteContainer = ({}: WriteContainerProps) => {
 	},[ dispatch, postWrite ]
 	);
 
+	const checkLogin = () => {
+		const tokenObj = sessionStorage.getItem("idToken");
+		const isToken = JSON.parse(tokenObj).uid
+		if (!isToken) {
+			console.log(isToken);
+			Router.push(ROUTES.home, ROUTES.home, { shallow: true });
+		}
+	}
+
+	useEffect(() => {
+		checkLogin();
+	}, []);
 
 	useEffect(
 		() => {
