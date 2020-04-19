@@ -27,22 +27,6 @@ export const removeExp = (str: string) => {
   } return str;
 } 
 
-export const loginPopup = () => {
-  firebase.auth().signInWithPopup(provider).then(function(result) {
-    const token = JSON.stringify(result.credential.toJSON());
-    sessionStorage.setItem("idToken", token);
-    return result.user
-  }).catch(function(error) {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    const credential = error.credential;
-    // ...
-  });
-}
 
 export const logoutFn = () => {
   firebase.auth().signOut().then(function() {
