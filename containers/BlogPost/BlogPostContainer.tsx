@@ -2,12 +2,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, Dispatch, SetStateAction } from 'react';
 import { useRouter } from 'next/router';
 import PostView from '../../components/Posts/PostView/PostView';
-import { getPostAsync, Post, deletePostAsync } from '../../store/modules/post';
+import { deletePostAsync } from '../../store/modules/post';
 import Footer from '../../components/CommonUI/Footer';
-import { ROUTES } from '../../lib/Routes/Routes';
 import HeaderContainer from '../Header/HeaderContainer';
 import { RootState } from '../../store/modules';
-import { setInputValues } from '../../store/modules/postUI';
 
 type BlogPostProps = {
   editMode: boolean;

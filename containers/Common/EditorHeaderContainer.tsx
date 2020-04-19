@@ -1,9 +1,6 @@
 import { useCallback } from "react";
-import { AxiosError } from "axios";
 import { useDispatch } from "react-redux";
 import { PostWrite, getValue, addTagArr } from "../../store/modules/postUI";
-import { AsyncState } from "../../lib/Utils/asyncUtils";
-import { Post } from "../../store/modules/post";
 import { Head } from "../../components/Write";
 import SubTitleInput from "../../components/Write/SubTItleInput";
 import TagAndImg from '../../components/Write/TagAndImg';

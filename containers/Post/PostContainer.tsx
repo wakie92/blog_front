@@ -1,10 +1,8 @@
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
-import Router from 'next-routes';
 import routers  from '../../routes';
 import { getPostAsync } from "../../store/modules/post";
-import { ROUTES } from "../../lib/Routes/Routes";
 import Post from "../../components/Posts/Post/Post";
 
 type PostContainerProps = {

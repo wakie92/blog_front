@@ -1,5 +1,4 @@
 import { useState, useCallback } from "react";
-import { logoutFn, loginPopup } from "../../lib/Utils/utils";
 import Header from "../../components/CommonUI/Header";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/modules";
@@ -17,16 +16,11 @@ const HeaderContainer = () => {
     setToggle(!toggle);
   }, [toggle]);
 
-  const moveRouter = () => {
-    router.push(`${ROUTES.about}`, `${ROUTES.about}`);
-  };
-
   return (
     <Header 
       isLogged={isLogged} 
       toggle={toggle} 
       handleToggle={handleToggle}
-      moveRouter={moveRouter} 
     />
   )
 }
