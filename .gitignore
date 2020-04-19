@@ -5,14 +5,14 @@
 /.pnp
 .pnp.js
 
-/configs
 # testing
 /coverage
+/configs
 
 # next.js
-/.next/
+/.nexts/
 /out/
-
+/.now/
 # production
 /build
 Untitled.html
