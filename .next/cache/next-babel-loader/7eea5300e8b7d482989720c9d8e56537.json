@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const breakpoints = {\n  xlarge: '1200px',\n  large: '1024px',\n  medium: '768px',\n  small: '576px',\n  xsmall: '360px'\n};","map":null,"metadata":{},"sourceType":"module"}
