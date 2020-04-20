@@ -60,19 +60,7 @@ const WriteContainer = ({}: WriteContainerProps) => {
 	},[ dispatch, postWrite ]
 	);
 
-	const checkLogin = () => {
-		const tokenObj = sessionStorage.getItem("idToken");
-		const isToken = JSON.parse(tokenObj).uid
-		if (!isToken) {
-			console.log(isToken);
-			Router.push(ROUTES.home, ROUTES.home, { shallow: true });
-		}
-	}
-
-	useEffect(() => {
-		checkLogin();
-	}, []);
-
+	
 	useEffect(
 		() => {
 			mdRef.current.scrollTo(0, mdRef.current.scrollHeight);

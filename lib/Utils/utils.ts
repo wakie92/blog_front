@@ -1,4 +1,4 @@
-import firebase, { provider } from '../../configs/init-firebase';
+import firebase, { provider } from '../../config/init-firebase';
 
 export const formatDate = (dateData: string) => {
   const formatted: Date = new Date(dateData);
@@ -51,4 +51,10 @@ export const loginEmail = (email: string, password: string) => {
       return res
   }).catch(err =>  console.log(err));
   return result;
+}
+
+export const checkLogin = () => {
+  const tokenObj = sessionStorage.getItem("idToken");
+  const isToken = JSON.parse(tokenObj)
+  return isToken;
 }

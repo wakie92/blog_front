@@ -6,6 +6,7 @@ import { AxiosError } from 'axios';
 import { Post, getPostsListAsync } from '../store/modules/post';
 import { GetPostsList } from '../lib/api/apis';
 import { NextPageCustom } from '../lib/types/nextCustomTypes';
+import { checkLogin } from '../lib/Utils/utils';
 
 type writeProps = {};
 const Wrapper = styled.main`
@@ -21,8 +22,14 @@ const Write: NextPageCustom = ({}: writeProps) => {
   );
 };
 
-Write.getInitialProps = async ({ store, isServer }) => {
+Write.getInitialProps = async ({ store, isServer, req }) => {
+  if (!req) {
+    console.log('client side');
+  }
   if(isServer) {
+    // const isToken = checkLogin();
+    // console.log(isToken);
+    console.log(req.headers.cookie);
     await store.dispatch(getPostsListAsync.request(30));
   }
   return { };
