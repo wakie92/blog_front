@@ -37,6 +37,19 @@ export const logoutFn = () => {
   });
 }
 
+export const  setCookie = (name: string, value: any, day: number) => {
+  const date = new Date();
+  date.setTime(date.getTime() + day * 60 * 60 * 24 * 1000);
+  document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
+  console.log(document.cookie);
+};
+
+export const deleteCookie = (name: string) => {
+  const date = new Date();
+  document.cookie = name + "= " + "; expires=" + date.toUTCString() + "; path=/";
+  console.log("delete");
+}
+
 export const checkUser = async () => {
   const user = await firebase.auth().currentUser;
   return user;
@@ -47,14 +60,17 @@ export const loginEmail = (email: string, password: string) => {
     .signInWithEmailAndPassword(email, password)
     .then((res) => {
       const token = JSON.stringify(res.user);
+      setCookie("token", token, 1);
       sessionStorage.setItem("idToken", token);
       return res
   }).catch(err =>  console.log(err));
   return result;
 }
 
+
+
 export const checkLogin = () => {
-  const tokenObj = sessionStorage.getItem("idToken");
+  const tokenObj = document.cookie;
   const isToken = JSON.parse(tokenObj)
   return isToken;
 }
