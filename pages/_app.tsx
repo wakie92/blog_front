@@ -6,8 +6,7 @@ import withRedux from 'next-redux-wrapper';
 import withReduxSaga from 'next-redux-saga';
 import Layout from '../components/CommonUI/Layout';
 import configureStore from '../store/configureStore';
-import { useState, useEffect } from 'react';
-import { checkUser } from '../lib/Utils/utils';
+import { getIsLogged } from '../store/modules/loginUI';
 
 type IProps = { store: Store } & AppInitialProps & AppContext
 
@@ -23,17 +22,11 @@ type IProps = { store: Store } & AppInitialProps & AppContext
 // };
 const MyApp2 = (props: IProps) => {
   const { Component, pageProps, store } = props;
-  const [token, setToken] = useState(null);
 
-  useEffect(() => {
-    const tokenData = JSON.parse(sessionStorage.getItem("idToken"));
-    setToken(tokenData);
-  }, []);
-  
   return (
     <ThemeProvider theme={{ fontFamily: 'Noto Sans KR' }}>
       <Provider store={store}>
-        <Layout token={token}>
+        <Layout>
           <Component {...pageProps} />
         </Layout>
       </Provider>
@@ -43,13 +36,21 @@ const MyApp2 = (props: IProps) => {
     </ThemeProvider>
   );
 }
-MyApp2.getInitialProps = async ({ Component, ctx, sessionStorage }) => {
+MyApp2.getInitialProps = async ({ Component, ctx }) => {
   let pageProps = {}
   // 서버사이드에서 리덕스 연결 성공. 원인 공부
   if (ctx.isServer) {
     pageProps = await Component.getInitialProps(ctx)
+
+    //check login
+    if(!ctx.req.headers.cookie) {
+      console.log('none cookie')
+      ctx.store.dispatch(getIsLogged(false))
+    } else {
+      ctx.store.dispatch(getIsLogged(true))
     }
-    return { pageProps }
+  }
+  return { pageProps }
 }
 
 export default withRedux(configureStore)(withReduxSaga(MyApp2));
