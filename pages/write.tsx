@@ -22,13 +22,13 @@ const Write: NextPageCustom = ({}: writeProps) => {
   );
 };
 
-Write.getInitialProps = async ({ store, isServer, req }) => {
-  if (!req) {
-    console.log('client side');
+Write.getInitialProps = async ({ store, isServer, req, res }) => {
+  if (!req.headers.cookie) {
+    res.writeHead(302, { Location: '/' })
+    res.end()
+    return; 
   }
   if(isServer) {
-    // const isToken = checkLogin();
-    // console.log(isToken);
     console.log(req.headers.cookie);
     await store.dispatch(getPostsListAsync.request(30));
   }
