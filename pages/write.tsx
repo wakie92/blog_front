@@ -1,12 +1,7 @@
 import WriteContainer from '../containers/Write/WriteContainer';
 import styled from 'styled-components';
-import { NextPage, NextPageContext } from 'next';
-import { AsyncState, asyncState } from '../lib/Utils/asyncUtils';
-import { AxiosError } from 'axios';
-import { Post, getPostsListAsync } from '../store/modules/post';
-import { GetPostsList } from '../lib/api/apis';
+import { getPostsListAsync } from '../store/modules/post';
 import { NextPageCustom } from '../lib/types/nextCustomTypes';
-import { checkLogin } from '../lib/Utils/utils';
 
 type writeProps = {};
 const Wrapper = styled.main`
