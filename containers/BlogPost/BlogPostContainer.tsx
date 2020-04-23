@@ -29,7 +29,6 @@ const BlogPostContainer = ({ editMode, setEditMode }: BlogPostProps) => {
 
   return (
     <>
-      <HeaderContainer />
       <PostView 
         isLogged={isLogged} 
         reqDeletePost={reqDeletePost} 
