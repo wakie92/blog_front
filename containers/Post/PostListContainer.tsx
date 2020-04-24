@@ -1,15 +1,16 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useCallback, useEffect } from "react";
 import 'firebase/auth';
-import { getPostsListAsync } from "../../store/modules/post";
+import { getPostsListAsync, postAsync } from "../../store/modules/post";
 import { RootState } from "../../store/modules";
 import { PostsLayout } from "../../components/Posts";
 
 const limitCnt = 30;
 const PostListContainer = () => {
 
-  const { postsList, isLogged } = useSelector(({ post, loginUI }: RootState) => ({
+  const { postsList, isLogged, reqPost } = useSelector(({ post, loginUI }: RootState) => ({
 		postsList: post.postsList,
+		reqPost: post.reqPost,
 		isLogged: loginUI.isLogged,
 	}));
 	const dispatch = useDispatch();
@@ -23,12 +24,16 @@ const PostListContainer = () => {
 	},[ dispatch ]);
 
   useEffect(() => {
-		console.log('dfdfdf');
 		if (!postsList.data) {
 			reqGetPostsList();
 			}
 	}, []);
-	
+	useEffect(() => {
+		if(reqPost.data) {
+			dispatch(postAsync.success(null));
+			reqGetPostsList();
+		}
+	}, [reqPost.data, dispatch] )
   return (
     <PostsLayout postsList={postsList} />
   );

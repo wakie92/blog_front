@@ -15,9 +15,10 @@ type WriteContainerProps = {};
 const WriteContainer = ({}: WriteContainerProps) => {
 	const dispatch = useDispatch();
 	const mdRef = useRef<HTMLDivElement>();
-	const { postWrite, postsList } = useSelector((state: RootState) => ({
+	const { postWrite, postsList, reqPost } = useSelector((state: RootState) => ({
 		postWrite: state.postUI.postWrite,
-    postsList: state.post.postsList,
+		postsList: state.post.postsList,
+		reqPost: state.post.reqPost,
 	}));
 	const router = useRouter();
 
@@ -36,7 +37,7 @@ const WriteContainer = ({}: WriteContainerProps) => {
 		[ dispatch ]
 	);
 
-	const onUpload = useCallback(async () => {
+	const onUpload = useCallback(() => {
 		const uploadDate = new Date().toISOString();
 		const { title, inputValue, mdValue, imgUrl, subTitle, tagArr} = postWrite
 		const withoutExp = removeExp(inputValue);
@@ -52,20 +53,24 @@ const WriteContainer = ({}: WriteContainerProps) => {
        tagArr: tagArr,
 		};
 		try {
-			dispatch(postAsync.request(dataForUpload));
-			Router.push(ROUTES.home, ROUTES.home, { shallow: true });
+			dispatch(postAsync.request(dataForUpload))
 		} catch (err) {
 			throw err;
 		}
-	},[ dispatch, postWrite ]
+	},[dispatch, postWrite]
 	);
 
+	useEffect(() => {
+		if (reqPost.data) {
+			router.push(ROUTES.home, ROUTES.home, { shallow: false });
+		}
+	}, [reqPost.data])
 	
 	useEffect(
 		() => {
 			mdRef.current.scrollTo(0, mdRef.current.scrollHeight);
 		},
-		[ postWrite.inputValue ]
+		[postWrite.inputValue]
 	);
 
 	useEffect(() => {
