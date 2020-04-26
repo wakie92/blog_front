@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import RenderMarkdownView from "../../CommonUI/RenderMarkdownView";
 import Maybe from "../../Maybe/Maybe";
 import { colors } from '../../../lib/styles/global';
+import { breakpoints } from '../../../lib/styles/responsive';
 
 type PostContentProps = {
   title: string;
@@ -27,7 +28,7 @@ export default PostContent;
 const Wrapper = styled.article`
   width: 100%;
 	main {
-		width: 90%;
+		width: 76.8rem;
 		margin: auto;
 		display: flex;
 		flex-direction: column;
@@ -36,6 +37,9 @@ const Wrapper = styled.article`
       padding-bottom: 4rem;
       max-height: 50rem;
       max-width: 100%;
+    }
+    @media screen and (max-width: ${breakpoints.medium}) {
+      width: 90%;
     }
   }
   hr {

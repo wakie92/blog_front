@@ -1,10 +1,6 @@
 import WriteContainer from '../containers/Write/WriteContainer';
 import styled from 'styled-components';
-import { NextPage, NextPageContext } from 'next';
-import { AsyncState, asyncState } from '../lib/Utils/asyncUtils';
-import { AxiosError } from 'axios';
-import { Post, getPostsListAsync } from '../store/modules/post';
-import { GetPostsList } from '../lib/api/apis';
+import { getPostsListAsync } from '../store/modules/post';
 import { NextPageCustom } from '../lib/types/nextCustomTypes';
 
 type writeProps = {};
@@ -21,8 +17,14 @@ const Write: NextPageCustom = ({}: writeProps) => {
   );
 };
 
-Write.getInitialProps = async ({ store, isServer }) => {
+Write.getInitialProps = async ({ store, isServer, req, res }) => {
+  if (!req.headers.cookie) {
+    res.writeHead(302, { Location: '/' })
+    res.end()
+    return; 
+  }
   if(isServer) {
+    console.log(req.headers.cookie);
     await store.dispatch(getPostsListAsync.request(30));
   }
   return { };

@@ -48,12 +48,12 @@ export default function PostView({
 }
 
 const Layout = styled.div`
-	width: calc(100% - 18rem);
+	width: calc(100% - 10rem);
 	margin: auto;
 	min-height: 70rem;
 	padding: 2rem;
 	margin-top: 20rem;
-	@media screen and (max-width: ${breakpoints.large}) {
+	@media screen and (max-width: ${breakpoints.medium}) {
 		width: calc(100% - 4rem);
 	}
 `;

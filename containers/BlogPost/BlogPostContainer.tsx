@@ -19,11 +19,9 @@ const BlogPostContainer = ({ editMode, setEditMode }: BlogPostProps) => {
   }))
   const router = useRouter();
 
-  const reqDeletePost = useCallback(() => {
+  const reqDeletePost = useCallback(async () => {
     try {
       dispatch(deletePostAsync.request(postData.data.resId));
-      // router ? Link .. ssr제대로 파악해서 routing
-      router.back();
     } catch (e) {
       throw e;
     }
@@ -31,7 +29,6 @@ const BlogPostContainer = ({ editMode, setEditMode }: BlogPostProps) => {
 
   return (
     <>
-      <HeaderContainer />
       <PostView 
         isLogged={isLogged} 
         reqDeletePost={reqDeletePost} 
