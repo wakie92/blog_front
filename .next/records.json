@@ -1,0 +1,98 @@
+{
+  "mini-css-extract-plugin node_modules/@zeit/next-css/node_modules/css-loader/index.js??ref--6-1!lib/styles/githubMarkdown.css": [
+    {
+      "modules": {
+        "byIdentifier": {},
+        "usedIds": {}
+      },
+      "chunks": {
+        "byName": {
+          "mini-css-extract-plugin": 0
+        },
+        "bySource": {},
+        "usedIds": [
+          0
+        ]
+      }
+    }
+  ],
+  "mini-css-extract-plugin node_modules/@zeit/next-css/node_modules/css-loader/index.js??ref--6-1!lib/styles/notion-markdown.css": [
+    {
+      "modules": {
+        "byIdentifier": {},
+        "usedIds": {}
+      },
+      "chunks": {
+        "byName": {
+          "mini-css-extract-plugin": 0
+        },
+        "bySource": {},
+        "usedIds": [
+          0
+        ]
+      }
+    }
+  ],
+  "mini-css-extract-plugin node_modules/@zeit/next-css/node_modules/css-loader/index.js??ref--6-1!lib/styles/prism.css": [
+    {
+      "modules": {
+        "byIdentifier": {},
+        "usedIds": {}
+      },
+      "chunks": {
+        "byName": {
+          "mini-css-extract-plugin": 0
+        },
+        "bySource": {},
+        "usedIds": [
+          0
+        ]
+      }
+    }
+  ],
+  "modules": {
+    "byIdentifier": {
+      "ignored node_modules/aws-sdk/lib fs": 0,
+      "css node_modules/@zeit/next-css/node_modules/css-loader/index.js??ref--6-1!lib/styles/notion-markdown.css 0": 1,
+      "css node_modules/@zeit/next-css/node_modules/css-loader/index.js??ref--6-1!lib/styles/prism.css 0": 2,
+      "css node_modules/@zeit/next-css/node_modules/css-loader/index.js??ref--6-1!lib/styles/githubMarkdown.css 0": 3
+    },
+    "usedIds": {
+      "0": 0,
+      "1": 1,
+      "2": 2,
+      "3": 3
+    }
+  },
+  "chunks": {
+    "byName": {
+      "static/runtime/webpack.js": 0,
+      "commons": 1,
+      "styles": 2,
+      "static/runtime/main.js": 3,
+      "static/runtime/polyfills.js": 4,
+      "static\\OjGbs0l8M-TkTguJi4N7G\\pages\\_app.js": 5,
+      "static\\OjGbs0l8M-TkTguJi4N7G\\pages\\_error.js": 6,
+      "static\\OjGbs0l8M-TkTguJi4N7G\\pages\\about.js": 7,
+      "static\\OjGbs0l8M-TkTguJi4N7G\\pages\\admin\\oscar\\login.js": 8,
+      "static\\OjGbs0l8M-TkTguJi4N7G\\pages\\dev\\blog\\[id].js": 9,
+      "static\\OjGbs0l8M-TkTguJi4N7G\\pages\\index.js": 10,
+      "static\\OjGbs0l8M-TkTguJi4N7G\\pages\\write.js": 11
+    },
+    "bySource": {},
+    "usedIds": [
+      0,
+      1,
+      10,
+      11,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  }
+}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var AWSConfig = {\n  albumBucketName: 'blog-oscar',\n  bucketRegion: 'ap-northeast-2',\n  IdentityPoolId: 'ap-northeast-2:df63c109-29c3-46e1-8598-a4693415589d'\n};","map":null,"metadata":{},"sourceType":"module"}

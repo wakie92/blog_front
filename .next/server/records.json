@@ -1,0 +1,51 @@
+{
+  "modules": {
+    "byIdentifier": {
+      "multi private-next-pages/_app.tsx": 0,
+      "multi private-next-pages/_document.tsx": 1,
+      "multi private-next-pages/about.tsx": 2,
+      "multi private-next-pages/admin/oscar/login.tsx": 3,
+      "multi private-next-pages/dev/blog/[id].tsx": 4,
+      "multi private-next-pages/index.tsx": 5,
+      "multi private-next-pages/write.tsx": 6,
+      "multi next/dist/pages/_error": 7
+    },
+    "usedIds": {
+      "0": 0,
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "5": 5,
+      "6": 6,
+      "7": 7
+    }
+  },
+  "chunks": {
+    "byName": {
+      "init-server.js": 0,
+      "on-error-server.js": 1,
+      "static\\OjGbs0l8M-TkTguJi4N7G\\pages\\_app.js": 2,
+      "static\\OjGbs0l8M-TkTguJi4N7G\\pages\\_document.js": 3,
+      "static\\OjGbs0l8M-TkTguJi4N7G\\pages\\_error.js": 4,
+      "static\\OjGbs0l8M-TkTguJi4N7G\\pages\\about.js": 5,
+      "static\\OjGbs0l8M-TkTguJi4N7G\\pages\\admin\\oscar\\login.js": 6,
+      "static\\OjGbs0l8M-TkTguJi4N7G\\pages\\dev\\blog\\[id].js": 7,
+      "static\\OjGbs0l8M-TkTguJi4N7G\\pages\\index.js": 8,
+      "static\\OjGbs0l8M-TkTguJi4N7G\\pages\\write.js": 9
+    },
+    "bySource": {},
+    "usedIds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  }
+}

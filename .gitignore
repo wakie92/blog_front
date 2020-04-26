@@ -7,10 +7,10 @@
 
 # testing
 /coverage
-/config
+# /config
 
 # next.js
-/.next/
+# /.next/
 /out/
 /.now/
 # production
