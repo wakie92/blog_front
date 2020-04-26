@@ -1,4 +1,4 @@
-import firebase, { provider } from '../../config/init-firebase';
+import firebase, { provider } from '../../configs/init-firebase';
 
 export const formatDate = (dateData: string) => {
   const formatted: Date = new Date(dateData);

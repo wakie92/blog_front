@@ -1,1 +1,0 @@
-{"ast":null,"code":"export { default as PostsLayout } from './PostsLayout';","map":{"version":3,"sources":["C:/Users/lchon/Project/blog_front/components/Posts/index.ts"],"names":["default"],"mappings":"AAAA,SAASA,OAAO,IAAhB,WAAA,QAAA,eAAA","sourcesContent":["export { default as PostsLayout } from './PostsLayout';\r\n"]},"metadata":{},"sourceType":"module"}
