@@ -27,6 +27,7 @@ const BlogPostContainer = ({ editMode, setEditMode }: BlogPostProps) => {
     }
   }, [dispatch]);
 
+  console.log(postData.data);
   return (
     <>
       <PostView 
