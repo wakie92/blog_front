@@ -32,10 +32,9 @@ const EditorHeaderContainer = ({ onChange, postWrite, onUpload }: EditorHeaderPr
     const bucketData: string | void = await addPhoto(e);
     if (typeof bucketData === 'string') {
       const imgMarkdown = `![](${bucketData})`;
-      dispatch(getValue({ name: 'inputValue', value: imgMarkdown }));
+      dispatch(getValue({ name: 'inputValue', value: `${postWrite.inputValue} ${imgMarkdown}` }));
     }
-  }, [dispatch]);
-
+  }, [dispatch, postWrite.inputValue]);
   return (
     <>
       <Head onUpload={onUpload} postWrite={postWrite} onChange={onChange} reqImgUpload={reqImgUpload} />

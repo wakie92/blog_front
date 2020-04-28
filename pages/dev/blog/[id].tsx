@@ -8,6 +8,7 @@ import { NextPageCustom, nextPageProps } from '../../../lib/types/nextCustomType
 import { RootState } from '../../../store/modules';
 import { useSelector } from 'react-redux';
 import EditContainer from '../../../containers/Edit/EditContainer';
+import PostSeo from '../../../components/Posts/PostView/PostSeo';
 
 type blogType = {};
 const post: NextPageCustom = ({}: blogType) => {
@@ -15,13 +16,11 @@ const post: NextPageCustom = ({}: blogType) => {
   const { postData } = useSelector(( state : RootState ) => ({
     postData: state.post.post
   }))
-  const { data } = postData;
   return (
     <>
-      <Head>
-        <title>{data.res.title}</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
+      <PostSeo
+        data={postData.data}
+      />
       <Maybe isVisible={editMode}>
         <EditContainer editMode={editMode} />
       </Maybe>
