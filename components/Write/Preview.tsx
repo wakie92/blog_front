@@ -1,4 +1,4 @@
-import { useEffect, createRef } from 'react';
+import React, { useEffect, createRef } from 'react';
 import styled from 'styled-components';
 import showdown from 'showdown';
 import '../../lib/styles/githubMarkdown.css';
@@ -9,13 +9,12 @@ interface PreviewProps {
   onChange: (html: string) => void;
   mdRef: React.RefObject<HTMLDivElement>;
 }
-export default function Preview({ inputValue, mdRef, onChange }: PreviewProps) {
+const Preview = ({ inputValue, mdRef, onChange }: PreviewProps) => {
   const converter = new showdown.Converter();
   const html = converter.makeHtml(inputValue);
   useEffect(() => {
     onChange(html);
   }, [html]);
-
  
   return (
     <>
@@ -24,6 +23,7 @@ export default function Preview({ inputValue, mdRef, onChange }: PreviewProps) {
       </Wrapper>
   </>);
 }
+export default React.memo(Preview)
 
 const Wrapper = styled.div`
   padding: 3rem 1rem;

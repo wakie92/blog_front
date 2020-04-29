@@ -77,7 +77,6 @@ const EditContainer = ({ editMode }: EditContainerProps) => {
       <EditBox>
         <EditPart>
           <EditorHeaderContainer 
-            postWrite={postWrite}
             onChange={handleChange}
             onUpload={onUpload}
           />
@@ -89,7 +88,7 @@ const EditContainer = ({ editMode }: EditContainerProps) => {
   ); 
 }
 
-export default EditContainer;
+export default React.memo(EditContainer);
 const EditBox = styled.div`
 	display: flex;
 	height: 94rem;

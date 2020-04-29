@@ -4,24 +4,20 @@ import { FiArrowLeft, FiUpload } from 'react-icons/fi';
 import { colors } from '../../lib/styles/global';
 
 type HeadProps = {
-	postWrite: {
-		title: string;
-		inputValue: string;
-		mdValue: string;
-	};
+	title: string;
 	onUpload: () => void;
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	reqImgUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
 };
 
-export default React.memo(function Head({reqImgUpload, postWrite, onUpload, onChange }: HeadProps) {
+const Head = ({reqImgUpload, title, onUpload, onChange }: HeadProps) => {
 	const backLink = () => {
 		history.back();
 	};
 	return (
 		<Title>
 			<FiArrowLeft onClick={backLink} className="svg-icon" />
-			<input placeholder="제목" name="title" onChange={onChange} value={postWrite.title} />
+			<input placeholder="제목" name="title" onChange={onChange} value={title} />
 			<input type="file" className="file-upload" id="file-upload" onChange={reqImgUpload} />
 			<label htmlFor="file-upload">
 				<FiUpload className="svg-icon" />
@@ -31,8 +27,10 @@ export default React.memo(function Head({reqImgUpload, postWrite, onUpload, onCh
 			</button>
 		</Title>
 	);
-});
-
+};
+export default React.memo(Head,
+	
+	)
 const Title = styled.div`
 	width: 100%;
 	background-color: ${colors.defaultBlack};

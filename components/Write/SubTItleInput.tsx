@@ -1,25 +1,20 @@
+import React from 'react';
 import styled from 'styled-components';
 import { colors } from '../../lib/styles/global';
 
 type SubTitleProps = {
-  subTitle: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-}
+	subTitle: string;
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
 const SubTitleInput = ({ subTitle, onChange }: SubTitleProps) => {
 	return (
 		<Wrapper>
-      <input 
-        name="subTitle"
-        value={subTitle}
-        onChange={onChange}
-        placeholder="부제를 입력하세요"
-        type="text"
-      />
+			<input name="subTitle" value={subTitle} onChange={onChange} placeholder="부제를 입력하세요" type="text" />
 		</Wrapper>
 	);
 };
 
-export default SubTitleInput;
+export default React.memo(SubTitleInput);
 
 const Wrapper = styled.div`
 	width: 100%;

@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { FiImage } from 'react-icons/fi';
 import Tag from '../CommonUI/Tag';
@@ -60,4 +61,4 @@ const Wrapper = styled.div`
 	}
 `;
 
-export default TagAndImg;
+export default React.memo(TagAndImg);
