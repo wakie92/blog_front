@@ -6,9 +6,13 @@ const useInputInEditor = () => {
   const dispatch = useDispatch();
   const onChange = useCallback((e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     const { name, value } = e.target;
-    dispatch(getValue({name, value}))
+    dispatch(getValue({ name, value }))
   }, [dispatch])
-  return onChange as typeof onChange
+  
+  const reset = useCallback(() => {
+    dispatch(getValue({ name, value: '' }))
+  }, [])
+  return [onChange, reset] as [typeof onChange, typeof reset]
 }
 
 export default useInputInEditor;

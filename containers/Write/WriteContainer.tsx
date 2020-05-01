@@ -15,7 +15,7 @@ type WriteContainerProps = {};
 
 const WriteContainer = ({  }: WriteContainerProps) => {
 	const dispatch = useDispatch();
-	const onChange = useInputInEditor();
+	const [onChange, reset] = useInputInEditor();
 	const mdRef = useRef<HTMLDivElement>();
 	const { postWrite, postsList, reqPost } = useSelector((state: RootState) => ({
 		postWrite: state.postUI.postWrite,
@@ -83,6 +83,7 @@ const WriteContainer = ({  }: WriteContainerProps) => {
 	useEffect(() => {
 		return () => {
 			dispatch(resetInputValue());
+			reset();
 			checkUser();
 		};
 	}, []);
