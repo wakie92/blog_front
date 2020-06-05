@@ -1,0 +1,105 @@
+{
+  "mini-css-extract-plugin node_modules/@zeit/next-css/node_modules/css-loader/index.js??ref--6-1!lib/styles/githubMarkdown.css": [
+    {
+      "modules": {
+        "byIdentifier": {},
+        "usedIds": {}
+      },
+      "chunks": {
+        "byName": {
+          "mini-css-extract-plugin": 0
+        },
+        "bySource": {},
+        "usedIds": [
+          0
+        ]
+      }
+    }
+  ],
+  "mini-css-extract-plugin node_modules/@zeit/next-css/node_modules/css-loader/index.js??ref--6-1!lib/styles/notion-markdown.css": [
+    {
+      "modules": {
+        "byIdentifier": {},
+        "usedIds": {}
+      },
+      "chunks": {
+        "byName": {
+          "mini-css-extract-plugin": 0
+        },
+        "bySource": {},
+        "usedIds": [
+          0
+        ]
+      }
+    }
+  ],
+  "mini-css-extract-plugin node_modules/@zeit/next-css/node_modules/css-loader/index.js??ref--6-1!lib/styles/prism.css": [
+    {
+      "modules": {
+        "byIdentifier": {},
+        "usedIds": {}
+      },
+      "chunks": {
+        "byName": {
+          "mini-css-extract-plugin": 0
+        },
+        "bySource": {},
+        "usedIds": [
+          0
+        ]
+      }
+    }
+  ],
+  "modules": {
+    "byIdentifier": {
+      "ignored node_modules/aws-sdk/lib fs": 0,
+      "css node_modules/@zeit/next-css/node_modules/css-loader/index.js??ref--6-1!lib/styles/notion-markdown.css 0": 1,
+      "css node_modules/@zeit/next-css/node_modules/css-loader/index.js??ref--6-1!lib/styles/prism.css 0": 2,
+      "css node_modules/@zeit/next-css/node_modules/css-loader/index.js??ref--6-1!lib/styles/githubMarkdown.css 0": 3
+    },
+    "usedIds": {
+      "0": 0,
+      "1": 1,
+      "2": 2,
+      "3": 3
+    }
+  },
+  "chunks": {
+    "byName": {
+      "static/runtime/webpack.js": 0,
+      "commons": 1,
+      "styles": 2,
+      "static/runtime/main.js": 3,
+      "static/runtime/polyfills.js": 4,
+      "static\\e40rdgTVL656S563T9bp2\\pages\\_app.js": 5,
+      "static\\e40rdgTVL656S563T9bp2\\pages\\_error.js": 6,
+      "static\\e40rdgTVL656S563T9bp2\\pages\\about.js": 7,
+      "static\\e40rdgTVL656S563T9bp2\\pages\\admin\\oscar\\login.js": 8,
+      "static\\e40rdgTVL656S563T9bp2\\pages\\dev\\blog\\[id].js": 9,
+      "static\\e40rdgTVL656S563T9bp2\\pages\\index.js": 10,
+      "static\\e40rdgTVL656S563T9bp2\\pages\\write.js": 11,
+      "static\\UQoAohzdgbRO5xnt9mufD\\pages\\_app.js": 12,
+      "static\\UQoAohzdgbRO5xnt9mufD\\pages\\_error.js": 13,
+      "static\\UQoAohzdgbRO5xnt9mufD\\pages\\about.js": 14,
+      "static\\UQoAohzdgbRO5xnt9mufD\\pages\\admin\\oscar\\login.js": 15,
+      "static\\UQoAohzdgbRO5xnt9mufD\\pages\\dev\\blog\\[id].js": 16,
+      "static\\UQoAohzdgbRO5xnt9mufD\\pages\\index.js": 17,
+      "static\\UQoAohzdgbRO5xnt9mufD\\pages\\write.js": 18
+    },
+    "bySource": {},
+    "usedIds": [
+      0,
+      1,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      2,
+      3,
+      4
+    ]
+  }
+}
