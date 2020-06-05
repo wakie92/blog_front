@@ -28,7 +28,7 @@
     "**/*.ts",
     "**/*.tsx",
     "next.config.js",
-    "config/init-firebase.ts",
+    "configs/init-firebase.ts",
     "store/configureStore.js",
     "routes.js"
   ]
