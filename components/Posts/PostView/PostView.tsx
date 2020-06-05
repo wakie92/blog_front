@@ -5,6 +5,7 @@ import { breakpoints } from '../../../lib/styles/responsive';
 import { Post } from '../../../store/modules/post';
 import { AsyncState } from '../../../lib/Utils/asyncUtils';
 import { PostHeader, PostContent } from '.';
+import Utterances from '../../Utterances/Utterances';
 
 type PostViewProps = {
   postData: AsyncState<{
@@ -42,6 +43,8 @@ export default function PostView({
 					imgUrl={imgUrl}
 					rawContent={rawContent}
 				/>
+				<Utterances />
+
 			</div>
 		</Layout>
 	);
